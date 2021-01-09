@@ -8,6 +8,8 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@nuxtjs/axios": "^5.12.5",
+    "ant-design-vue": "^1.7.2",
     "nuxt": "^2.14.0"
   },
   "devDependencies": {

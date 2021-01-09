@@ -8,6 +8,7 @@
     <h2>count:{{ arr.length }}</h2>
   </div>
 </template>
+
 <script lang="ts">
 import Vue from 'vue'
 import arr from '@/json/app.json'

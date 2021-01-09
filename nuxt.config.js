@@ -3,5 +3,18 @@ export default {
     port: 80,
     host: '0.0.0.0'
   },
-  buildModules: ['@nuxt/typescript-build']
+  buildModules: ['@nuxt/typescript-build'],
+  modules: ['@nuxtjs/axios',],
+  axios: {
+    proxy: true,
+    baseURL: 'https://kankanapi.bihukankan.com',
+    browserBaseURL: '/proxy'
+  },
+  proxy: {
+    '/proxy': {
+      target: 'https://kankanapi.bihukankan.com',
+      pathRewrite: {'^/proxy': '/'}
+    }
+  },
+  plugins: ['@/plugins/api.ts','@/plugins/antd.ts']
 }
