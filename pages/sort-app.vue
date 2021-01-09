@@ -8,14 +8,26 @@
     <h2>count:{{ arr.length }}</h2>
   </div>
 </template>
-<script>
-export default {
-  data() {
+<script lang="ts">
+import Vue from 'vue'
+import arr from '@/json/app.json'
+
+interface Type {
+  text: string,
+  lately: number,
+  arr: string[]
+}
+
+export default Vue.extend({
+  data(): Type {
     return {
       text: '',
-      lately: 0,
-      arr: ["baidutieba", "bianqian", "bilibili", "dingding", "fuwuyufankui", "gaode", "head", "jingdong", "jisuanqi", "kendeji", "lianxiren", "liulanqi", "luyinji", "mijia", "minri", "pinduo", "pinmu", "play", "qq", "quanqiu", "rili", "saoyisao", "shizhong", "shoujiguanjia", "shoujitao", "ssrr", "tianqi", "wangyiyun", "wanneng", "weibo", "weixin", "wenjian", "wps", "xiangce", "xiaoai", "xiaomiqianbao", "xiaomishangcheng", "xiaomishipin", "xiaomiyundong", "xiazai", "yinyong", "yinyue", "zhifubao", "zhihu", "zhinanzhen", "zhutibizhi"]
+      lately: 12,
+      arr
     }
+  },
+  mounted() {
+    console.log(arr.length)
   },
   methods: {
     add() {
@@ -25,20 +37,19 @@ export default {
       this.arr.push(this.text)
       this.arr.sort()
       this.lately = this.arr.indexOf(this.text)
-      console.log(JSON.stringify(this.arr))
       this.text = ''
     }
   }
-}
+})
 </script>
-<style>
+<style lang="scss">
 #sort-app {
   text-align: center;
   margin: 0 auto;
-}
 
-#sort-app .red {
-  color: red;
-  font-weight: bold;
+  .red {
+    color: red;
+    font-weight: bold;
+  }
 }
 </style>
