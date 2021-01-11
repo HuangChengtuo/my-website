@@ -5,6 +5,7 @@
     <a-button type="primary">asdasd</a-button>
     <br>
     {{ now }}
+    <br>
   </div>
 </template>
 <script lang="ts">
@@ -13,17 +14,17 @@ import dayjs from 'dayjs'
 
 export default Vue.extend({
   async asyncData({ $api }) {
-    const bitcoin = await $api.get('v1.3.0/article')
-    return { bitcoin }
+    const articles = await $api.get('v1.3.0/article')
+    return { articles }
   },
   data() {
     return {
-      bitcoin: {},
-      timer: null,
-      now: ''
+      now: dayjs().format('YYYY-MM-DD HH:mm:ss'),
+      timer: null
     }
   },
   created() {
+
     this.timer = setInterval(() => {
       this.now = dayjs().format('YYYY-MM-DD HH:mm:ss')
     }, 1000)

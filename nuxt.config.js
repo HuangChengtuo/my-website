@@ -4,7 +4,7 @@ export default {
     host: '0.0.0.0'
   },
   buildModules: ['@nuxt/typescript-build'],
-  modules: ['@nuxtjs/axios',],
+  modules: ['@nuxtjs/axios'],
   axios: {
     proxy: true,
     baseURL: 'https://kankanapi.bihukankan.com',
@@ -13,8 +13,14 @@ export default {
   proxy: {
     '/proxy': {
       target: 'https://kankanapi.bihukankan.com',
-      pathRewrite: {'^/proxy': '/'}
+      pathRewrite: { '^/proxy': '/' }
     }
   },
-  plugins: ['@/plugins/api.ts','@/plugins/antd.ts']
+  plugins: ['@/plugins/api.ts', '@/plugins/antd.ts'],
+  components: {
+    dirs: [
+      '@/components',
+      { path: '@/components/layouts/', prefix: 'Layouts' }
+    ]
+  }
 }
