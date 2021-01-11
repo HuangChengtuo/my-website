@@ -1,0 +1,12 @@
+* {
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: dinbold;
+  src: url("./dinbold.woff");
+}
+
+.number-font {
+  font-family: dinbold, sans-serif;
+}

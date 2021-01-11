@@ -17,10 +17,5 @@ export default {
     }
   },
   plugins: ['@/plugins/api.ts', '@/plugins/antd.ts'],
-  components: {
-    dirs: [
-      '@/components',
-      { path: '@/components/layouts/', prefix: 'Layouts' }
-    ]
-  }
+  css: ['@/static/styles/index.scss']
 }
