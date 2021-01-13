@@ -17,5 +17,9 @@ export default {
     }
   },
   plugins: ['@/plugins/api.ts', '@/plugins/antd.ts'],
-  css: ['@/static/styles/index.scss']
+  css: ['@/static/styles/index.scss'],
+  head: {
+    title: '黄秤砣的主页',
+    meta: [{ charset: 'utf-8' }]
+  }
 }

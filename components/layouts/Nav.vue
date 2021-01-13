@@ -5,6 +5,7 @@
       黄秤砣
     </nuxt-link>
     <span class="time number-font">{{ now }}</span>
+    <a href="/黄诚拓前端简历.pdf" target="_blank" class="download-btn">简历</a>
   </div>
 </template>
 
@@ -15,8 +16,17 @@ import dayjs from 'dayjs'
 export default Vue.extend({
   data() {
     return {
-      now: dayjs().format('YYYY-MM-DD HH:mm:ss')
+      now: dayjs().format('YYYY-MM-DD HH:mm:ss'),
+      timer: null
     }
+  },
+  mounted() {
+    this.timer = setInterval(() => {
+      this.now = dayjs().format('YYYY-MM-DD HH:mm:ss')
+    }, 1000)
+  },
+  beforeDestroy() {
+    clearInterval(this.timer)
   }
 })
 </script>
@@ -29,7 +39,6 @@ export default Vue.extend({
   height: 64px;
   box-shadow: 0 4px 8px rgba(234, 235, 246, .25);
   padding: 0 20px;
-  margin-bottom: 20px;
 
   .logo {
     font-size: 20px;
@@ -40,6 +49,18 @@ export default Vue.extend({
     .logo-img {
       height: 64px;
     }
+  }
+
+  .download-btn {
+    color: #ffffff;
+    cursor: pointer;
+    width: 100px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    background: #fb7299;
+    border-radius: 4px;
+    margin-left: 14px;
   }
 }
 </style>
