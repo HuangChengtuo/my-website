@@ -14,9 +14,9 @@ import Vue from 'vue'
 import arr from '@/json/app.json'
 
 interface Type {
-  text: string,
-  lately: number,
-  arr: string[]
+  text: string;
+  lately: number;
+  arr: string[];
 }
 
 export default Vue.extend({
