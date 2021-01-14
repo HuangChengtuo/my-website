@@ -3,13 +3,13 @@ import {Plugin} from '@nuxt/types'
 
 declare module 'vue/types/vue' {
   interface Vue {
-    $api: any
+    $api: any;
   }
 }
 declare module '@nuxt/types' {
   interface Context {
-    $axios: any,
-    $api: any
+    $axios: any;
+    $api: any;
   }
 }
 

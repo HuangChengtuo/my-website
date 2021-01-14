@@ -4,6 +4,6 @@ declare module "*.vue" {
 }
 
 declare module "*.json" {
-  const temp:any
+  const temp: any
   export default temp
 }
