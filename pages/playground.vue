@@ -11,11 +11,6 @@ export default Vue.extend({
     return {
       arr: [1, 2, 3, 4]
     }
-  },
-  mounted () {
-    let asd = 46
-    asd = 'ww'
-    console.log(asd)
   }
 })
 </script>

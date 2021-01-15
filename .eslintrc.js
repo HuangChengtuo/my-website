@@ -11,6 +11,7 @@ module.exports = {
   ],
   parserOptions: { ecmaVersion: 2020 },
   rules: {
-    semi: [1, 'never']
+    semi: [1, 'never'],
+    '@typescript-eslint/no-explicit-any': 0
   }
 }
