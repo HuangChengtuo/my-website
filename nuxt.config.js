@@ -5,6 +5,14 @@ export default {
     browserBaseURL: '/proxy'
   },
   buildModules: ['@nuxt/typescript-build'],
+  components: {
+    dirs: [
+      {
+        path: '~/components/layouts/',
+        prefix: 'Layouts'
+      }
+    ]
+  },
   css: ['@/static/styles/index.scss'],
   head: {
     title: '黄秤砣的主页',
