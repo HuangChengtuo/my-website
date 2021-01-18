@@ -2,11 +2,10 @@
   <div id="home-page">
     <div class="banner"></div>
     <nuxt-link to="sort-app">go</nuxt-link>
-    <h1 class="title">黄秤砣的小站</h1>
-    <div style="background: #000000">a</div>
-    <a href="https://alphardex.github.io/gateofbabylon" target="_blank" class="download-btn">copy</a>
-
-    <div style="height: 2000px"></div>
+    <main class="main">
+      <h1 class="title">黄秤砣的小站</h1>
+      <a href="https://alphardex.github.io/gateofbabylon" target="_blank" class="download-btn">copy</a>
+    </main>
   </div>
 </template>
 <script lang="ts">
@@ -16,7 +15,7 @@ export default Vue.extend({
   layout: 'null',
   data() {
     return {
-      posistion: 0,
+      index: 0,
       debounce: false
     }
   },
@@ -29,11 +28,11 @@ export default Vue.extend({
   methods: {
     scrollFn(e: any) {
       e.preventDefault()
-      if (this.debounce) {
+      // 正在滚动中，或者到最后一页还向下滚，或者第一页还向上滚
+      if (this.debounce || (e.deltaY > 0 && this.index >= 1) || (e.deltaY < 0 && this.index === 0)) {
         return
       }
       let start = 0
-      // 动画函数，需要闭包访问start
       const step = (unix: number) => {
         if (!start) {
           start = unix
@@ -41,16 +40,22 @@ export default Vue.extend({
         const duration = unix - start
         const windowHeight = window.innerHeight || document.body.clientHeight
         const scrollHeight = windowHeight * 0.8
-        const nowY = scrollHeight / 750 * duration
-        window.scrollTo(0, e.deltaY > 0 ? nowY : scrollHeight - nowY)
-        if (duration < 750) {
+        const y = this.easeInOutCubic(duration / 1000) * scrollHeight
+        window.scrollTo(0, e.deltaY > 0 ? y : scrollHeight - y)
+        if (duration <= 1000) {
           requestAnimationFrame(step)
           this.debounce = true
         } else {
           this.debounce = false
+          e.deltaY > 0 ? this.index++ : this.index--
+          console.log(this.index)
         }
       }
       requestAnimationFrame(step)
+    },
+    // 缓动函数 https://easings.net#easeInOutCubic
+    easeInOutCubic(x: number): number {
+      return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
     }
   }
 })
@@ -62,6 +67,7 @@ export default Vue.extend({
     height: 80vh;
 
     background: {
+      color: #bdb6bb;
       image: url("/img/AF.png");
       attachment: fixed;
       position-x: right;
@@ -70,11 +76,15 @@ export default Vue.extend({
     }
   }
 
-  .title {
-    line-height: 20vh;
-    font-weight: bold;
-    text-align: center;
-    font-size: 3rem;
+  .main {
+    height: 98vh;
+
+    .title {
+      line-height: 20vh;
+      font-weight: bold;
+      text-align: center;
+      font-size: 3rem;
+    }
   }
 }
 </style>
