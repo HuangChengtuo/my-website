@@ -6,6 +6,7 @@
     </h1>
     <div v-for="(item,index) of arr" :class="index === lately ? 'red' : ''">{{ item }}</div>
     <h2>count:{{ arr.length }}</h2>
+    <div style="height:1000px"></div>
   </div>
 </template>
 
