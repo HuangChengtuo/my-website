@@ -26,13 +26,14 @@ export default Vue.extend({
     window.removeEventListener('mousewheel', this.scrollFn)
   },
   methods: {
-    scrollFn(e: any) {
+    scrollFn(e: WheelEvent) {
       e.preventDefault()
       // 正在滚动中，或者到最后一页还向下滚，或者第一页还向上滚
       if (this.debounce || (e.deltaY > 0 && this.index >= 1) || (e.deltaY < 0 && this.index === 0)) {
         return
       }
       let start = 0
+      // 动画函数，需要闭包访问 start 就没有分离出来
       const step = (unix: number) => {
         if (!start) {
           start = unix
