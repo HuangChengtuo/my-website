@@ -4,8 +4,10 @@
 theme: juejin
 highlight:
 ---
-想在自己的个人网站上实现一个劫持鼠标滚轮，实现鼠标滚轮翻页的效果，记录一下踩坑之路。  
-先来看看模仿目标 [明日方舟官网](https://ak.hypergryph.com/index)（上班摸鱼警告👓 ）
+以前的网站是用 VuePress 的 beta 版直接生成的，当时还挺新鲜，放到现在感觉已经烂大街了，以后面试也捞不到好处，决定重新写一个。  
+想在自己的网站上实现一个劫持鼠标滚轮，进行翻页的效果，记录一下踩坑之路。  
+先来看看模仿目标 [明日方舟官网](https://ak.hypergryph.com/index)（上班摸鱼警告👓 ）  
+记得小米和一加的手机介绍页也用过这种滚动
 
 最终效果✌️  
 ![最终效果](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d3ccc97a99a8433785d368ef859351b4~tplv-k3u1fbpfcp-watermark.image)
@@ -39,11 +41,11 @@ target.addEventListener(type, listener, options);
 target.addEventListener(type, listener, useCapture);
 ```
 啥时候多了一个 options 的语法。。  
-百度了一番发现有许多的文章讲到 addEventListener 的 useCapture 用的人太少，15年底已经被规范为可选属性，并且能够传入对象。  
-`passive`的作用就是让 listener 禁止调用`preventDefault()`，修改后最终成功实现滚轮默认事件
+搜索一番发现许多18年的文章讲到 addEventListener 的 useCapture 用的人太少，15年底已经被规范为可选属性，并且能够传入对象。`passive`的作用就是让 listener 禁止调用`preventDefault()`  
+修改为 `window.addEventListener('mousewheel', this.scrollFn, { passive: false })` 最终成功实现滚轮默认事件
 
-现在回想起我17年大二在学校学前端，listener、事件冒泡讲课时的场景，连`preventDefault`都没提到  
-不知多久之后大学教材才会更新呢。。
+现在回想起17年在学校学前端，listener、事件冒泡讲课时的场景，连`preventDefault`都没讲到  
+不知多久之后大学教材才会更新到呢。。
 
 
 ## 第一次尝试 scroll-behavior: smooth
@@ -61,11 +63,12 @@ scrollFn(e: WheelEvent) {
 }
 ```
 ![css](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/66e8c9145788423d9902b8f026841533~tplv-k3u1fbpfcp-watermark.image)  
-发现了更方便的方法`window.scrollTo({ top: 1000, behavior: "smooth" })`尝试了一下，safari 也不支持
+发现了更方便的方法`window.scrollTo({ top: 1000, behavior: "smooth" })`  
+尝试了一下，mac 的 safari 也不支持
 
 ## 第二次尝试 requestAnimationFrame
 
-通过使用 requestAnimationFrame 方法来进行滚动动画操作，在浏览器重绘之前调用动画函数，一般根据显示器的帧数来进行调用，通常是每秒60次，在我的小米10上能够达到每秒90次😄  而且能够在页面 blur 时停止动画，节省资源
+通过使用 requestAnimationFrame 方法来进行滚动动画操作，在浏览器重绘之前调用动画函数，一般根据显示器的帧数来进行调用，通常是每秒60次，在我的小米10上能够达到每秒90次😄而且能够在页面 blur 时停止动画，节省资源
 ```js
 scrollFn(e: WheelEvent) {
   e.preventDefault()
@@ -92,17 +95,18 @@ scrollFn(e: WheelEvent) {
 }
 ```
 敲完代码一看，效果有点拉胯  
-这动画效果直上直下，太呆了
+这直上直下的线性效果，太呆了
 
 ![requestAnimationFrame](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/68d6187af74e4342a790d4d11cc46f1d~tplv-k3u1fbpfcp-watermark.image)
 
 ## 第三次尝试 添加缓动函数
 
-这时候想起来自己是个计算机系的了，当年为了学分选修的计算机图形学给我一顿血虐，跟坐数学题一样，期末的项目也是从 three.js 里偷来的。。  
-在看回形针的这期三维模型视频 [BV1Db411c7M3](https://www.bilibili.com/video/BV1Db411c7M3) 的时候，让我感同身受，也让我对上课时的贝塞尔曲线印象更加深刻。  
-搜索引擎里输入贝塞尔曲线，在我以为只能放弃自己手写，得找 npm 时，从一堆数学题里翻出来 [https://easings.net/cn](https://easings.net/cn) ，救我🐶命
+这时候想起来自己是个计算机系的了，当年为了学分选修的计算机图形学给我一顿血虐，跟做数学题一样，期末的项目也是从 three.js 里偷来的。。  
+在看回形针的这期三维模型视频 [BV1Db411c7M3](https://www.bilibili.com/video/BV1Db411c7M3) 的时候，让我感同身受，也让我对上课时的贝塞尔曲线印象更加深刻（其实也就只记得贝塞尔曲线这听着挺牛的名字😅）。  
+搜索引擎里输入贝塞尔曲线，可大多都是数学题和 canvas 里的画图  ，难度还是有点高的嗷
+在我以为只能放弃自己手写，借助 npm 的力量时，从一堆数学题里翻出来 [https://easings.net/cn](https://easings.net/cn) ，救我🐶命
 
-现在看来数学可真神奇，这些函数很多都像是初高中的反比例函数、一元二次函数，能实现好多 nice 的效果
+现在看来数学还挺重要，这些函数很多都像是初高中的反比例函数、一元二次函数，能实现好多 nice 的效果
 ```js
 scrollFn(e: WheelEvent) {
   e.preventDefault()
@@ -140,3 +144,26 @@ easeInOutCubic(x: number): number {
   return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
 }
 ```
+缓动函数 `easeInOutCubic` 会根据传入的 x 的范围0-1输出相应的快慢的0-1，就像 [https://easings.net#easeInOutCubic](https://easings.net#easeInOutCubic) 里的例子一样，对 `requestAnimationFrame` 的速度进行控制
+
+![最终效果](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d3ccc97a99a8433785d368ef859351b4~tplv-k3u1fbpfcp-watermark.image)
+
+## 效果对比
+
+从👎到👍
+
+requestAnimationFrame  
+![requestAnimationFrame](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/68d6187af74e4342a790d4d11cc46f1d~tplv-k3u1fbpfcp-watermark.image)
+
+scroll-behavior: smooth  
+![css](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/66e8c9145788423d9902b8f026841533~tplv-k3u1fbpfcp-watermark.image)
+
+requestAnimationFrame with easings  
+![最终效果](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d3ccc97a99a8433785d368ef859351b4~tplv-k3u1fbpfcp-watermark.image)
+
+## 总结
+[项目地址](https://gitee.com/HuangChengtuo/my-website)
+* WheelEvent 默认的 passive 为 true，不允许 preventDefault
+* `scroll-behavior: smooth` 最方便，自带缓动函数，但是 safari 不支持，动画时间也不可控
+* requestAnimationFrame 是线性动画，动画范围大了会很呆板，需要缓动函数控制速率
+* 做完这套动画后，不知道下面一页该放些啥了。。
