@@ -1,10 +1,8 @@
 <template>
   <div id="home-page">
     <div class="banner"></div>
-    <nuxt-link to="sort-app">go</nuxt-link>
     <main class="main">
       <h1 class="title">黄秤砣的小站</h1>
-      <a href="https://alphardex.github.io/gateofbabylon" target="_blank" class="download-btn">copy</a>
     </main>
   </div>
 </template>
@@ -43,7 +41,7 @@ export default Vue.extend({
         const scrollHeight = windowHeight * 0.8
         const y = this.easeInOutCubic(duration / 1000) * scrollHeight
         window.scrollTo(0, e.deltaY > 0 ? y : scrollHeight - y)
-        if (duration <= 1000) {
+        if (duration <= 1001) {
           requestAnimationFrame(step)
           this.debounce = true
         } else {
@@ -78,7 +76,7 @@ export default Vue.extend({
   }
 
   .main {
-    height: 99vh;
+    height: 100vh;
 
     .title {
       line-height: 20vh;
