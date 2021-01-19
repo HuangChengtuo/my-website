@@ -4,7 +4,7 @@
 theme: juejin
 highlight:
 ---
-想在自己的个人网站上实现一个劫持鼠标滚轮，实现鼠标滚轮翻页的效果，记录一下踩坑之路  
+想在自己的个人网站上实现一个劫持鼠标滚轮，实现鼠标滚轮翻页的效果，记录一下踩坑之路。  
 先来看看模仿目标 [明日方舟官网](https://ak.hypergryph.com/index)（上班摸鱼警告👓 ）
 
 最终效果✌️  
@@ -32,17 +32,18 @@ scrollFn(e: WheelEvent) {
 ![报错](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8b90593a781e4af5b7cd91a7cf683f6e~tplv-k3u1fbpfcp-watermark.image)
 
 而且默认的鼠标滚轮事件仍然能触发。。  
-点进去翻了一下 chrome 的 [feature](https://www.chromestatus.com/feature/6662647093133312) ，发现 Event 多出来了一个 `passive` 属性，而且 WheelEvent 的 `passive` 默认为 true  
+点进去翻了一下 chrome 的 [feature](https://www.chromestatus.com/feature/6662647093133312) ，发现 Event 多出来了一个 `passive` 属性，而且 WheelEvent 的 `passive` 默认为 true，  
 又翻了翻 `addEventListener` 的 [MDN](https://developer.mozilla.org/zh-cn/docs/web/api/eventtarget/addeventlistener) ，发现
 ```js
 target.addEventListener(type, listener, options);
 target.addEventListener(type, listener, useCapture);
 ```
 啥时候多了一个 options 的语法。。  
-百度了一番发现有许多的文章讲到 addEventListener 的 useCapture 用的人太少，15年底已经被规范为可选属性，并且能够传入对象  
+百度了一番发现有许多的文章讲到 addEventListener 的 useCapture 用的人太少，15年底已经被规范为可选属性，并且能够传入对象。  
 `passive`的作用就是让 listener 禁止调用`preventDefault()`，修改后最终成功实现滚轮默认事件
 
-现在回想起我17年大二在学校学前端，listener、事件冒泡讲课时的场景，连`preventDefault`都没提到，更别提还会有新规范这种事了。。
+现在回想起我17年大二在学校学前端，listener、事件冒泡讲课时的场景，连`preventDefault`都没提到  
+不知多久之后大学教材才会更新呢。。
 
 
 ## 第一次尝试 scroll-behavior: smooth
@@ -64,7 +65,7 @@ scrollFn(e: WheelEvent) {
 
 ## 第二次尝试 requestAnimationFrame
 
-通过使用 requestAnimationFrame 方法来进行滚动动画操作，在浏览器重绘之前调用动画函数，一般根据显示器的帧数来进行调用，通常是每秒60次，在我的小米10上能够达到每秒90次😄
+通过使用 requestAnimationFrame 方法来进行滚动动画操作，在浏览器重绘之前调用动画函数，一般根据显示器的帧数来进行调用，通常是每秒60次，在我的小米10上能够达到每秒90次😄  而且能够在页面 blur 时停止动画，节省资源
 ```js
 scrollFn(e: WheelEvent) {
   e.preventDefault()
@@ -95,6 +96,47 @@ scrollFn(e: WheelEvent) {
 
 ![requestAnimationFrame](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/68d6187af74e4342a790d4d11cc46f1d~tplv-k3u1fbpfcp-watermark.image)
 
-## 第三次尝试 
+## 第三次尝试 添加缓动函数
 
+这时候想起来自己是个计算机系的了，当年为了学分选修的计算机图形学给我一顿血虐，跟坐数学题一样，期末的项目也是从 three.js 里偷来的。。  
+在看回形针的这期三维模型视频 [BV1Db411c7M3](https://www.bilibili.com/video/BV1Db411c7M3) 的时候，让我感同身受，也让我对上课时的贝塞尔曲线印象更加深刻。  
+搜索引擎里输入贝塞尔曲线，在我以为只能放弃自己手写，得找 npm 时，从一堆数学题里翻出来 [https://easings.net/cn](https://easings.net/cn) ，救我🐶命
 
+现在看来数学可真神奇，这些函数很多都像是初高中的反比例函数、一元二次函数，能实现好多 nice 的效果
+```js
+scrollFn(e: WheelEvent) {
+  e.preventDefault()
+  // 正在滚动中，或者到最后一页还向下滚，或者第一页还向上滚
+  if (this.debounce || (e.deltaY > 0 && this.index >= 1) || (e.deltaY < 0 && this.index === 0)) {
+    return
+  }
+  let start = 0
+  // 动画函数，需要闭包访问 start 就没有分离出来
+  const step = (unix: number) => {
+    if (!start) {
+      start = unix
+    }
+    const duration = unix - start
+    // 获取视窗高度
+    const windowHeight = window.innerHeight || document.body.clientHeight
+    // 计算 banner 高度，css 属性为80vh
+    const scrollHeight = windowHeight * 0.8
+    // 1000ms内，duration / 1000就会在0-1之间增加，返回值也是，再乘上最终的高度
+    const y = this.easeInOutCubic(duration / 1000) * scrollHeight
+    window.scrollTo(0, e.deltaY > 0 ? y : scrollHeight - y)
+    if (duration <= 1001) {
+      requestAnimationFrame(step)
+      this.debounce = true
+    } else {
+      this.debounce = false
+      e.deltaY > 0 ? this.index++ : this.index--
+      console.log(this.index)
+    }
+  }
+  requestAnimationFrame(step)
+},
+// 缓动函数，x的范围为0-1，返回的 number 也是0-1 https://easings.net#easeInOutCubic
+easeInOutCubic(x: number): number {
+  return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+}
+```
