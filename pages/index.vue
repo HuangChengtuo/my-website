@@ -77,7 +77,7 @@ export default Vue.extend({
   }
 
   .main {
-    height: 98vh;
+    height: 99vh;
 
     .title {
       line-height: 20vh;

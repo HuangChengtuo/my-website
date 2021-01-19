@@ -15,8 +15,9 @@ export default {
   },
   css: ['@/static/styles/index.scss'],
   head: {
-    title: '黄秤砣的主页',
-    meta: [{ charset: 'utf-8' }]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    meta: [{ charset: 'utf-8' }],
+    title: '黄秤砣的主页'
   },
   modules: ['@nuxtjs/axios'],
   plugins: ['@/plugins/api.ts', '@/plugins/antd.ts'],
