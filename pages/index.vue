@@ -1,13 +1,19 @@
 <template>
   <div id="home-page">
-    <div class="banner"></div>
+    <header class="header"></header>
     <main class="main">
       <h1 class="title">黄秤砣的小站</h1>
+      <div class="space-between">
+        <div class="block">今日新番</div>
+        <div class="block">666</div>
+        <div class="block">666</div>
+      </div>
     </main>
   </div>
 </template>
 <script lang="ts">
 import Vue from 'vue'
+import bangumi from '@/static/json/bangumi.json'
 
 export default Vue.extend({
   layout: 'null',
@@ -18,13 +24,14 @@ export default Vue.extend({
     }
   },
   mounted() {
-    window.addEventListener('mousewheel', this.scrollFn, { passive: false })
+    console.log(bangumi)
+    window.addEventListener('mousewheel', this.wheelFn, { passive: false })
   },
   beforeDestroy() {
-    window.removeEventListener('mousewheel', this.scrollFn)
+    window.removeEventListener('mousewheel', this.wheelFn)
   },
   methods: {
-    scrollFn(e: WheelEvent) {
+    wheelFn(e: WheelEvent) {
       e.preventDefault()
       // 正在滚动中，或者到最后一页还向下滚，或者第一页还向上滚
       if (this.debounce || (e.deltaY > 0 && this.index >= 1) || (e.deltaY < 0 && this.index === 0)) {
@@ -47,7 +54,6 @@ export default Vue.extend({
         } else {
           this.debounce = false
           e.deltaY > 0 ? this.index++ : this.index--
-          console.log(this.index)
         }
       }
       requestAnimationFrame(step)
@@ -60,9 +66,13 @@ export default Vue.extend({
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+html::-webkit-scrollbar {
+  display: none;
+}
+
 #home-page {
-  .banner {
+  .header {
     height: 80vh;
 
     background: {
@@ -77,12 +87,20 @@ export default Vue.extend({
 
   .main {
     height: 100vh;
+    width: 1200px;
+    margin: 0 auto;
 
     .title {
       line-height: 20vh;
       font-weight: bold;
       text-align: center;
       font-size: 3rem;
+    }
+
+    .block {
+      box-shadow: 0 0 32px rgba(168, 178, 197, .12), 0 0 16px rgba(168, 178, 197, .16);
+      width: 384px;
+      height: 320px;
     }
   }
 }

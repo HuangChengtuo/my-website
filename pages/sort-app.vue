@@ -4,7 +4,7 @@
       <input v-model="text" @keyup.enter="add" />
       <button @click="add">add</button>
     </h1>
-    <div v-for="(item,index) of arr" :class="index === lately ? 'red' : ''">{{ item }}</div>
+    <div v-for="(item,index) of arr" :key="item" :class="index === lately ? 'red' : ''">{{ item }}</div>
     <h2>count:{{ arr.length }}</h2>
     <div style="height:1000px"></div>
   </div>
@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import arr from '@/json/app.json'
+import arr from '@/static/json/app.json'
 
 interface Type {
   text: string;
@@ -21,7 +21,7 @@ interface Type {
 }
 
 export default Vue.extend({
-  data(): Type {
+  data() {
     return {
       text: '',
       lately: 12,
@@ -39,7 +39,6 @@ export default Vue.extend({
       this.arr.push(this.text)
       this.arr.sort()
       this.lately = this.arr.indexOf(this.text)
-      this.text = ''
     }
   }
 })
