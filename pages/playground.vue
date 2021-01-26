@@ -1,5 +1,5 @@
 <template>
-  <div id="playground">
+  <div id="playground" style="height: 2000px">
   </div>
 </template>
 

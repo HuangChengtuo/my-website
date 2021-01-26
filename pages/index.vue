@@ -4,7 +4,7 @@
     <main class="main">
       <h1 class="title">黄秤砣的小站</h1>
       <div class="space-between">
-        <div class="block">今日新番</div>
+        <TodayBangumi class="block" />
         <div class="block">666</div>
         <div class="block">666</div>
       </div>
@@ -13,10 +13,11 @@
 </template>
 <script lang="ts">
 import Vue from 'vue'
-import bangumi from '@/static/json/bangumi.json'
+import TodayBangumi from '@/components/index/TodayBangumi.vue'
 
 export default Vue.extend({
   layout: 'null',
+  components: { TodayBangumi },
   data() {
     return {
       index: 0,
@@ -24,7 +25,6 @@ export default Vue.extend({
     }
   },
   mounted() {
-    console.log(bangumi)
     window.addEventListener('mousewheel', this.wheelFn, { passive: false })
   },
   beforeDestroy() {
@@ -60,17 +60,13 @@ export default Vue.extend({
     },
     // 缓动函数 https://easings.net#easeInOutCubic
     easeInOutCubic(x: number): number {
-      return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+      return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2
     }
   }
 })
 </script>
 
 <style lang="scss">
-html::-webkit-scrollbar {
-  display: none;
-}
-
 #home-page {
   .header {
     height: 80vh;
