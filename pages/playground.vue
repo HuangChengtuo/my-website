@@ -1,24 +1,15 @@
 <template>
   <div id="playground" style="height: 2000px">
+    <TodayBangumi />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import TodayBangumi from "@/components/index/TodayBangumi.vue";
 
-interface Demo {
-  name: string,
-  age: number
-}
 
 export default Vue.extend({
-  mounted() {
-    const data = {
-      name: 'hct',
-      age: 16,
-      sex: 0
-    } as Demo
-    console.log(data)
-  }
+  components: { TodayBangumi }
 })
 </script>
