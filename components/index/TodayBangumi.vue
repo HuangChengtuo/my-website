@@ -16,7 +16,6 @@ export default Vue.extend({
     const unique = new Set()
     for (const item of this.bangumi) {
       item.sites.map(e => {
-        console.log(e)
         unique.add(e.site)
       })
     }

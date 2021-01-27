@@ -11,18 +11,17 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import dayjs from 'dayjs'
 
 export default Vue.extend({
   data() {
     return {
-      now: dayjs().format('YYYY-MM-DD HH:mm:ss'),
+      now: this.$formatTime(),
       timer: null
     }
   },
   mounted() {
     this.timer = setInterval(() => {
-      this.now = dayjs().format('YYYY-MM-DD HH:mm:ss')
+      this.now = this.$formatTime()
     }, 1000)
   },
   beforeDestroy() {

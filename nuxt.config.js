@@ -25,7 +25,7 @@ export default {
     title: '黄秤砣的主页'
   },
   modules: ['@nuxtjs/axios'],
-  plugins: ['@/plugins/api.ts', '@/plugins/antd.ts'],
+  plugins: ['@/plugins/api.ts', '@/plugins/antd.ts','@/plugins/utils.ts'],
   proxy: {
     '/proxy': {
       target: 'https://kankanapi.bihukankan.com',
