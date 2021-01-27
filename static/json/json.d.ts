@@ -3,10 +3,13 @@ declare module "@/static/json/app.json" {
   export default temp
 }
 
+type Site = { begin: string, site: string }
+
 interface Bangumi {
-  begin: string;
-  end: string;
-  title: string;
+  begin: string,
+  end: string,
+  title: string,
+  sites: Site[]
 }
 
 declare module "@/static/json/bangumi.json" {

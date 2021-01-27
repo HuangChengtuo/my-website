@@ -7,8 +7,8 @@
 import Vue from 'vue'
 
 interface Demo {
-  name: string;
-  age: number;
+  name: string,
+  age: number
 }
 
 export default Vue.extend({

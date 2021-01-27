@@ -7,12 +7,6 @@
 <script lang="ts">
 import Vue from 'vue'
 import bangumi from '@/static/json/bangumi.json'
-import dayjs from 'dayjs'
-
-interface Bangumi {
-  title: string;
-  begin: string;
-}
 
 export default Vue.extend({
   data() {
@@ -22,6 +16,7 @@ export default Vue.extend({
     const unique = new Set()
     for (const item of this.bangumi) {
       item.sites.map(e => {
+        console.log(e)
         unique.add(e.site)
       })
     }
