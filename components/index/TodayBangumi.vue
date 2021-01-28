@@ -2,8 +2,8 @@
   <div class="bangumi">
     今日新番
     <div v-for="item of bangumi" :key="item.title">
-      {{ week(item.begin) }}
-      {{ item.title }}
+      {{ $formatTime(item.begin) }}
+      {{ showTitle(item) }}
     </div>
   </div>
 </template>
@@ -21,22 +21,30 @@ export default Vue.extend({
     }
   },
   computed: {
-    bangumi() {
+    bangumi(): Bangumi[] {
       const result = []
       for (const item of this.rawBangumi) {
+        // 国内版权
         const hasCopyright = item.sites.some(e => this.chinesePlatform.includes(e.site))
         if (hasCopyright) {
+          // 替换为国内开播时间
           item.hasCopyright = hasCopyright
           item.begin = item.sites.find(e => this.chinesePlatform.includes(e.site)).begin || item.begin
         }
-        result.push(item)
+        // 今日更新
+        if (dayjs(item.begin).day() === dayjs().day()) {
+          result.push(item)
+        }
       }
       return result
     }
   },
+  mounted() {
+    console.log(this.bangumi)
+  },
   methods: {
-    week(date: string) {
-      return dayjs(date).day()
+    showTitle(item: Bangumi) {
+      return item.titleTranslate['zh-Hans']?.[0] || item.title
     }
   }
 })
