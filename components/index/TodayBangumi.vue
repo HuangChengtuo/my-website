@@ -1,9 +1,9 @@
 <template>
   <div class="bangumi">
-    今日新番
+    <div class="title">今日新番</div>
     <div v-for="item of bangumi" :key="item.title">
-      {{ $formatTime(item.begin) }}
       {{ showTitle(item) }}
+      <span class="number-font">{{ $formatTime(item.begin, 'HH:mm') }}</span>
     </div>
   </div>
 </template>
@@ -29,10 +29,10 @@ export default Vue.extend({
         if (hasCopyright) {
           // 替换为国内开播时间
           item.hasCopyright = hasCopyright
-          item.begin = item.sites.find(e => this.chinesePlatform.includes(e.site)).begin || item.begin
+          item.chineseBegin = item.sites.find(e => this.chinesePlatform.includes(e.site)).begin
         }
         // 今日更新
-        if (dayjs(item.begin).day() === dayjs().day()) {
+        if (dayjs(item.chineseBegin || item.begin).day() === dayjs().day()) {
           result.push(item)
         }
       }
@@ -50,6 +50,19 @@ export default Vue.extend({
 })
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.bangumi {
 
+  .title {
+    line-height: 32px;
+    margin-bottom: 18px;
+    font-weight: 500;
+    font-size: 24px;
+    text-align: center;
+  }
+
+  .number-font {
+    float: right;
+  }
+}
 </style>

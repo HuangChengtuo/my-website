@@ -2,10 +2,10 @@
   <div id="home-page">
     <header class="header"></header>
     <main class="main">
-      <h1 class="title">黄秤砣的小站</h1>
+      <h1 class="title">黄秤砣</h1>
       <div class="space-between">
         <TodayBangumi class="block" />
-        <div class="block">666</div>
+        <a class="block" href="http://blog.huangchengtuo.com" target="_blank">我的博客</a>
         <div class="block">666</div>
       </div>
     </main>
@@ -66,14 +66,14 @@ export default Vue.extend({
 })
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 #home-page {
   .header {
     height: 80vh;
 
     background: {
       color: #bdb6bb;
-      image: url("/img/AF.png");
+      image: url("http://s1.huangchengtuo.com/img/AF.png");
       attachment: fixed;
       position-x: right;
       position-y: top;
@@ -96,7 +96,8 @@ export default Vue.extend({
     .block {
       box-shadow: 0 0 32px rgba(168, 178, 197, .12), 0 0 16px rgba(168, 178, 197, .16);
       width: 384px;
-      height: 320px;
+      padding: 24px 16px 16px;
+      color: #000000;
     }
   }
 }

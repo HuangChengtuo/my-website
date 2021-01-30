@@ -7,8 +7,17 @@
   src: url("./dinbold.woff");
 }
 
-.number-font {
+.din-font {
   font-family: dinbold, sans-serif;
+}
+
+@font-face {
+  font-family: roboto;
+  src: url("./Roboto-Medium-12.ttf");
+}
+
+.number-font {
+  font-family: roboto, sans-serif;
 }
 
 .space-around {

@@ -1,11 +1,11 @@
 <template>
   <div id="nav">
     <nuxt-link to="/" class="logo">
-      <img src="/img/DD.png" alt="logo" class="logo-img">
+      <img src="http://s1.huangchengtuo.com/img/DD.png" alt="logo" class="logo-img">
       黄秤砣
     </nuxt-link>
     <span class="time number-font">{{ now }}</span>
-    <a href="/黄诚拓前端简历.pdf" target="_blank" class="download-btn">简历</a>
+    <a href="http://blog.huangchengtuo.com" target="_blank" class="download-btn">去博客</a>
   </div>
 </template>
 
@@ -53,7 +53,7 @@ export default Vue.extend({
   .download-btn {
     color: #ffffff;
     cursor: pointer;
-    width: 100px;
+    width: 80px;
     height: 36px;
     line-height: 36px;
     text-align: center;

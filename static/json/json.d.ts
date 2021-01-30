@@ -10,7 +10,8 @@ interface Bangumi {
   title: string,
   titleTranslate: { 'zh-Hans': string[] },
   sites: { begin: string, site: string }[],
-  hasCopyright: boolean
+  hasCopyright: boolean,
+  chineseBegin: string
 }
 
 declare module "@/static/json/bangumi.json" {
