@@ -3,7 +3,7 @@
     <header class="header"></header>
     <main class="main">
       <h1 class="title">黄秤砣</h1>
-      <div class="space-between">
+      <div class="jcsb">
         <TodayBangumi class="block" />
         <a class="block" href="http://blog.huangchengtuo.com" target="_blank">我的博客</a>
         <div class="block">666</div>
@@ -98,6 +98,12 @@ export default Vue.extend({
       width: 384px;
       padding: 24px 16px 16px;
       color: #000000;
+      transition: all .3s linear;
+
+      &:hover {
+        transform: translateY(-20px);
+        box-shadow: 0 0 16px rgb(72 117 193 / 12%), 0 0 24px rgb(55 103 195 / 8%);
+      }
     }
   }
 }

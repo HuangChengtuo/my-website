@@ -2,9 +2,15 @@
   box-sizing: border-box;
 }
 
+.one-line {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 @font-face {
   font-family: dinbold;
-  src: url("./dinbold.woff");
+  src: url("http://s1.huangchengtuo.com/fonts/dinbold.woff");
 }
 
 .din-font {
@@ -13,19 +19,24 @@
 
 @font-face {
   font-family: roboto;
-  src: url("./Roboto-Medium-12.ttf");
+  src: url("http://s1.huangchengtuo.com/fonts/Roboto-Medium-12.ttf");
 }
 
 .number-font {
   font-family: roboto, sans-serif;
 }
 
-.space-around {
+.jcsa {
   display: flex;
   justify-content: space-around;
 }
 
-.space-between {
+.jcsb {
   display: flex;
   justify-content: space-between;
+}
+
+.aic {
+  display: flex;
+  align-items: center;
 }

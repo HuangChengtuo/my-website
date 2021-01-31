@@ -1,23 +1,22 @@
 <template>
-  <div class="bangumi">
-    <div class="title">今日新番</div>
-    <div v-for="item of bangumi" :key="item.title">
-      {{ showTitle(item) }}
-      <span class="number-font">{{ $formatTime(item.begin, 'HH:mm') }}</span>
+  <nuxt-link to="/bangumi" class="today-bangumi">
+    <div class="title">今日新番表</div>
+    <div v-for="item of bangumi" :key="item.title" class="bangumi aic" :class="{now:item.now}">
+      <span class="name one-line">{{ showTitle(item) }}</span>
+      <span class="number-font">{{ $formatTime(item.chineseBegin || item.begin, 'HH:mm') }}</span>
     </div>
-  </div>
+  </nuxt-link>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import rawBangumi from '@/static/json/bangumi.json'
 import dayjs from 'dayjs'
 
 export default Vue.extend({
   data() {
     return {
       chinesePlatform: ['bilibili', 'acfun', 'qq', 'iqiyi'],
-      rawBangumi
+      rawBangumi: []
     }
   },
   computed: {
@@ -27,32 +26,39 @@ export default Vue.extend({
         // 国内版权
         const hasCopyright = item.sites.some(e => this.chinesePlatform.includes(e.site))
         if (hasCopyright) {
-          // 替换为国内开播时间
+          // 新增国内开播时间字段
           item.hasCopyright = hasCopyright
           item.chineseBegin = item.sites.find(e => this.chinesePlatform.includes(e.site)).begin
         }
-        // 今日更新
-        if (dayjs(item.chineseBegin || item.begin).day() === dayjs().day()) {
+        // 今日国内更新
+        if (dayjs(item.chineseBegin || item.begin).day() === dayjs().day() && hasCopyright) {
           result.push(item)
         }
       }
+      result.push({ title: '--- 现在 ---', now: true, begin: dayjs().toISOString() })
+      result.sort((a, b) => {
+        const timeA = dayjs(a.chineseBegin || a.begin).format('HHmmss')
+        const timeB = dayjs(b.chineseBegin || b.begin).format('HHmmss')
+        return Number(timeA) - Number(timeB)
+      })
       return result
     }
   },
   mounted() {
-    console.log(this.bangumi)
+    this.$api.get('http://s1.huangchengtuo.com/json/bangumi.json').then(res => {
+      this.rawBangumi = res
+    })
   },
   methods: {
     showTitle(item: Bangumi) {
-      return item.titleTranslate['zh-Hans']?.[0] || item.title
+      return item.titleTranslate?.['zh-Hans']?.[0] || item.title
     }
   }
 })
 </script>
 
 <style lang="scss" scoped>
-.bangumi {
-
+.today-bangumi {
   .title {
     line-height: 32px;
     margin-bottom: 18px;
@@ -61,8 +67,21 @@ export default Vue.extend({
     text-align: center;
   }
 
-  .number-font {
-    float: right;
+  .bangumi {
+    .name {
+      width: 300px;
+    }
+
+    .number-font {
+      margin-left: auto;
+    }
   }
+
+  .bangumi.now {
+    margin: 8px 0;
+    text-align: center;
+    color: #73c9e5;
+  }
+
 }
 </style>
