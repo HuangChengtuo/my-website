@@ -45,7 +45,7 @@ export default Vue.extend({
     }
   },
   mounted() {
-    this.$api.get('http://s1.huangchengtuo.com/json/bangumi.json').then(res => {
+    this.$api.get('https://s1.huangchengtuo.com/json/bangumi.json').then(res => {
       this.rawBangumi = res
     })
   },
