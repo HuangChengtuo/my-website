@@ -28,7 +28,11 @@ export default {
     '/proxy': {
       target: 'https://kankanapi.bihukankan.com',
       pathRewrite: { '^/proxy': '/' }
-    }
+    },
+    '/s1': {
+      target: 'https://static-1302789012.cos.ap-shanghai.myqcloud.com',
+      pathRewrite: { '^/s1': '/' }
+    },
   },
   server: {
     port: 80,
