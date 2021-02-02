@@ -73,7 +73,7 @@ export default Vue.extend({
 
     background: {
       color: #bdb6bb;
-      image: url("http://s1.huangchengtuo.com/img/AF.png");
+      image: url("https://s1.huangchengtuo.com/img/AF.png");
       attachment: fixed;
       position-x: right;
       position-y: top;
