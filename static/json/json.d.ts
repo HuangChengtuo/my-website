@@ -3,7 +3,6 @@ declare module "@/static/json/app.json" {
   export default temp
 }
 
-
 interface Bangumi {
   begin: string,
   end: string,

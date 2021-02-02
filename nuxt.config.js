@@ -8,8 +8,8 @@ export default {
   // 自动注册全局组件，需要声明相应文件夹，没有声明的仍需 import 引入
   components: {
     dirs: [{
-      path: '~/components/layouts/',
-      prefix: 'Layouts'
+      path: '~/components/global/',
+      prefix: ''
     }]
   },
   css: ['@/static/styles/index.scss'],
@@ -20,7 +20,7 @@ export default {
       { rel: 'stylesheet', href: '/styles/antd.css' }
     ],
     meta: [{ charset: 'utf-8' }],
-    title: '黄秤砣的主页'
+    title: '黄秤砣'
   },
   modules: ['@nuxtjs/axios'],
   plugins: ['@/plugins/api.ts', '@/plugins/antd.ts', '@/plugins/utils.ts'],

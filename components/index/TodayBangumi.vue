@@ -1,6 +1,6 @@
 <template>
   <nuxt-link to="/bangumi" class="today-bangumi">
-    <div class="title">今日新番表</div>
+    <div class="card-title">今日新番表</div>
     <div v-for="item of bangumi" :key="item.title" class="bangumi aic" :class="{now:item.now}">
       <span class="name one-line">{{ showTitle(item) }}</span>
       <span class="number-font">{{ $formatTime(item.chineseBegin || item.begin, 'HH:mm') }}</span>
@@ -60,14 +60,6 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .today-bangumi {
-  .title {
-    line-height: 32px;
-    margin-bottom: 18px;
-    font-weight: 500;
-    font-size: 24px;
-    text-align: center;
-  }
-
   .bangumi {
     .name {
       width: 300px;

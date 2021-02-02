@@ -4,9 +4,9 @@
     <main class="main">
       <h1 class="title">黄秤砣</h1>
       <div class="jcsb">
-        <TodayBangumi class="block" />
-        <Blog class="block" />
-        <div class="block">666</div>
+        <TodayBangumi class="card" />
+        <Blog class="card" />
+        <div class="card">666</div>
       </div>
     </main>
   </div>
@@ -67,7 +67,7 @@ export default Vue.extend({
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 #home-page {
   .header {
     height: 80vh;
@@ -94,12 +94,20 @@ export default Vue.extend({
       font-size: 3rem;
     }
 
-    .block {
+    .card {
       box-shadow: 0 0 10px rgba(168, 182, 191, 0.6);
       width: 384px;
       padding: 24px 16px 16px;
       color: #000000;
       transition: all 0.3s linear;
+
+      .card-title {
+        line-height: 32px;
+        margin-bottom: 18px;
+        font-weight: 500;
+        font-size: 24px;
+        text-align: center;
+      }
 
       &:hover {
         transform: translateY(-5px);
