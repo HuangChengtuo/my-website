@@ -11,13 +11,12 @@
 <script lang="ts">
 import Vue from 'vue'
 import dayjs from 'dayjs'
-import rawBangumi from '@/static/json/bangumi.json'
 
 export default Vue.extend({
   data() {
     return {
       chinesePlatform: ['bilibili', 'acfun', 'qq', 'iqiyi'],
-      rawBangumi
+      rawBangumi: []
     }
   },
   computed: {
@@ -44,6 +43,11 @@ export default Vue.extend({
       })
       return result
     }
+  },
+  mounted() {
+    this.$api.get('https://s1.huangchengtuo.com/json/bangumi.json').then((res: Bangumi[]) => {
+      this.rawBangumi = res
+    })
   },
   methods: {
     showTitle(item: Bangumi) {
@@ -78,6 +82,5 @@ export default Vue.extend({
     text-align: center;
     color: #73c9e5;
   }
-
 }
 </style>

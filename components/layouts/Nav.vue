@@ -1,7 +1,7 @@
 <template>
   <div id="nav">
     <nuxt-link to="/" class="logo">
-      <img src="http://s1.huangchengtuo.com/img/DD.png" alt="logo" class="logo-img">
+      <img src="https://s1.huangchengtuo.com/img/DD.png" alt="logo" class="logo-img">
       黄秤砣
     </nuxt-link>
     <span class="time number-font">{{ now }}</span>
