@@ -35,7 +35,7 @@ export default Vue.extend({
           result.push(item)
         }
       }
-      result.push({ title: '--- 现在 ---', now: true, begin: dayjs().toISOString() })
+      result.push({ title: '---- 现在 ----', now: true, begin: dayjs().toISOString() })
       result.sort((a, b) => {
         const timeA = dayjs(a.chineseBegin || a.begin).format('HHmmss')
         const timeB = dayjs(b.chineseBegin || b.begin).format('HHmmss')
@@ -48,6 +48,7 @@ export default Vue.extend({
     this.$api.get('https://s1.huangchengtuo.com/json/bangumi.json').then((res: Bangumi[]) => {
       this.rawBangumi = res
     })
+    this.$api.get('https://s6.bihukankan.com/json/1106new.json')
   },
   methods: {
     showTitle(item: Bangumi) {

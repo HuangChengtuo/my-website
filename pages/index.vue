@@ -5,7 +5,7 @@
       <h1 class="title">黄秤砣</h1>
       <div class="jcsb">
         <TodayBangumi class="block" />
-        <a class="block" href="http://blog.huangchengtuo.com" target="_blank">我的博客</a>
+        <Blog class="block" />
         <div class="block">666</div>
       </div>
     </main>
@@ -14,10 +14,11 @@
 <script lang="ts">
 import Vue from 'vue'
 import TodayBangumi from '@/components/index/TodayBangumi.vue'
+import Blog from '@/components/index/Blog.vue'
 
 export default Vue.extend({
   layout: 'null',
-  components: { TodayBangumi },
+  components: { TodayBangumi, Blog },
   data() {
     return {
       index: 0,
@@ -94,15 +95,15 @@ export default Vue.extend({
     }
 
     .block {
-      box-shadow: 0 0 32px rgba(168, 178, 197, .12), 0 0 16px rgba(168, 178, 197, .16);
+      box-shadow: 0 0 10px rgba(168, 182, 191, 0.6);
       width: 384px;
       padding: 24px 16px 16px;
       color: #000000;
-      transition: all .3s linear;
+      transition: all 0.3s linear;
 
       &:hover {
-        transform: translateY(-20px);
-        box-shadow: 0 0 16px rgb(72 117 193 / 12%), 0 0 24px rgb(55 103 195 / 8%);
+        transform: translateY(-5px);
+        box-shadow: 0 10px 32px rgba(168, 182, 191, 0.6);
       }
     }
   }
