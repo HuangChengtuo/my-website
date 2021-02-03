@@ -76,8 +76,7 @@ export default Vue.extend({
       color: #bdb6bb;
       image: url("https://s1.huangchengtuo.com/img/AF.png");
       attachment: fixed;
-      position-x: right;
-      position-y: top;
+      position: right top;
       size: auto 100vw;
     }
   }

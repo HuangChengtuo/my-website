@@ -7,8 +7,14 @@
 
 <style lang="scss" scoped>
 .card {
+  position: relative;
+
   .dd {
-    width: 100%;
+    width: 300px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }
 </style>
