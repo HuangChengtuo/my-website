@@ -96,6 +96,7 @@ export default Vue.extend({
     .card {
       box-shadow: 0 0 10px rgba(168, 182, 191, 0.6);
       width: 384px;
+      min-height: 300px;
       padding: 24px 16px 16px;
       color: #000000;
       transition: all 0.3s linear;
