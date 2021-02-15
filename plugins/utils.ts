@@ -3,17 +3,19 @@ import { Plugin } from '@nuxt/types'
 import dayjs from "dayjs"
 
 type FormatTime = (unix?: number | string, template?: string) => string
-const formatTime = (unix, template = 'YYYY-MM-DD HH:mm:ss') => dayjs(unix).format(template)
+const formatTime: FormatTime = (unix, template = 'YYYY-MM-DD HH:mm:ss') => dayjs(unix).format(template)
+
+interface Utils {
+  $formatTime: FormatTime
+}
 
 declare module 'vue/types/vue' {
-  interface Vue {
-    $formatTime: FormatTime
+  interface Vue extends Utils {
   }
 }
 
 declare module '@nuxt/types' {
-  interface Context {
-    $formatTime: FormatTime
+  interface Context extends Utils {
   }
 }
 

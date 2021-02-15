@@ -22,6 +22,7 @@ module.exports = {
         delimiter: 'comma',
         requireLast: false
       }
-    }]
+    }],
+    '@typescript-eslint/no-empty-interface': 0
   }
 }
