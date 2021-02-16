@@ -4,7 +4,7 @@
     <main class="main">
       <h1 class="title">黄秤砣</h1>
       <div class="jcsb">
-        <TodayBangumi class="card" />
+        <TodayBangumi class="card" :raw-bangumi="bangumi" />
         <Blog class="card" />
         <div class="card">666</div>
       </div>
@@ -17,12 +17,17 @@ import TodayBangumi from '@/components/index/TodayBangumi.vue'
 import Blog from '@/components/index/Blog.vue'
 
 export default Vue.extend({
+  async asyncData({ $api }) {
+    const bangumi = await $api.get('https://s1.huangchengtuo.com/json/bangumi.json')
+    return { bangumi }
+  },
   layout: 'null',
   components: { TodayBangumi, Blog },
   data() {
     return {
       index: 0,
-      debounce: false
+      debounce: false,
+      bangumi: []
     }
   },
   mounted() {

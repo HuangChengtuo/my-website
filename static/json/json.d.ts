@@ -3,17 +3,18 @@ declare module "@/static/json/app.json" {
   export default temp
 }
 
+interface Site {
+  begin: string,
+  site: string,
+  id: string
+}
+
 interface Bangumi {
   begin: string,
   end: string,
   title: string,
   titleTranslate: { 'zh-Hans': string[] },
-  sites: { begin: string, site: string }[],
+  sites: Site[],
   hasCopyright: boolean,
   chineseBegin: string
-}
-
-declare module "@/static/json/bangumi.json" {
-  const temp: Bangumi[]
-  export default temp
 }

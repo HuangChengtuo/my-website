@@ -9,26 +9,24 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import Vue, { PropOptions } from 'vue'
 import dayjs from 'dayjs'
 
 export default Vue.extend({
-  data() {
-    return {
-      chinesePlatform: ['bilibili', 'acfun', 'qq', 'iqiyi'],
-      rawBangumi: []
-    }
+  props: {
+    rawBangumi: Array as PropOptions<Bangumi[]>
   },
   computed: {
     bangumi(): Bangumi[] {
+      const chinesePlatform = ['bilibili', 'acfun', 'qq', 'iqiyi']
       const result = []
       for (const item of this.rawBangumi) {
         // 国内版权
-        const hasCopyright = item.sites.some(e => this.chinesePlatform.includes(e.site))
+        const hasCopyright = item.sites.some(e => chinesePlatform.includes(e.site))
         if (hasCopyright) {
           // 新增国内开播时间字段
           item.hasCopyright = hasCopyright
-          item.chineseBegin = item.sites.find(e => this.chinesePlatform.includes(e.site)).begin
+          item.chineseBegin = item.sites.find(e => chinesePlatform.includes(e.site)).begin
         }
         // 今日国内更新
         if (dayjs(item.chineseBegin || item.begin).day() === dayjs().day() && hasCopyright) {
@@ -43,12 +41,6 @@ export default Vue.extend({
       })
       return result
     }
-  },
-  mounted() {
-    this.$api.get('https://s1.huangchengtuo.com/json/bangumi.json').then((res: Bangumi[]) => {
-      this.rawBangumi = res
-    })
-    this.$api.get('https://s6.bihukankan.com/json/1106new.json')
   },
   methods: {
     showTitle(item: Bangumi) {

@@ -18,8 +18,18 @@ declare module '@nuxt/types' {
 const fn: Plugin = (context) => {
   const api = context.$axios.create({ timeout: 10000 })
   api.interceptors.response.use(
-    (res: any) => res.data,
-    (err: any) => Promise.reject(err)
+    (res: any) => {
+      if (process.server) {
+        console.log('SUCCESS ' + res?.config?.url)
+      }
+      return res.data
+    },
+    (err: any) => {
+      if (process.server) {
+        console.error(err?.config?.url)
+      }
+      return Promise.reject(err)
+    }
   )
   Vue.prototype.$api = api
   context.$api = api
