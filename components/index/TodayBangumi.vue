@@ -18,7 +18,7 @@ export default Vue.extend({
   },
   computed: {
     bangumi(): Bangumi[] {
-      const chinesePlatform = ['bilibili', 'acfun', 'qq', 'iqiyi']
+      const chinesePlatform = ["acfun", "bilibili", "sohu", "youku", "qq", "iqiyi", "letv", "pptv", "mgtv", "dmhy"]
       const result = []
       for (const item of this.rawBangumi) {
         // 国内版权
@@ -29,7 +29,7 @@ export default Vue.extend({
           item.chineseBegin = item.sites.find(e => chinesePlatform.includes(e.site)).begin
         }
         // 今日国内更新
-        if (dayjs(item.chineseBegin || item.begin).day() === dayjs().day() && hasCopyright) {
+        if (dayjs(item.chineseBegin || item.begin).day() === dayjs().day()) {
           result.push(item)
         }
       }

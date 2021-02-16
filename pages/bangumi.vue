@@ -1,6 +1,15 @@
 <template>
   <div id="bangumi">
-    <a-table :data-source="bangumi" :pagination="false" rowKey="title">
+    <a-tabs v-model="day">
+      <a-tab-pane :key="1" tab="周一" />
+      <a-tab-pane :key="2" tab="周二" />
+      <a-tab-pane :key="3" tab="周三" />
+      <a-tab-pane :key="4" tab="周四" />
+      <a-tab-pane :key="5" tab="周五" />
+      <a-tab-pane :key="6" tab="周六" />
+      <a-tab-pane :key="0" tab="周日" />
+    </a-tabs>
+    <a-table :data-source="showBangumi" :pagination="false" rowKey="title">
       <a-table-column title="番剧">
         <template slot-scope="row">
           {{ showTitle(row) }}
@@ -8,10 +17,10 @@
       </a-table-column>
       <a-table-column title="放送时间" align="center">
         <div slot-scope="row" class="number-font">
-          {{ $formatTime(row.chineseBegin || row.begin) }}
+          {{ $formatTime(row.chineseBegin || row.begin,'HH:mm') }}
         </div>
       </a-table-column>
-      <a-table-column title="国内放送">
+      <a-table-column title="国内放送" width="350px" align="center">
         <template slot-scope="row">
           <a
             v-for="item of showSites(row.sites)"
@@ -20,6 +29,7 @@
             target="_blank"
             class="link"
           >{{ item.title }}</a>
+          <span v-if="!showSites(row.sites).length" style="color:gainsboro">暂无</span>
         </template>
       </a-table-column>
     </a-table>
@@ -28,8 +38,10 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import dayjs from 'dayjs'
 
 interface Data {
+  day: number,
   bangumi: Bangumi[],
   siteMeta: {
     [index: string]: {
@@ -43,6 +55,7 @@ interface Data {
 export default Vue.extend({
   data(): Data {
     return {
+      day: dayjs().day(),
       bangumi: [],
       siteMeta: {
         "acfun": { "title": "AcFun", "urlTemplate": "https://www.acfun.cn/bangumi/aa{{id}}", "type": "onair" },
@@ -58,8 +71,24 @@ export default Vue.extend({
       }
     }
   },
+  computed: {
+    showBangumi(): Bangumi[] {
+      const result = []
+      for (const item of this.bangumi) {
+        if (dayjs(item.chineseBegin || item.begin).day() === this.day) {
+          result.push(item)
+        }
+      }
+      result.sort((a, b) => {
+        const timeA = dayjs(a.chineseBegin || a.begin).format('HHmmss')
+        const timeB = dayjs(b.chineseBegin || b.begin).format('HHmmss')
+        return Number(timeA) - Number(timeB)
+      })
+      return result
+    },
+  },
   async mounted() {
-    const chinesePlatform = ['bilibili', 'acfun', 'qq', 'iqiyi']
+    const chinesePlatform = ["acfun", "bilibili", "sohu", "youku", "qq", "iqiyi", "letv", "pptv", "mgtv", "dmhy"]
     const res: Bangumi[] = await this.$api.get('https://s1.huangchengtuo.com/json/bangumi.json')
     for (const item of res) {
       // 国内版权
@@ -81,7 +110,6 @@ export default Vue.extend({
       for (const item of arr) {
         if (this.siteMeta[item.site]) {
           const abbr = this.siteMeta[item.site]
-          console.log(abbr)
           result.push({ title: abbr.title, url: abbr.urlTemplate.replace('{{id}}', item.id) })
         }
       }
