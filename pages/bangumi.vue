@@ -16,8 +16,8 @@
         </template>
       </a-table-column>
       <a-table-column title="放送时间" align="center">
-        <div slot-scope="row" class="number-font">
-          {{ $formatTime(row.chineseBegin || row.begin,'HH:mm') }}
+        <div slot-scope="row" class="roboto-font">
+          {{ $formatTime(row.chineseBegin || row.begin, 'HH:mm') }}
         </div>
       </a-table-column>
       <a-table-column title="国内放送" width="350px" align="center">
@@ -44,7 +44,7 @@ interface Data {
   day: number,
   bangumi: Bangumi[],
   siteMeta: {
-    [index: string]: {
+    [key: string]: {
       title: string,
       type: string,
       urlTemplate: string
@@ -121,6 +121,8 @@ export default Vue.extend({
 
 <style lang="scss">
 #bangumi {
+  padding-bottom: 32px;
+
   .link + .link {
     margin-left: 5px;
   }

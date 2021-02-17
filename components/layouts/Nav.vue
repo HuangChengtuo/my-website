@@ -4,7 +4,7 @@
       <img src="https://s1.huangchengtuo.com/img/pureDD.png" alt="logo" class="logo-img">
       黄秤砣
     </nuxt-link>
-    <span class="time number-font">{{ now }}</span>
+    <span class="time roboto-font">{{ now }}</span>
     <a href="http://blog.huangchengtuo.com" target="_blank" class="download-btn">去博客</a>
   </div>
 </template>

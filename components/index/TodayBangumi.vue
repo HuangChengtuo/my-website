@@ -1,9 +1,12 @@
 <template>
   <nuxt-link to="/bangumi" class="today-bangumi">
-    <div class="card-title">今日新番表</div>
+    <div class="card-title">
+      今日新番表
+      <span class="sub">(国内)</span>
+    </div>
     <div v-for="item of bangumi" :key="item.title" class="bangumi aic" :class="{now:item.now}">
       <span class="name one-line">{{ showTitle(item) }}</span>
-      <span class="number-font">{{ $formatTime(item.chineseBegin || item.begin, 'HH:mm') }}</span>
+      <span class="roboto-font">{{ $formatTime(item.chineseBegin || item.begin, 'HH:mm') }}</span>
     </div>
   </nuxt-link>
 </template>
@@ -13,9 +16,7 @@ import Vue, { PropOptions } from 'vue'
 import dayjs from 'dayjs'
 
 export default Vue.extend({
-  props: {
-    rawBangumi: Array as PropOptions<Bangumi[]>
-  },
+  props: { rawBangumi: Array as PropOptions<Bangumi[]> },
   computed: {
     bangumi(): Bangumi[] {
       const chinesePlatform = ["acfun", "bilibili", "sohu", "youku", "qq", "iqiyi", "letv", "pptv", "mgtv", "dmhy"]
@@ -28,8 +29,8 @@ export default Vue.extend({
           item.hasCopyright = hasCopyright
           item.chineseBegin = item.sites.find(e => chinesePlatform.includes(e.site)).begin
         }
-        // 今日国内更新
-        if (dayjs(item.chineseBegin || item.begin).day() === dayjs().day()) {
+        // 今日国内版权更新
+        if (dayjs(item.chineseBegin || item.begin).day() === dayjs().day() && item.hasCopyright) {
           result.push(item)
         }
       }
@@ -52,12 +53,19 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .today-bangumi {
+  .card-title {
+    .sub {
+      font-size: 14px;
+      font-weight: normal;
+    }
+  }
+
   .bangumi {
     .name {
       width: 300px;
     }
 
-    .number-font {
+    .roboto-font {
       margin-left: auto;
     }
   }

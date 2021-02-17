@@ -18,7 +18,7 @@ export default Vue.extend({
 #layout-default {
   .nuxt-body {
     width: 1200px;
-    margin: 16px auto ;
+    margin: 16px auto;
   }
 }
 </style>
