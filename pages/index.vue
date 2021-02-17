@@ -4,9 +4,14 @@
     <main class="main">
       <h1 class="title">黄秤砣</h1>
       <div class="jcsb">
-        <TodayBangumi class="card" :raw-bangumi="bangumi" />
+        <!--腾讯云服务端时间不正常-->
+        <client-only>
+          <TodayBangumi class="card" :raw-bangumi="bangumi" />
+        </client-only>
         <Blog class="card" />
-        <div class="card">666</div>
+        <div class="card">
+          <nuxt-link to="/playground">playground</nuxt-link>
+        </div>
       </div>
     </main>
   </div>
