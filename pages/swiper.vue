@@ -1,0 +1,190 @@
+<template>
+  <div id="swiper" style="height: 2000px">
+    <a-button @click="start">start</a-button>
+    <a-button @click="end">end</a-button>
+    <br />
+    <div class="sample1" :style="`background-image:url(https://s6.bihukankan.com/img/0205index/banner${head1.val}.png)`">{{ head1.val }}</div>
+    <!--提前加载，防止白屏-->
+    <div style="background-image: url(https://s6.bihukankan.com/img/0205index/banner1.png)"></div>
+    <div style="background-image: url(https://s6.bihukankan.com/img/0205index/banner2.png)"></div>
+    <div style="background-image: url(https://s6.bihukankan.com/img/0205index/banner3.png)"></div>
+    <a-button @click="next">next</a-button>
+    <div class="sample2">
+      <div :class="getClass(1)">1</div>
+      <div :class="getClass(2)">2</div>
+      <div :class="getClass(3)">3</div>
+      <div :class="getClass(4)">4</div>
+      <div :class="getClass(5)">5</div>
+    </div>
+    <div class="sample3 jcsb">
+      <div class="common active"></div>
+      <div class="common"></div>
+      <div class="common"></div>
+      <div class="common"></div>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import Vue from 'vue'
+
+class ListNode {
+  val: number
+  next: ListNode
+
+  constructor(val: number) {
+    this.val = val
+  }
+}
+
+let temp: ListNode
+
+const head1 = new ListNode(1)
+temp = head1
+temp.next = new ListNode(2)
+temp = temp.next
+temp.next = new ListNode(3)
+temp = temp.next
+temp.next = head1
+
+const head2 = new ListNode(1)
+temp = head2
+temp.next = new ListNode(2)
+temp = temp.next
+temp.next = new ListNode(3)
+temp = temp.next
+temp.next = new ListNode(4)
+temp = temp.next
+temp.next = new ListNode(5)
+temp = temp.next
+temp.next = head2
+
+
+export default Vue.extend({
+  data() {
+    return {
+      head1,
+      head2,
+      timer: null,
+      loading: false
+    }
+  },
+  mounted() {
+    this.start()
+  },
+  methods: {
+    start() {
+      this.end()
+      this.timer = setInterval(() => {
+        this.next()
+      }, 4000)
+    },
+    end() {
+      clearInterval(this.timer)
+    },
+    next() {
+      if (this.loading) {
+        return
+      }
+      this.head1 = this.head1.next
+      this.head2 = this.head2.next
+      this.loading = true
+      setTimeout(() => {
+        this.loading = false
+      }, 1000)
+    },
+    getClass(index: number) {
+      const ll = this.head2.val === index
+      const l = index === this.head2.next.val
+      const c = index === this.head2.next.next.val
+      const r = index === this.head2.next.next.next.val
+      const rr = index === this.head2.next.next.next.next.val
+      // 左左，左，中，右，右右
+      return { common: true, ll, l, c, r, rr }
+    }
+  }
+})
+</script>
+
+<style lang="scss">
+#swiper {
+  .sample1 {
+    height: 500px;
+    background: {
+      size: cover;
+      position: bottom;
+    }
+    transition: all 1s;
+  }
+
+  .sample2 {
+    position: relative;
+    height: 200px;
+    border: 1px solid #000000;
+    overflow: hidden;
+
+    .common {
+      opacity: 0;
+      background: {
+        image: url(https://s1.huangchengtuo.com/img/ywwuyi.jpg);
+        position: center;
+        size: cover;
+      }
+      transition: all 1s;
+      height: 150px;
+      width: 150px;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      transform: translateX(-50%);
+    }
+
+    .l,
+    .c,
+    .r {
+      opacity: 1;
+    }
+
+    .ll {
+      left: -10%;
+    }
+
+    .l {
+      left: 25%;
+    }
+
+    .c {
+      left: 50%;
+      height: 200px;
+      width: 200px;
+    }
+
+    .r {
+      left: 75%;
+    }
+
+    .rr {
+      left: 110%;
+    }
+  }
+
+  .sample3 {
+    height: 400px;
+
+    .common {
+      height: 400px;
+      width: 180px;
+      border-radius: 14px;
+      background: {
+        image: url(https://s1.huangchengtuo.com/img/banner.jpg);
+        size: cover;
+        position: right;
+      };
+    }
+
+    .active {
+      width: 550px;
+    }
+  }
+}
+</style>
