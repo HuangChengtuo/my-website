@@ -1,7 +1,7 @@
 <template>
   <div id="playground" style="height: 2000px">
     {{ time }}
-    <div class="banner" :style="`background-image: url(https://s6.bihukankan.com/img/0205index/banner${head.val}.png)`"></div>
+    <div class="banner">{{head.val}}</div>
     <a-button @click="start">start</a-button>
     <a-button @click="end">end</a-button>
     <div class="swiper">
@@ -11,9 +11,6 @@
       <div class="common" :class="getClass(4)">4</div>
       <div class="common" :class="getClass(5)">5</div>
     </div>
-    <div style="background-image: url(https://s6.bihukankan.com/img/0205index/banner1.png)"></div>
-    <div style="background-image: url(https://s6.bihukankan.com/img/0205index/banner2.png)"></div>
-    <div style="background-image: url(https://s6.bihukankan.com/img/0205index/banner3.png)"></div>
   </div>
 </template>
 
@@ -43,8 +40,8 @@ temp.next = head
 
 
 export default Vue.extend({
-  async asyncData({ $formatTime }) {
-    return { time: $formatTime() }
+  async asyncData() {
+    return { time: new Date() }
   },
   data() {
     return {
@@ -58,6 +55,7 @@ export default Vue.extend({
   },
   methods: {
     start() {
+      this.end()
       this.timer = setInterval(() => {
         this.head = this.head.next
       }, 5000)
