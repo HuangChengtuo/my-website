@@ -41,7 +41,7 @@ temp.next = head
 
 export default Vue.extend({
   async asyncData() {
-    return { time: new Date() }
+    return { time: new Date().toString() }
   },
   data() {
     return {
