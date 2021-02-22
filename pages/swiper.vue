@@ -16,17 +16,13 @@
       <div :class="getClass(4)">4</div>
       <div :class="getClass(5)">5</div>
     </div>
-    <div class="sample3 jcsb">
-      <div class="common active"></div>
-      <div class="common"></div>
-      <div class="common"></div>
-      <div class="common"></div>
-    </div>
+    <Sample3 />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import Sample3 from '@/components/swiper/Sample3.vue'
 
 class ListNode {
   val: number
@@ -61,6 +57,7 @@ temp.next = head2
 
 
 export default Vue.extend({
+  components: { Sample3 },
   data() {
     return {
       head1,
@@ -165,25 +162,6 @@ export default Vue.extend({
 
     .rr {
       left: 110%;
-    }
-  }
-
-  .sample3 {
-    height: 400px;
-
-    .common {
-      height: 400px;
-      width: 180px;
-      border-radius: 14px;
-      background: {
-        image: url(https://s1.huangchengtuo.com/img/banner.jpg);
-        size: cover;
-        position: right;
-      };
-    }
-
-    .active {
-      width: 550px;
     }
   }
 }
