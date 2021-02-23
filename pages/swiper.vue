@@ -24,34 +24,34 @@
 import Vue from 'vue'
 import Sample3 from '@/components/swiper/Sample3.vue'
 
-class ListNode {
+class Node {
   val: number
-  next: ListNode
+  next: Node
 
   constructor(val: number) {
     this.val = val
   }
 }
 
-let temp: ListNode
+let temp: Node
 
-const head1 = new ListNode(1)
+const head1 = new Node(1)
 temp = head1
-temp.next = new ListNode(2)
+temp.next = new Node(2)
 temp = temp.next
-temp.next = new ListNode(3)
+temp.next = new Node(3)
 temp = temp.next
 temp.next = head1
 
-const head2 = new ListNode(1)
+const head2 = new Node(1)
 temp = head2
-temp.next = new ListNode(2)
+temp.next = new Node(2)
 temp = temp.next
-temp.next = new ListNode(3)
+temp.next = new Node(3)
 temp = temp.next
-temp.next = new ListNode(4)
+temp.next = new Node(4)
 temp = temp.next
-temp.next = new ListNode(5)
+temp.next = new Node(5)
 temp = temp.next
 temp.next = head2
 
