@@ -1,14 +1,10 @@
 <template>
   <div id="swiper" style="height: 2000px">
+    <div class="sample1">{{ head1.val }}</div>
     <a-button @click="start">start</a-button>
-    <a-button @click="end">end</a-button>
-    <br />
-    <div class="sample1" :style="`background-image:url(https://s6.bihukankan.com/img/0205index/banner${head1.val}.png)`">{{ head1.val }}</div>
-    <!--提前加载，防止白屏-->
-    <div style="background-image: url(https://s6.bihukankan.com/img/0205index/banner1.png)"></div>
-    <div style="background-image: url(https://s6.bihukankan.com/img/0205index/banner2.png)"></div>
-    <div style="background-image: url(https://s6.bihukankan.com/img/0205index/banner3.png)"></div>
     <a-button @click="next">next</a-button>
+    <a-button @click="stop">stop</a-button>
+    <br />
     <div class="sample2">
       <div :class="getClass(1)">1</div>
       <div :class="getClass(2)">2</div>
@@ -71,12 +67,12 @@ export default Vue.extend({
   },
   methods: {
     start() {
-      this.end()
+      this.stop()
       this.timer = setInterval(() => {
         this.next()
       }, 4000)
     },
-    end() {
+    stop() {
       clearInterval(this.timer)
     },
     next() {
@@ -123,7 +119,7 @@ export default Vue.extend({
     .common {
       opacity: 0;
       background: {
-        image: url(https://s1.huangchengtuo.com/img/ywwuyi.jpg);
+        image: url(https://s1.huangchengtuo.com/img/pureDD.png);
         position: center;
         size: cover;
       }

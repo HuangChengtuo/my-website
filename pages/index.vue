@@ -31,11 +31,14 @@ export default Vue.extend({
   data() {
     return {
       index: 0,
+      position: [0],
       debounce: false,
       bangumi: []
     }
   },
   mounted() {
+    // 确定页面的高度以及模块位置
+    this.position[1] = (window.innerHeight || document.body.clientHeight) * 0.8
     window.addEventListener('mousewheel', this.wheelFn, { passive: false })
   },
   beforeDestroy() {
@@ -48,6 +51,10 @@ export default Vue.extend({
       if (this.debounce || (e.deltaY > 0 && this.index >= 1) || (e.deltaY < 0 && this.index === 0)) {
         return
       }
+      const nowPosition = window.pageYOffset
+      const down = e.deltaY > 0
+      const windowHeight = window.innerHeight || document.body.clientHeight
+      const scrollHeight = windowHeight * 0.8
       let start = 0
       // 动画函数，需要闭包访问 start 就没有分离出来
       const step = (unix: number) => {
@@ -55,10 +62,8 @@ export default Vue.extend({
           start = unix
         }
         const duration = unix - start
-        const windowHeight = window.innerHeight || document.body.clientHeight
-        const scrollHeight = windowHeight * 0.8
         const y = this.easeInOutCubic(duration / 1000) * scrollHeight
-        window.scrollTo(0, e.deltaY > 0 ? y : scrollHeight - y)
+        window.scrollTo(0, down ? y : scrollHeight - y)
         if (duration <= 1001) {
           requestAnimationFrame(step)
           this.debounce = true
