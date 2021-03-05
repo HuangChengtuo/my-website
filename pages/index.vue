@@ -30,15 +30,16 @@ export default Vue.extend({
   components: { TodayBangumi, Blog },
   data() {
     return {
-      index: 0,
-      position: [0],
+      // 各模块位置，单位为vh，mounted时根据视窗转化为对应px
+      position: [0, 0.8, 1.8],
       debounce: false,
       bangumi: []
     }
   },
   mounted() {
-    // 确定页面的高度以及模块位置
-    this.position[1] = (window.innerHeight || document.body.clientHeight) * 0.8
+    const windowHeight = window.innerHeight || document.body.clientHeight
+    // 根据vh转化为px
+    this.position = this.position.map(ele => Math.floor(windowHeight * ele))
     window.addEventListener('mousewheel', this.wheelFn, { passive: false })
   },
   beforeDestroy() {
@@ -47,15 +48,20 @@ export default Vue.extend({
   methods: {
     wheelFn(e: WheelEvent) {
       e.preventDefault()
+      const nowY = window.pageYOffset
+      const { index, between } = this.calcNowPosition(nowY)
+      console.log(index, between)
+      // if (index < 0) {
+      //   index = this.position.length - 1
+      // }
       // 正在滚动中，或者到最后一页还向下滚，或者第一页还向上滚
-      if (this.debounce || (e.deltaY > 0 && this.index >= 1) || (e.deltaY < 0 && this.index === 0)) {
+      if (this.debounce) {
         return
       }
-      const nowPosition = window.pageYOffset
+      this.debounce = true
       const down = e.deltaY > 0
-      const windowHeight = window.innerHeight || document.body.clientHeight
-      const scrollHeight = windowHeight * 0.8
       let start = 0
+      const scrollHeight = down ? this.position[index + 1] - nowY : nowY - this.position[index]
       // 动画函数，需要闭包访问 start 就没有分离出来
       const step = (unix: number) => {
         if (!start) {
@@ -63,16 +69,22 @@ export default Vue.extend({
         }
         const duration = unix - start
         const y = this.easeInOutCubic(duration / 1000) * scrollHeight
-        window.scrollTo(0, down ? y : scrollHeight - y)
+        window.scrollTo(0, down ? nowY + y : nowY - y)
         if (duration <= 1001) {
           requestAnimationFrame(step)
-          this.debounce = true
         } else {
           this.debounce = false
-          e.deltaY > 0 ? this.index++ : this.index--
         }
       }
       requestAnimationFrame(step)
+    },
+    calcNowPosition(nowY: number): { index: number, between: boolean } {
+      for (let i = 0; i < this.position.length; i++) {
+        if (this.position[i] > nowY) {
+          return { index: i - 1, between: this.position[i - 1] === nowY }
+        }
+      }
+      return { index: this.position.length - 1, between: false }
     },
     // 缓动函数 https://easings.net#easeInOutCubic
     easeInOutCubic(x: number): number {
