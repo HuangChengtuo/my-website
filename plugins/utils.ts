@@ -5,6 +5,11 @@ import dayjs from "dayjs"
 type FormatTime = (unix?: number | string, template?: string) => string
 const formatTime: FormatTime = (unix, template = 'YYYY-MM-DD HH:mm:ss') => dayjs(unix).format(template)
 
+const fn: Plugin = (context) => {
+  Vue.prototype.$formatTime = formatTime
+  context.$formatTime = formatTime
+}
+
 interface Utils {
   $formatTime: FormatTime
 }
@@ -19,8 +24,4 @@ declare module '@nuxt/types' {
   }
 }
 
-const fn: Plugin = (context) => {
-  Vue.prototype.$formatTime = formatTime
-  context.$formatTime = formatTime
-}
 export default fn
