@@ -1,13 +1,12 @@
 <template>
-  <div>playground</div>
+  <div>
+    playground
+    <img src="/0322banner.png" alt="banner" />
+  </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 
-export default Vue.extend({
-  mounted() {
-    throw new Error('123123')
-  }
-})
+export default Vue.extend({})
 </script>
