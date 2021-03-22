@@ -21,6 +21,12 @@ import Vue from 'vue'
 import TodayBangumi from '@/components/index/TodayBangumi.vue'
 import Blog from '@/components/index/Blog.vue'
 
+interface Data {
+  position: number[],
+  debounce: boolean,
+  bangumi: Bangumi[]
+}
+
 export default Vue.extend({
   async asyncData({ $api }) {
     const bangumi = await $api.get('https://s1.huangchengtuo.com/json/bangumi.json')
@@ -28,9 +34,9 @@ export default Vue.extend({
   },
   layout: 'null',
   components: { TodayBangumi, Blog },
-  data() {
+  data(): Data {
     return {
-      // 各模块位置，单位为vh，mounted时根据视窗转化为对应px
+      // 各模块边界位置，单位为vh，mounted时根据视窗转化为对应px
       position: [0, 0.8, 1.8],
       debounce: false,
       bangumi: []
@@ -49,19 +55,24 @@ export default Vue.extend({
     wheelFn(e: WheelEvent) {
       e.preventDefault()
       const nowY = window.pageYOffset
-      const { index, between } = this.calcNowPosition(nowY)
-      console.log(index, between)
-      // if (index < 0) {
-      //   index = this.position.length - 1
-      // }
-      // 正在滚动中，或者到最后一页还向下滚，或者第一页还向上滚
+      // 正在滚动中
       if (this.debounce) {
         return
       }
-      this.debounce = true
+      const { index, between } = this.calcNowPosition(nowY)
+      // 滚轮是向下还是向上
       const down = e.deltaY > 0
+      this.debounce = true
       let start = 0
-      const scrollHeight = down ? this.position[index + 1] - nowY : nowY - this.position[index]
+
+      let scrollHeight = 0
+      if (down) {
+        // 向下滚，滚动高度等于下一个位置与现在的差值
+        scrollHeight = this.position[index + 1] - nowY
+      } else {
+        // 向上滚，夹在中间需滚动上一个边界与现在的差值，在边界就滚动一个完整距离
+        scrollHeight = between ? (nowY - this.position[index]) : (this.position[index] - this.position[index - 1])
+      }
       // 动画函数，需要闭包访问 start 就没有分离出来
       const step = (unix: number) => {
         if (!start) {
@@ -78,10 +89,11 @@ export default Vue.extend({
       }
       requestAnimationFrame(step)
     },
+    // 计算现在在哪个位置，是正好对准边界还是夹在中间
     calcNowPosition(nowY: number): { index: number, between: boolean } {
       for (let i = 0; i < this.position.length; i++) {
         if (this.position[i] > nowY) {
-          return { index: i - 1, between: this.position[i - 1] === nowY }
+          return { index: i - 1, between: this.position[i - 1] !== nowY }
         }
       }
       return { index: this.position.length - 1, between: false }
