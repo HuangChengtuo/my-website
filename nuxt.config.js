@@ -20,8 +20,12 @@ export default {
       // antd.css 太大，改 link
       { rel: 'stylesheet', href: 'https://s1.huangchengtuo.com/css/antd.min.css' }
     ],
-    meta: [{ charset: 'utf-8' }],
-    title: '黄秤砣'
+    meta: [
+      { charset: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' }
+    ],
+    script: [{ src: '//cdn.jsdelivr.net/npm/eruda' }],
+    title: '黄秤砣的网站'
   },
   modules: ['@nuxtjs/axios'],
   plugins: ['@/plugins/api.ts', '@/plugins/antd.ts', '@/plugins/utils.ts'],

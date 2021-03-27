@@ -1,6 +1,5 @@
 <template>
   <div id="swiper" style="height: 2000px">
-    <div class="sample1">{{ head1.val }}</div>
     <a-button @click="start">start</a-button>
     <a-button @click="next">next</a-button>
     <a-button @click="stop">stop</a-button>
@@ -12,7 +11,13 @@
       <div :class="getClass(4)">4</div>
       <div :class="getClass(5)">5</div>
     </div>
+    <br />
     <Sample3 />
+    <br />
+    <div class="sample1" :style="`background-image:url(${bg[head1.val]})`"></div>
+    <!-- 轮播图提前加载 -->
+    <div style="background:url(https://s1.huangchengtuo.com/img/altina.jpg)"></div>
+    <div style="background:url(https://s1.huangchengtuo.com/img/juna.jpg)"></div>
   </div>
 </template>
 
@@ -34,8 +39,6 @@ let temp: Node
 const head1 = new Node(1)
 temp = head1
 temp.next = new Node(2)
-temp = temp.next
-temp.next = new Node(3)
 temp = temp.next
 temp.next = head1
 
@@ -59,7 +62,11 @@ export default Vue.extend({
       head1,
       head2,
       timer: null,
-      loading: false
+      loading: false,
+      bg: {
+        1: 'https://s1.huangchengtuo.com/img/altina.jpg',
+        2: 'https://s1.huangchengtuo.com/img/juna.jpg'
+      }
     }
   },
   mounted() {
@@ -102,11 +109,8 @@ export default Vue.extend({
 <style lang="scss">
 #swiper {
   .sample1 {
-    height: 500px;
-    background: {
-      size: cover;
-      position: bottom;
-    }
+    height: 675px;
+    background-size: cover;
     transition: all 1s;
   }
 

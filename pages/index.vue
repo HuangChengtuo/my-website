@@ -10,6 +10,10 @@
         </client-only>
         <Blog class="card" />
         <div class="card">
+          <div class="card-title">demo</div>
+          <nuxt-link to="/swiper">swiper</nuxt-link>
+          <br />
+          <br />
           <nuxt-link to="/playground">playground</nuxt-link>
         </div>
       </div>
@@ -28,7 +32,14 @@ interface Data {
 }
 
 export default Vue.extend({
-  async asyncData({ $api }) {
+  async asyncData({ $api, req, redirect }) {
+    if (process.server) {
+      const ua = req.headers['user-agent'] || ''
+      if (ua.match(/iPhone|Android|iPad/)) {
+        redirect('/mobile')
+        return
+      }
+    }
     const bangumi = await $api.get('https://s1.huangchengtuo.com/json/bangumi.json')
     return { bangumi }
   },
