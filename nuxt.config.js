@@ -24,7 +24,6 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' }
     ],
-    script: [{ src: '//cdn.jsdelivr.net/npm/eruda' }],
     title: '黄秤砣的网站'
   },
   modules: ['@nuxtjs/axios'],

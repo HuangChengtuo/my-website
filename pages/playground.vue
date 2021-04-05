@@ -1,12 +1,14 @@
 <template>
-  <div>
-    playground
-    <img src="/0322banner.png" alt="banner" />
-  </div>
+  <div>playground</div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 
-export default Vue.extend({})
+export default Vue.extend({
+  data() {
+    return {
+    }
+  }
+})
 </script>
