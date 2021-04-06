@@ -1,6 +1,8 @@
 <template>
   <div id="mobile">
+    <nuxt-link to="/mobile">
     <img src="https://s1.huangchengtuo.com/img/AF.png" alt="af" class="header" />
+    </nuxt-link>
     <div class="main">
       <div class="title">
         今日新番表
