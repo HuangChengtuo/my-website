@@ -1,6 +1,6 @@
 <template functional>
-  <a class="card" href="http://blog.huangchengtuo.com">
-    <div class="card-title">我的博客</div>
+  <a class="card" href="http://blog.huangchengtuo.com/resume.html">
+    <div class="card-title">我的简历</div>
     <img src="https://s1.huangchengtuo.com/img/DD.png" alt="DD" class="dd" />
   </a>
 </template>
