@@ -1,5 +1,5 @@
 <template>
-  <div id="mobile">
+  <div id="mobile-bangumi">
     <nuxt-link to="/mobile">
     <img src="https://s1.huangchengtuo.com/img/AF.png" alt="af" class="header" />
     </nuxt-link>
@@ -72,17 +72,7 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-html {
-  // 375px除以100等于100vw除以font-size，得到font-size等于26.6666666vw
-  // 375px除以100等于1(100%)除以font-size，得到font-size等于.266666666vw
-  font-size: 0.26666666666vw;
-}
-
-body {
-  font-size: 20rem;
-}
-
-#mobile {
+#mobile-bangumi {
   .header {
     width: 100vw;
     height: 100vw;
@@ -101,19 +91,19 @@ body {
       text-align: center;
       font-weight: bold;
       color: #000000;
-      font-size: 30rem;
-      padding: 8rem 0;
+      font-size: 60rem;
+      padding: 16rem 0;
 
       .sub {
-        font-size: 20rem;
+        font-size: 40rem;
         font-weight: normal;
       }
     }
 
     .bangumi {
-      padding: 0 10rem;
+      padding: 0 20rem;
       .name {
-        width: 300rem;
+        width: 600rem;
       }
 
       .roboto-font {
@@ -122,7 +112,7 @@ body {
     }
 
     .bangumi.now {
-      margin: 2rem 0;
+      margin: 4rem 0;
       text-align: center;
       color: #73c9e5;
     }

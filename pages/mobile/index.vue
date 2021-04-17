@@ -3,7 +3,8 @@
     <img src="https://s1.huangchengtuo.com/img/AF.png" alt="af" class="header" />
     <div class="main">
       <div class="title">黄秤砣的个人网站</div>
-      <a href="http://blog.huangchengtuo.com">个人博客</a>
+      <a href="http://blog.huangchengtuo.com/resume.html">我的简历</a>
+      <br />
       <nuxt-link to="/mobile/bangumi">今日新番</nuxt-link>
     </div>
   </div>
@@ -18,16 +19,6 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-html {
-  // 375px除以100等于100vw除以font-size，得到font-size等于26.6666666vw
-  // 375px除以100等于1(100%)除以font-size，得到font-size等于.266666666vw
-  font-size: 0.26666666666vw;
-}
-
-body {
-  font-size: 20rem;
-}
-
 #mobile {
   .header {
     width: 100vw;
@@ -48,11 +39,11 @@ body {
       text-align: center;
       font-weight: bold;
       color: #000000;
-      font-size: 30rem;
+      font-size: 60rem;
       padding: 8rem 0;
 
       .sub {
-        font-size: 20rem;
+        font-size: 40rem;
         font-weight: normal;
       }
     }

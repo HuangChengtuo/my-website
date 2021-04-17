@@ -1,3 +1,16 @@
+@media screen and (max-width: 980px) {
+  html {
+    // 375px除以100等于100vw除以font-size，得到font-size等于26.6666666vw
+    // 375px除以100等于1(100%)除以font-size，得到font-size等于.266666666vw
+    // 750px除以100等于1(100%)除以font-size，得到font-size等于.133333333vw
+    font-size: 0.133333333vw;
+
+    body {
+      font-size: 40rem;
+    }
+  }
+}
+
 * {
   box-sizing: border-box;
 }
