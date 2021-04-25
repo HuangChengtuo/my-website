@@ -1,8 +1,7 @@
 export default {
   axios: {
     proxy: true,
-    baseURL: 'https://kankanapi.bihukankan.com',
-    browserBaseURL: '/proxy'
+    prefix: '/proxy'
   },
   build: { publicPath: 'https://my-website-1302789012.cos.ap-shanghai.myqcloud.com' },
   buildModules: ['@nuxt/typescript-build'],

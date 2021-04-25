@@ -8,14 +8,8 @@
         <client-only>
           <TodayBangumi class="card" :raw-bangumi="bangumi" />
         </client-only>
-        <Blog class="card" />
-        <div class="card">
-          <div class="card-title">demo</div>
-          <nuxt-link to="/swiper">swiper</nuxt-link>
-          <br />
-          <br />
-          <nuxt-link to="/playground">playground</nuxt-link>
-        </div>
+        <Card class="card" href="http://blog.huangchengtuo.com/resume.html" title="我的简历" src="https://s1.huangchengtuo.com/img/DD.png"/>
+        <Card class="card" href="http://react.huangchengtuo.com" title="我的工具箱" src="https://s1.huangchengtuo.com/img/0425react.png"/>
       </div>
     </main>
   </div>
@@ -23,7 +17,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import TodayBangumi from '@/components/index/TodayBangumi.vue'
-import Blog from '@/components/index/Blog.vue'
+import Card from '@/components/index/Card.vue'
 
 interface Data {
   position: number[],
@@ -44,7 +38,7 @@ export default Vue.extend({
     return { bangumi }
   },
   layout: 'null',
-  components: { TodayBangumi, Blog },
+  components: { TodayBangumi, Card },
   data(): Data {
     return {
       // 各模块边界位置，单位为vh，mounted时根据视窗转化为对应px
