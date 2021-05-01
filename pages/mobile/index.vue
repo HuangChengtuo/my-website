@@ -3,9 +3,8 @@
     <img src="https://s1.huangchengtuo.com/img/AF.png" alt="af" class="header" />
     <div class="main">
       <div class="title">黄秤砣的个人网站</div>
-      <a href="http://blog.huangchengtuo.com/resume.html">我的简历</a>
-      <br />
-      <nuxt-link to="/mobile/bangumi">今日新番</nuxt-link>
+      <a href="http://blog.huangchengtuo.com/resume.html" class="link">我的简历</a>
+      <nuxt-link to="/mobile/bangumi" class="link">今日新番</nuxt-link>
     </div>
   </div>
 </template>
@@ -30,10 +29,12 @@ export default Vue.extend({
   }
 
   .main {
-    margin-top: 100vw;
+    margin-top: 90vw;
     min-height: 100vh;
     background: #ffffff;
     text-align: center;
+    border-radius: 66rem;
+    padding-top: 24rem;
 
     .title {
       text-align: center;
@@ -41,11 +42,11 @@ export default Vue.extend({
       color: #000000;
       font-size: 60rem;
       padding: 8rem 0;
+    }
 
-      .sub {
-        font-size: 40rem;
-        font-weight: normal;
-      }
+    .link {
+      display: block;
+      margin: 24rem 0;
     }
   }
 }
