@@ -79,6 +79,7 @@ export default Vue.extend({
     object-fit: cover;
     position: fixed;
     top: 0;
+    left: 0;
     z-index: -1;
   }
 
@@ -88,7 +89,6 @@ export default Vue.extend({
     background: #ffffff;
 
     .title {
-      text-align: center;
       font-weight: bold;
       color: #000000;
       font-size: 60rem;
@@ -113,7 +113,6 @@ export default Vue.extend({
 
     .bangumi.now {
       margin: 4rem 0;
-      text-align: center;
       color: #73c9e5;
     }
   }

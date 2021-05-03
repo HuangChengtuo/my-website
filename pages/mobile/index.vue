@@ -2,9 +2,9 @@
   <div id="mobile">
     <img src="https://s1.huangchengtuo.com/img/AF.png" alt="af" class="header" />
     <div class="main">
-      <div class="title">黄秤砣的个人网站</div>
-      <a href="http://blog.huangchengtuo.com/resume.html" class="link">我的简历</a>
-      <nuxt-link to="/mobile/bangumi" class="link">今日新番</nuxt-link>
+      <h2 class="weui-form__title">黄秤砣的个人网站</h2>
+      <a href="http://blog.huangchengtuo.com/resume.html" class="weui-btn weui-btn_primary">我的简历</a>
+      <nuxt-link to="/mobile/bangumi" class="weui-btn weui-btn_primary">今日新番</nuxt-link>
     </div>
   </div>
 </template>
@@ -13,6 +13,12 @@
 import Vue from 'vue'
 
 export default Vue.extend({
+  head() {
+    return {
+      // weui 替换 antd
+      link: [{ hid: 'antd', rel: 'stylesheet', href: 'https://s1.huangchengtuo.com/css/weui.min.css' }]
+    }
+  },
   layout: 'null'
 })
 </script>
@@ -25,28 +31,18 @@ export default Vue.extend({
     object-fit: cover;
     position: fixed;
     top: 0;
+    left: 0;
     z-index: -1;
   }
 
   .main {
-    margin-top: 90vw;
+    margin-top: 100vw;
     min-height: 100vh;
     background: #ffffff;
-    text-align: center;
-    border-radius: 66rem;
     padding-top: 24rem;
 
-    .title {
-      text-align: center;
-      font-weight: bold;
-      color: #000000;
-      font-size: 60rem;
-      padding: 8rem 0;
-    }
-
-    .link {
-      display: block;
-      margin: 24rem 0;
+    .weui-form__title {
+      margin-bottom: 32rem;
     }
   }
 }

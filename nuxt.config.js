@@ -17,7 +17,7 @@ export default {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       // antd.css 太大，改 link
-      { rel: 'stylesheet', href: 'https://s1.huangchengtuo.com/css/antd.min.css' }
+      { hid: 'antd', rel: 'stylesheet', href: 'https://s1.huangchengtuo.com/css/antd.min.css' }
     ],
     meta: [
       { charset: 'utf-8' },
