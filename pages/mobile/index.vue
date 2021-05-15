@@ -13,13 +13,7 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-  head() {
-    return {
-      // weui 替换 antd
-      link: [{ hid: 'antd', rel: 'stylesheet', href: 'https://s1.huangchengtuo.com/css/weui.min.css' }]
-    }
-  },
-  layout: 'null'
+  layout: 'mobile'
 })
 </script>
 

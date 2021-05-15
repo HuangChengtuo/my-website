@@ -8,8 +8,8 @@
         <client-only>
           <TodayBangumi class="card" :raw-bangumi="bangumi" />
         </client-only>
-        <Card class="card" href="http://blog.huangchengtuo.com/resume.html" title="我的简历" src="https://s1.huangchengtuo.com/img/DD.png"/>
-        <Card class="card" href="http://react.huangchengtuo.com" title="我的工具箱" src="https://s1.huangchengtuo.com/img/0425react.png"/>
+        <Card class="card" href="http://blog.huangchengtuo.com/resume.html" title="我的简历" src="https://s1.huangchengtuo.com/img/DD.png" />
+        <Card class="card" href="http://react.huangchengtuo.com" title="我的工具箱" src="https://s1.huangchengtuo.com/img/0425react.png" />
       </div>
     </main>
   </div>
@@ -27,12 +27,10 @@ interface Data {
 
 export default Vue.extend({
   async asyncData({ $api, req, redirect }) {
-    if (process.server) {
-      const ua = req.headers['user-agent'] || ''
-      if (ua.match(/iPhone|Android|iPad/)) {
-        redirect('/mobile')
-        return
-      }
+    const ua = process.server ? req.headers['user-agent'] : navigator.userAgent
+    if (ua.match(/iPhone|Android|iPad/)) {
+      redirect('/mobile')
+      return
     }
     const bangumi = await $api.get('https://s1.huangchengtuo.com/json/bangumi.json')
     return { bangumi }

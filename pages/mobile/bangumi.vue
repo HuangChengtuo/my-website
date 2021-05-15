@@ -25,7 +25,7 @@ export default Vue.extend({
     const rawBangumi = await $api.get('https://s1.huangchengtuo.com/json/bangumi.json')
     return { rawBangumi }
   },
-  layout: 'null',
+  layout: 'mobile',
   data() {
     return {
       width: 0,
