@@ -35,7 +35,7 @@ export default {
     }
   },
   server: {
-    port: 80,
+    port: 1111,
     host: '0.0.0.0'
   }
 }
