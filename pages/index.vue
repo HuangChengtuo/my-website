@@ -26,7 +26,7 @@ interface Data {
 }
 
 export default Vue.extend({
-  async asyncData({ $api, req, redirect }) {
+  async asyncData ({ $api, req, redirect }) {
     const ua = process.server ? req.headers['user-agent'] : navigator.userAgent
     if (ua.match(/iPhone|Android|iPad/)) {
       redirect('/mobile')
@@ -37,7 +37,7 @@ export default Vue.extend({
   },
   layout: 'null',
   components: { TodayBangumi, Card },
-  data(): Data {
+  data (): Data {
     return {
       // 各模块边界位置，单位为vh，mounted时根据视窗转化为对应px
       position: [0, 0.8, 1.8],
@@ -45,17 +45,18 @@ export default Vue.extend({
       bangumi: []
     }
   },
-  mounted() {
+  mounted () {
     const windowHeight = window.innerHeight || document.body.clientHeight
     // 根据vh转化为px
     this.position = this.position.map(ele => Math.floor(windowHeight * ele))
     window.addEventListener('mousewheel', this.wheelFn, { passive: false })
   },
-  beforeDestroy() {
+  beforeDestroy () {
     window.removeEventListener('mousewheel', this.wheelFn)
   },
   methods: {
-    wheelFn(e: WheelEvent) {
+
+    wheelFn (e: WheelEvent) {
       e.preventDefault()
       const nowY = window.pageYOffset
       // 正在滚动中
@@ -93,7 +94,7 @@ export default Vue.extend({
       requestAnimationFrame(step)
     },
     // 计算现在在哪个位置，是正好对准边界还是夹在中间
-    calcNowPosition(nowY: number): { index: number, between: boolean } {
+    calcNowPosition (nowY: number): { index: number, between: boolean } {
       for (let i = 0; i < this.position.length; i++) {
         if (this.position[i] > nowY) {
           return { index: i - 1, between: this.position[i - 1] !== nowY }
@@ -102,7 +103,7 @@ export default Vue.extend({
       return { index: this.position.length - 1, between: false }
     },
     // 缓动函数 https://easings.net#easeInOutCubic
-    easeInOutCubic(x: number): number {
+    easeInOutCubic (x: number): number {
       return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2
     }
   }

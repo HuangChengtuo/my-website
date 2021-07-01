@@ -1,13 +1,17 @@
 <template>
-  <div>playground</div>
+  <div>
+    <h1>playground</h1>
+    <button @click="add">{{ $store.state.count }}</button>
+  </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 
 export default Vue.extend({
-  data() {
-    return {
+  methods: {
+    add () {
+      this.$store.commit('changeCount', this.$store.state.count + 1)
     }
   }
 })
