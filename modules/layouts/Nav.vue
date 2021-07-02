@@ -5,7 +5,8 @@
       黄秤砣
     </nuxt-link>
     <span class="time roboto-font">{{ now }}</span>
-    <a href="http://blog.huangchengtuo.com" target="_blank" class="download-btn">去博客</a>
+    <a href="http://react.huangchengtuo.com" class="download-btn">工具箱</a>
+    <a href="http://blog.huangchengtuo.com" class="download-btn">去博客</a>
   </div>
 </template>
 
@@ -13,18 +14,18 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-  data() {
+  data () {
     return {
       now: this.$formatTime(),
       timer: null
     }
   },
-  mounted() {
+  mounted () {
     this.timer = setInterval(() => {
       this.now = this.$formatTime()
     }, 1000)
   },
-  beforeDestroy() {
+  beforeDestroy () {
     clearInterval(this.timer)
   }
 })
