@@ -7,12 +7,7 @@ export default {
   // build: { publicPath: 'https://my-website-1302789012.cos.ap-shanghai.myqcloud.com' },
   buildModules: ['@nuxt/typescript-build'],
   // 自动注册全局组件，需要声明相应文件夹，没有声明的仍需 import 引入
-  components: {
-    dirs: [{
-      path: '~/components/global/',
-      prefix: ''
-    }]
-  },
+  components: true,
   css: ['@/static/styles/index.scss'],
   head: {
     link: [

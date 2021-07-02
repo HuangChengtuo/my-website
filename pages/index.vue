@@ -16,8 +16,8 @@
 </template>
 <script lang="ts">
 import Vue from 'vue'
-import TodayBangumi from '@/components/index/TodayBangumi.vue'
-import Card from '@/components/index/Card.vue'
+import TodayBangumi from '@/modules/index/TodayBangumi.vue'
+import Card from '@/modules/index/Card.vue'
 
 interface Data {
   position: number[],

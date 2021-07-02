@@ -7,7 +7,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import LayoutsNav from '@/components/layouts/Nav.vue'
+import LayoutsNav from '@/modules/layouts/Nav.vue'
 
 export default Vue.extend({
   components: { LayoutsNav }
