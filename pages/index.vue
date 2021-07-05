@@ -27,7 +27,7 @@ interface Data {
 
 export default Vue.extend({
   async asyncData ({ $api, req, redirect }) {
-    const ua = process.server ? req.headers['user-agent'] : navigator.userAgent
+    const ua = req?.headers?.['user-agent'] || navigator.userAgent
     if (ua.match(/iPhone|Android|iPad/)) {
       redirect('/mobile')
       return
