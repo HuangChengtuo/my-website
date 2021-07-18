@@ -1,14 +1,11 @@
 <template>
   <div id="home-page">
-    <header class="header"></header>
+    <div class="banner"></div>
     <main class="main">
       <h1 class="title">黄秤砣</h1>
       <div class="jcsb">
-        <!--腾讯云服务端时间不正常-->
-        <client-only>
-          <TodayBangumi class="card" :raw-bangumi="bangumi" />
-        </client-only>
-        <Card class="card" href="http://blog.huangchengtuo.com/resume.html" title="我的简历" src="https://s1.huangchengtuo.com/img/DD.png" />
+        <TodayBangumi class="card" :raw-bangumi="bangumi" />
+        <Card class="card" href="http://blog.huangchengtuo.com" title="我的博客" src="https://s1.huangchengtuo.com/img/DD.png" />
         <Card class="card" href="http://react.huangchengtuo.com" title="我的工具箱" src="https://s1.huangchengtuo.com/img/0425react.png" />
       </div>
     </main>
@@ -112,7 +109,7 @@ export default Vue.extend({
 
 <style lang="scss">
 #home-page {
-  .header {
+  .banner {
     height: 80vh;
 
     background: {
