@@ -52,7 +52,6 @@ export default Vue.extend({
     window.removeEventListener('mousewheel', this.wheelFn)
   },
   methods: {
-
     wheelFn (e: WheelEvent) {
       e.preventDefault()
       const nowY = window.pageYOffset
