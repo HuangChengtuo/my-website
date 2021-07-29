@@ -153,7 +153,7 @@ export default Vue.extend({
       }
 
       &:hover {
-        box-shadow: 24px 24px 48px #cccccc, -24px -24px 48px #ffffff;
+        box-shadow: 5px 5px 10px #cccccc, -5px -5px 10px #ffffff;
       }
     }
   }
