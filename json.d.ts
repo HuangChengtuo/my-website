@@ -1,6 +1,6 @@
-declare module "@/static/json/app.json" {
-  const temp: string[]
-  export default temp
+declare module '@/static/json/app.json' {
+  const arr: string[]
+  export default arr
 }
 
 interface Site {

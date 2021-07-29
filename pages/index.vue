@@ -108,11 +108,13 @@ export default Vue.extend({
 
 <style lang="scss">
 #home-page {
+  background: #ededed;
+
   .banner {
     height: 80vh;
 
     background: {
-      color: #bdb6bb;
+      color: #f0f0f0;
       image: url("https://s1.huangchengtuo.com/img/AF.png");
       attachment: fixed;
       position: right top;
@@ -133,12 +135,14 @@ export default Vue.extend({
     }
 
     .card {
-      box-shadow: 0 0 10px rgba(168, 182, 191, 0.6);
-      width: 384px;
-      min-height: 384px;
+      border-radius: 50px;
+      background: #f0f0f0;
+      box-shadow: 16px 16px 32px #cccccc, -16px -16px 32px #ffffff;
+      width: 360px;
+      min-height: 360px;
       padding: 24px 16px 16px;
       color: #000000;
-      transition: all 0.3s linear;
+      transition: all 0.3s;
 
       .card-title {
         line-height: 32px;
@@ -149,8 +153,7 @@ export default Vue.extend({
       }
 
       &:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 32px rgba(168, 182, 191, 0.6);
+        box-shadow: 24px 24px 48px #cccccc, -24px -24px 48px #ffffff;
       }
     }
   }

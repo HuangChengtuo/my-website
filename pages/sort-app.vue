@@ -14,12 +14,6 @@
 import Vue from 'vue'
 import arr from '@/static/json/app.json'
 
-interface Type {
-  text: string,
-  lately: number,
-  arr: string[]
-}
-
 export default Vue.extend({
   data() {
     return {
