@@ -6,11 +6,10 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-  head() {
+  head () {
     console.log('layout head')
     return {
-      // weui 替换 antd
-      link: [{ hid: 'antd', rel: 'stylesheet', href: 'https://s1.huangchengtuo.com/css/weui.min.css' }]
+      link: [{ rel: 'stylesheet', href: 'https://s1.huangchengtuo.com/css/weui.min.css' }]
     }
   }
 })

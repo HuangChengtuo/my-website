@@ -1,8 +1,8 @@
 <template>
   <div id="swiper" style="height: 2000px">
-    <a-button @click="start">start</a-button>
-    <a-button @click="next">next</a-button>
-    <a-button @click="stop">stop</a-button>
+    <el-button @click="start">start</el-button>
+    <el-button @click="next">next</el-button>
+    <el-button @click="stop">stop</el-button>
     <br />
     <div class="sample2">
       <div :class="getClass(1)">1</div>

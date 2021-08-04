@@ -13,8 +13,6 @@ export default {
   head: {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      // antd.css 太大，改 link
-      { hid: 'antd', rel: 'stylesheet', href: 'https://s1.huangchengtuo.com/css/antd.min.css' },
       { hid: 'element', rel: 'stylesheet', href: 'https://s1.huangchengtuo.com/css/element.css' }
     ],
     meta: [

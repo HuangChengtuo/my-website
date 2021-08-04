@@ -1,38 +1,28 @@
 <template>
   <div id="bangumi">
-    <a-tabs v-model="day">
-      <a-tab-pane :key="1" tab="周一" />
-      <a-tab-pane :key="2" tab="周二" />
-      <a-tab-pane :key="3" tab="周三" />
-      <a-tab-pane :key="4" tab="周四" />
-      <a-tab-pane :key="5" tab="周五" />
-      <a-tab-pane :key="6" tab="周六" />
-      <a-tab-pane :key="0" tab="周日" />
-    </a-tabs>
-    <a-table :data-source="showBangumi" :pagination="false" rowKey="title">
-      <a-table-column title="番剧">
-        <template slot-scope="row">
-          {{ showTitle(row) }}
+    <el-tabs v-model="day">
+      <el-tab-pane name="1" label="周一" />
+      <el-tab-pane name="2" label="周二" />
+      <el-tab-pane name="3" label="周三" />
+      <el-tab-pane name="4" label="周四" />
+      <el-tab-pane name="5" label="周五" />
+      <el-tab-pane name="6" label="周六" />
+      <el-tab-pane name="0" label="周日" />
+    </el-tabs>
+    <el-table :data="showBangumi" >
+      <el-table-column label="番剧">
+        <template slot-scope="scope">{{ showTitle(scope.row) }}</template>
+      </el-table-column>
+      <el-table-column label="放送时间" width="200px" align="center">
+        <div slot-scope="scope" class="roboto-font">{{ $formatTime(scope.row.chineseBegin || scope.row.begin, 'HH:mm') }}</div>
+      </el-table-column>
+      <el-table-column label="国内放送" width="350px" align="center">
+        <template slot-scope="scope">
+          <a v-for="item of showSites(scope.row.sites)" :key="item.title" :href="item.url" target="_blank" class="link">{{ item.title }}</a>
+          <span v-if="!showSites(scope.row.sites).length" style="color:gainsboro">暂无</span>
         </template>
-      </a-table-column>
-      <a-table-column title="放送时间" align="center">
-        <div slot-scope="row" class="roboto-font">
-          {{ $formatTime(row.chineseBegin || row.begin, 'HH:mm') }}
-        </div>
-      </a-table-column>
-      <a-table-column title="国内放送" width="350px" align="center">
-        <template slot-scope="row">
-          <a
-            v-for="item of showSites(row.sites)"
-            :key="item.title"
-            :href="item.url"
-            target="_blank"
-            class="link"
-          >{{ item.title }}</a>
-          <span v-if="!showSites(row.sites).length" style="color:gainsboro">暂无</span>
-        </template>
-      </a-table-column>
-    </a-table>
+      </el-table-column>
+    </el-table>
   </div>
 </template>
 
@@ -41,7 +31,7 @@ import Vue from 'vue'
 import dayjs from 'dayjs'
 
 interface Data {
-  day: number,
+  day: string,
   bangumi: Bangumi[],
   siteMeta: {
     [key: string]: {
@@ -53,9 +43,9 @@ interface Data {
 }
 
 export default Vue.extend({
-  data(): Data {
+  data (): Data {
     return {
-      day: dayjs().day(),
+      day: dayjs().day().toString(),
       bangumi: [],
       siteMeta: {
         "acfun": { "title": "AcFun", "urlTemplate": "https://www.acfun.cn/bangumi/aa{{id}}", "type": "onair" },
@@ -72,10 +62,10 @@ export default Vue.extend({
     }
   },
   computed: {
-    showBangumi(): Bangumi[] {
+    showBangumi (): Bangumi[] {
       const result = []
       for (const item of this.bangumi) {
-        if (dayjs(item.chineseBegin || item.begin).day() === this.day) {
+        if (dayjs(item.chineseBegin || item.begin).day() === +this.day) {
           result.push(item)
         }
       }
@@ -87,7 +77,7 @@ export default Vue.extend({
       return result
     },
   },
-  async mounted() {
+  async mounted () {
     const chinesePlatform = ["acfun", "bilibili", "sohu", "youku", "qq", "iqiyi", "letv", "pptv", "mgtv", "dmhy"]
     const res: Bangumi[] = await this.$api.get('https://s1.huangchengtuo.com/json/bangumi.json')
     for (const item of res) {
@@ -102,10 +92,10 @@ export default Vue.extend({
     this.bangumi = res
   },
   methods: {
-    showTitle(item: Bangumi) {
+    showTitle (item: Bangumi) {
       return item.titleTranslate?.['zh-Hans']?.[0] || item.title
     },
-    showSites(arr: Site[]): { title: string, url: string }[] {
+    showSites (arr: Site[]): { title: string, url: string }[] {
       const result = []
       for (const item of arr) {
         if (this.siteMeta[item.site]) {
