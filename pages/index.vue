@@ -128,10 +128,11 @@ export default Vue.extend({
     margin: 0 auto;
 
     .title {
-      line-height: 20vh;
+      line-height: 18vh;
       font-weight: bold;
       text-align: center;
       font-size: 3rem;
+      color: #303133;
     }
 
     .card {
@@ -141,7 +142,7 @@ export default Vue.extend({
       width: 360px;
       min-height: 360px;
       padding: 24px 16px 16px;
-      color: #000000;
+      color: #303133;
       transition: all 0.3s;
 
       .card-title {

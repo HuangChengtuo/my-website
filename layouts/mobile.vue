@@ -7,7 +7,6 @@ import Vue from 'vue'
 
 export default Vue.extend({
   head () {
-    console.log('layout head')
     return {
       link: [{ rel: 'stylesheet', href: 'https://s1.huangchengtuo.com/css/weui.min.css' }]
     }

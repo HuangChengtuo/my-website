@@ -13,7 +13,7 @@ export default {
   head: {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { hid: 'element', rel: 'stylesheet', href: 'https://s1.huangchengtuo.com/css/element.css' }
+      { rel: 'stylesheet', href: 'https://s1.huangchengtuo.com/css/element.css' }
     ],
     meta: [
       { charset: 'utf-8' },
@@ -22,7 +22,7 @@ export default {
     title: '黄秤砣的网站'
   },
   modules: ['@nuxtjs/axios'],
-  plugins: ['@/plugins/api.ts', '@/plugins/antd.ts', '@/plugins/utils.ts','@/plugins/element.ts'],
+  plugins: ['@/plugins/api.ts', '@/plugins/element.ts', '@/plugins/utils.ts'],
   proxy: {
     '/proxy': {
       target: 'https://kankanapi.bihukankan.com',
