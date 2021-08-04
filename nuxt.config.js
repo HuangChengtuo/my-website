@@ -8,13 +8,14 @@ export default {
   buildModules: ['@nuxt/typescript-build'],
   // 自动注册全局组件，需要声明相应文件夹，没有声明的仍需 import 引入
   components: true,
-  css: ['@/static/styles/index.scss'],
+  css: ['@/static/css/index.scss'],
   generate: { subFolders: false },
   head: {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       // antd.css 太大，改 link
-      { hid: 'antd', rel: 'stylesheet', href: 'https://s1.huangchengtuo.com/css/antd.min.css' }
+      { hid: 'antd', rel: 'stylesheet', href: 'https://s1.huangchengtuo.com/css/antd.min.css' },
+      { hid: 'element', rel: 'stylesheet', href: 'https://s1.huangchengtuo.com/css/element.css' }
     ],
     meta: [
       { charset: 'utf-8' },
@@ -23,7 +24,7 @@ export default {
     title: '黄秤砣的网站'
   },
   modules: ['@nuxtjs/axios'],
-  plugins: ['@/plugins/api.ts', '@/plugins/antd.ts', '@/plugins/utils.ts'],
+  plugins: ['@/plugins/api.ts', '@/plugins/antd.ts', '@/plugins/utils.ts','@/plugins/element.ts'],
   proxy: {
     '/proxy': {
       target: 'https://kankanapi.bihukankan.com',

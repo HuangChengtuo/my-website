@@ -12,6 +12,7 @@
     "@nuxtjs/axios": "^5.12.5",
     "ant-design-vue": "^1.7.2",
     "dayjs": "^1.10.3",
+    "element-ui": "^2.15.5",
     "nuxt": "^2.14.0"
   },
   "devDependencies": {
