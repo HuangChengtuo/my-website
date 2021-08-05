@@ -15,6 +15,7 @@ module.exports = {
     'no-var': 2,
     'prefer-const': 2,
     eqeqeq: [2, 'smart'],
+    'eol-last': 1,
     'vue/max-attributes-per-line': [1, { singleline: 100, multiline: { max: 1, allowFirstLine: false } }],
     '@typescript-eslint/no-explicit-any': 0,
     '@typescript-eslint/member-delimiter-style': [1, {
