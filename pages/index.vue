@@ -138,7 +138,7 @@ export default Vue.extend({
     .card {
       border-radius: 50px;
       background: #f0f0f0;
-      box-shadow: 16px 16px 32px #cccccc, -16px -16px 32px #ffffff;
+      box-shadow: 5px 5px 10px #cccccc, -5px -5px 10px #ffffff;
       width: 360px;
       min-height: 360px;
       padding: 24px 16px 16px;
@@ -154,7 +154,7 @@ export default Vue.extend({
       }
 
       &:hover {
-        box-shadow: 5px 5px 10px #cccccc, -5px -5px 10px #ffffff;
+        box-shadow: 16px 16px 32px #cccccc, -16px -16px 32px #ffffff;
       }
     }
   }
