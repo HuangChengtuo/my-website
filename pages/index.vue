@@ -133,6 +133,7 @@ export default Vue.extend({
       text-align: center;
       font-size: 3rem;
       color: #303133;
+      margin: 0;
     }
 
     .card {
