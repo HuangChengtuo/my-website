@@ -3,8 +3,7 @@ export default {
     proxy: true,
     prefix: '/proxy'
   },
-  // srr 用
-  // build: { publicPath: 'https://my-website-1302789012.cos.ap-shanghai.myqcloud.com' },
+  build: { analyze: true },
   buildModules: ['@nuxt/typescript-build'],
   // 自动注册全局组件，需要声明相应文件夹，没有声明的仍需 import 引入
   components: true,
