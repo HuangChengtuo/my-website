@@ -45,7 +45,7 @@ export default Vue.extend({
   mounted () {
     const windowHeight = window.innerHeight || document.body.clientHeight
     // 根据vh转化为px
-    this.position = this.position.map(ele => Math.floor(windowHeight * ele))
+    this.position = this.position.map(ele => Math.ceil(windowHeight * ele))
     window.addEventListener('mousewheel', this.wheelFn, { passive: false })
   },
   beforeDestroy () {
@@ -73,6 +73,7 @@ export default Vue.extend({
         // 向上滚，夹在中间需滚动上一个边界与现在的差值，在边界就滚动一个完整距离
         scrollHeight = between ? (nowY - this.position[index]) : (this.position[index] - this.position[index - 1])
       }
+      console.log('move',scrollHeight)
       // 动画函数，需要闭包访问 start 就没有分离出来
       const step = (unix: number) => {
         if (!start) {
@@ -133,6 +134,7 @@ export default Vue.extend({
       text-align: center;
       font-size: 3rem;
       color: #303133;
+      margin: 0;
     }
 
     .card {
