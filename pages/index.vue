@@ -143,7 +143,7 @@ export default Vue.extend({
       box-shadow: 5px 5px 10px #cccccc, -5px -5px 10px #ffffff;
       width: 360px;
       min-height: 360px;
-      padding: 24px 16px 16px;
+      padding: 24px 16px 36px;
       color: #303133;
       transition: all 0.3s;
 
