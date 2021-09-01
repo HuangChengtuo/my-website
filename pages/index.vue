@@ -73,7 +73,7 @@ export default Vue.extend({
         // 向上滚，夹在中间需滚动上一个边界与现在的差值，在边界就滚动一个完整距离
         scrollHeight = between ? (nowY - this.position[index]) : (this.position[index] - this.position[index - 1])
       }
-      console.log('move',scrollHeight)
+      console.log('move', scrollHeight)
       // 动画函数，需要闭包访问 start 就没有分离出来
       const step = (unix: number) => {
         if (!start) {
