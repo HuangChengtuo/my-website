@@ -24,7 +24,7 @@ interface Data {
 
 export default Vue.extend({
   async asyncData ({ $api, req, redirect }) {
-    const ua = req?.headers?.['user-agent'] || navigator.userAgent
+    const ua = req?.headers?.['user-agent'] || ''
     if (ua.match(/iPhone|Android|iPad/)) {
       redirect('/mobile')
       return
@@ -43,6 +43,11 @@ export default Vue.extend({
     }
   },
   mounted () {
+    const ua = navigator.userAgent
+    if (ua.match(/iPhone|Android|iPad/)) {
+      this.$router.replace('/mobile')
+      return
+    }
     const windowHeight = window.innerHeight || document.body.clientHeight
     // 根据vh转化为px
     this.position = this.position.map(ele => Math.ceil(windowHeight * ele))
