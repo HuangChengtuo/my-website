@@ -4,7 +4,9 @@
     <main class="main">
       <h1 class="title">黄秤砣</h1>
       <div class="jcsb">
-        <TodayBangumi class="card" :raw-bangumi="bangumi" />
+        <client-only>
+          <TodayBangumi class="card" :raw-bangumi="bangumi" />
+        </client-only>
         <Card class="card" href="http://blog.huangchengtuo.com" title="我的博客" src="https://s1.huangchengtuo.com/img/DD.png" />
         <Card class="card" href="http://react.huangchengtuo.com" title="我的工具箱" src="https://s1.huangchengtuo.com/img/0425react.png" />
       </div>
@@ -24,7 +26,12 @@ interface Data {
 
 export default Vue.extend({
   async asyncData ({ $api, req, redirect }) {
-    const ua = process.server ? (req?.headers?.['user-agent'] || '') : navigator.userAgent
+    let ua = ''
+    if (process.server) {
+      ua = req?.headers?.['user-agent'] || ''
+    } else {
+      ua = navigator.userAgent
+    }
     if (ua.match(/iPhone|Android|iPad/)) {
       redirect('/mobile')
       return
