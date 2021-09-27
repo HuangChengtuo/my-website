@@ -9,7 +9,7 @@
       <el-tab-pane name="6" label="周六" />
       <el-tab-pane name="0" label="周日" />
     </el-tabs>
-    <el-table :data="showBangumi" >
+    <el-table :data="showBangumi">
       <el-table-column label="番剧">
         <template slot-scope="scope">{{ showTitle(scope.row) }}</template>
       </el-table-column>
@@ -33,13 +33,7 @@ import dayjs from 'dayjs'
 interface Data {
   day: string,
   bangumi: Bangumi[],
-  siteMeta: {
-    [key: string]: {
-      title: string,
-      type: string,
-      urlTemplate: string
-    }
-  }
+  siteMeta: Record<string, { title: string, type: string, urlTemplate: string }>
 }
 
 export default Vue.extend({
