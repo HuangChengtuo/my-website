@@ -9,11 +9,15 @@
 </template>
 
 <script lang="ts">
-import Vue, { PropOptions } from 'vue'
+import Vue from 'vue'
 import dayjs from 'dayjs'
 
 export default Vue.extend({
-  props: { rawBangumi: Array as PropOptions<Bangumi[]> },
+  data () {
+    return {
+      rawBangumi: []
+    }
+  },
   computed: {
     bangumi (): Bangumi[] {
       const chinesePlatform = ["acfun", "bilibili", "sohu", "youku", "qq", "iqiyi", "letv", "pptv", "mgtv", "dmhy"]
@@ -39,6 +43,11 @@ export default Vue.extend({
       })
       return result
     }
+  },
+  mounted () {
+    this.$api.get('https://s1.huangchengtuo.com/json/bangumi.json').then(res => {
+      this.rawBangumi = res
+    })
   },
   methods: {
     showTitle (item: Bangumi) {

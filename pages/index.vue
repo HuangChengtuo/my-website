@@ -5,7 +5,7 @@
       <h1 class="title">黄秤砣</h1>
       <div class="jcsb">
         <client-only>
-          <TodayBangumi class="card" :raw-bangumi="bangumi" />
+          <TodayBangumi class="card" />
         </client-only>
         <Card class="card" href="http://blog.huangchengtuo.com" title="我的博客" src="https://s1.huangchengtuo.com/img/DD.png" />
         <Card class="card" href="http://react.huangchengtuo.com" title="我的工具箱" src="https://s1.huangchengtuo.com/img/0425react.png" />
@@ -20,12 +20,11 @@ import Card from '@/modules/index/Card.vue'
 
 interface Data {
   position: number[],
-  debounce: boolean,
-  bangumi: Bangumi[]
+  debounce: boolean
 }
 
 export default Vue.extend({
-  async asyncData ({ $api, req, redirect }) {
+  async asyncData ({ req, redirect }) {
     let ua = ''
     if (process.server) {
       ua = req?.headers?.['user-agent'] || ''
@@ -34,10 +33,8 @@ export default Vue.extend({
     }
     if (ua.match(/iPhone|Android|iPad/)) {
       redirect('/mobile')
-      return
+      return {}
     }
-    const bangumi = await $api.get('https://s1.huangchengtuo.com/json/bangumi.json')
-    return { bangumi }
   },
   layout: 'null',
   components: { TodayBangumi, Card },
@@ -46,7 +43,6 @@ export default Vue.extend({
       // 各模块边界位置，单位为vh，mounted时根据视窗转化为对应px
       position: [0, 0.8, 1.8],
       debounce: false,
-      bangumi: []
     }
   },
   mounted () {
