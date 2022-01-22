@@ -1,13 +1,10 @@
 <template>
   <div id="mobile-bangumi">
     <nuxt-link to="/mobile">
-    <img src="https://s1.huangchengtuo.com/img/AF.png" alt="af" class="header" />
+      <img src="https://s1.huangchengtuo.com/img/AF.png" alt="af" class="header" />
     </nuxt-link>
     <div class="main">
-      <div class="title">
-        今日新番表
-        <span class="sub">(国内)</span>
-      </div>
+      <div class="title">今日新番表</div>
       <div v-for="item of bangumi" :key="item.title" class="bangumi aic" :class="{now:item.now}">
         <span class="name one-line">{{ showTitle(item) }}</span>
         <span class="roboto-font">{{ $formatTime(item.chineseBegin || item.begin, 'HH:mm') }}</span>
@@ -21,12 +18,8 @@ import Vue from 'vue'
 import dayjs from "dayjs"
 
 export default Vue.extend({
-  async asyncData({ $api }) {
-    const rawBangumi = await $api.get('https://s1.huangchengtuo.com/json/bangumi.json')
-    return { rawBangumi }
-  },
   layout: 'mobile',
-  data() {
+  data () {
     return {
       width: 0,
       height: 0,
@@ -34,7 +27,7 @@ export default Vue.extend({
     }
   },
   computed: {
-    bangumi(): Bangumi[] {
+    bangumi (): Bangumi[] {
       const chinesePlatform = ["acfun", "bilibili", "sohu", "youku", "qq", "iqiyi", "letv", "pptv", "mgtv", "dmhy"]
       const result = []
       for (const item of this.rawBangumi) {
@@ -45,8 +38,7 @@ export default Vue.extend({
           item.hasCopyright = hasCopyright
           item.chineseBegin = item.sites.find(e => chinesePlatform.includes(e.site)).begin
         }
-        // 今日国内版权更新
-        if (dayjs(item.chineseBegin || item.begin).day() === dayjs().day() && hasCopyright) {
+        if (dayjs(item.chineseBegin || item.begin).day() === dayjs().day()) {
           result.push(item)
         }
       }
@@ -59,12 +51,15 @@ export default Vue.extend({
       return result
     }
   },
-  mounted() {
+  mounted () {
+    this.$api.get('https://s1.huangchengtuo.com/json/bangumi.json').then(res => {
+      this.rawBangumi = res
+    })
     this.width = document.body.clientWidth
     this.height = document.body.clientHeight
   },
   methods: {
-    showTitle(item: Bangumi) {
+    showTitle (item: Bangumi) {
       return item.titleTranslate?.['zh-Hans']?.[0] || item.title
     }
   }
@@ -93,15 +88,11 @@ export default Vue.extend({
       color: #000000;
       font-size: 60rem;
       padding: 16rem 0;
-
-      .sub {
-        font-size: 40rem;
-        font-weight: normal;
-      }
     }
 
     .bangumi {
       padding: 0 20rem;
+
       .name {
         width: 600rem;
       }

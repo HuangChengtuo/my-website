@@ -24,18 +24,6 @@ interface Data {
 }
 
 export default Vue.extend({
-  async asyncData ({ req, redirect }) {
-    let ua = ''
-    if (process.server) {
-      ua = req?.headers?.['user-agent'] || ''
-    } else {
-      ua = navigator.userAgent
-    }
-    if (ua.match(/iPhone|Android|iPad/)) {
-      redirect('/mobile')
-      return {}
-    }
-  },
   layout: 'null',
   components: { TodayBangumi, Card },
   data (): Data {
@@ -46,6 +34,10 @@ export default Vue.extend({
     }
   },
   mounted () {
+    if (navigator.userAgent.match(/iPhone|Android|iPad/)) {
+      this.$router.push('/mobile')
+      return
+    }
     const windowHeight = window.innerHeight || document.body.clientHeight
     // 根据vh转化为px
     this.position = this.position.map(ele => Math.ceil(windowHeight * ele))

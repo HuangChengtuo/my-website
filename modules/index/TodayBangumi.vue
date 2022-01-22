@@ -30,7 +30,6 @@ export default Vue.extend({
           item.hasCopyright = hasCopyright
           item.chineseBegin = item.sites.find(e => chinesePlatform.includes(e.site)).begin
         }
-        // 今日版权更新
         if (dayjs(item.chineseBegin || item.begin).day() === dayjs().day()) {
           result.push(item)
         }
