@@ -5,12 +5,12 @@
 </template>
 
 <script lang="ts">
-import Vue, { PropOptions } from 'vue'
+import Vue from 'vue'
 
 export default Vue.extend({
   props: {
-    active: Boolean as PropOptions<boolean>,
-    title: String as PropOptions<string>
+    active: Boolean,
+    title: String
   }
 })
 

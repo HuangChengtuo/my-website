@@ -49,7 +49,7 @@ export default Vue.extend({
   methods: {
     wheelFn (e: WheelEvent) {
       e.preventDefault()
-      const nowY = window.pageYOffset
+      const nowY = window.scrollY
       // 正在滚动中
       if (this.debounce) {
         return

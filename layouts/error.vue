@@ -1,31 +1,16 @@
 <template>
   <div id="error-page">
-    <h1>{{error.statusCode}}</h1>
+    <h1>{{ error.statusCode }}</h1>
     <h1>{{ error.message }}</h1>
   </div>
 </template>
 
 <script lang="ts">
-import Vue, { PropOptions } from 'vue'
-
-interface Error {
-  message: string,
-  path: string,
-  statusCode: number
-}
+import Vue from 'vue'
 
 export default Vue.extend({
   layout: 'null',
-  props: {
-    error: Object as PropOptions<Error>
-  },
-  data() {
-    return {
-      obj: {
-        asd: 16
-      }
-    }
-  },
+  props: { error: Object },
   mounted() {
     console.log(this.error.message)
   }
