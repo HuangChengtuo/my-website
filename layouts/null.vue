@@ -1,3 +1,3 @@
-<template functional>
-  <nuxt />
+<template>
+  <slot />
 </template>

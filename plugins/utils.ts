@@ -1,26 +1,7 @@
-import Vue from 'vue'
-import { Plugin } from '@nuxt/types'
-import dayjs from "dayjs"
+import { formatTime } from "@/utils";
 
-const formatTime = (unix?: number | string | Date, template = 'YYYY-MM-DD HH:mm:ss') => dayjs(unix).format(template)
-
-const fn: Plugin = (context) => {
-  Vue.prototype.$formatTime = formatTime
-  context.$formatTime = formatTime
-}
-
-interface Utils {
-  $formatTime: typeof formatTime
-}
-
-declare module 'vue/types/vue' {
-  interface Vue extends Utils {
+export default defineNuxtPlugin(() => {
+  return {
+    provide: { formatTime }
   }
-}
-
-declare module '@nuxt/types' {
-  interface Context extends Utils {
-  }
-}
-
-export default fn
+})

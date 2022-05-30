@@ -1,15 +1,15 @@
 <template>
   <div id="layout-default">
     <LayoutsNav />
-    <nuxt class="nuxt-body" />
+    <slot class="nuxt-body" />
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { defineComponent } from 'vue'
 import LayoutsNav from '@/modules/layouts/Nav.vue'
 
-export default Vue.extend({
+export default defineComponent({
   components: { LayoutsNav }
 })
 </script>

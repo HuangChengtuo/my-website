@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { defineComponent } from 'vue'
 import dayjs from 'dayjs'
 
 interface Data {
@@ -36,7 +36,7 @@ interface Data {
   siteMeta: Record<string, { title: string, type: string, urlTemplate: string }>
 }
 
-export default Vue.extend({
+export default defineComponent({
   data (): Data {
     return {
       day: dayjs().day().toString(),

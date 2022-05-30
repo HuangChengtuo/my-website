@@ -1,18 +1,18 @@
 <template>
-  <nuxt-link to="/bangumi" class="today-bangumi">
+  <NuxtLink to="/bangumi" class="today-bangumi">
     <div class="card-title">今日新番表</div>
     <div v-for="item of bangumi" :key="item.title" class="bangumi aic" :class="{now:item.now}">
       <span class="name one-line">{{ showTitle(item) }}</span>
       <span class="roboto-font">{{ $formatTime(item.chineseBegin || item.begin, 'HH:mm') }}</span>
     </div>
-  </nuxt-link>
+  </NuxtLink>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { defineComponent } from 'vue'
 import dayjs from 'dayjs'
 
-export default Vue.extend({
+export default defineComponent({
   data () {
     return {
       rawBangumi: []
@@ -44,9 +44,10 @@ export default Vue.extend({
     }
   },
   mounted () {
-    this.$api.get('https://s1.huangchengtuo.com/json/bangumi.json').then(res => {
-      this.rawBangumi = res
-    })
+    // TODO api
+    // this.$api.get('https://s1.huangchengtuo.com/json/bangumi.json').then(res => {
+    //   this.rawBangumi = res
+    // })
   },
   methods: {
     showTitle (item: Bangumi) {

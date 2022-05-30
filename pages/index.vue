@@ -4,9 +4,7 @@
     <main class="main">
       <h1 class="title">黄秤砣</h1>
       <div class="jcsb">
-        <client-only>
-          <TodayBangumi class="card" />
-        </client-only>
+        <TodayBangumi class="card" />
         <Card class="card" href="http://blog.huangchengtuo.com" title="我的博客" src="https://s1.huangchengtuo.com/img/DD.png" />
         <Card class="card" href="http://react.huangchengtuo.com" title="我的工具箱" src="https://s1.huangchengtuo.com/img/0425react.png" />
       </div>
@@ -14,7 +12,7 @@
   </div>
 </template>
 <script lang="ts">
-import Vue from 'vue'
+import { defineComponent } from 'vue'
 import TodayBangumi from '@/modules/index/TodayBangumi.vue'
 import Card from '@/modules/index/Card.vue'
 
@@ -23,7 +21,7 @@ interface Data {
   debounce: boolean
 }
 
-export default Vue.extend({
+export default defineComponent({
   layout: 'null',
   components: { TodayBangumi, Card },
   data (): Data {

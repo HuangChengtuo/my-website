@@ -1,11 +1,11 @@
 <template>
-  <nuxt />
+  <slot />
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { defineComponent } from 'vue'
 
-export default Vue.extend({
+export default defineComponent({
   head () {
     return {
       link: [{ rel: 'stylesheet', href: 'https://s1.huangchengtuo.com/css/weui.min.css' }]

@@ -1,34 +1,34 @@
 <template>
   <div id="nav">
-    <nuxt-link to="/" class="logo">
+    <NuxtLink to="/" class="logo">
       <img src="https://s1.huangchengtuo.com/img/pureDD.png" alt="logo" class="logo-img">
       黄秤砣
-    </nuxt-link>
+    </NuxtLink>
     <span class="time roboto-font">{{ now }}</span>
     <a href="http://react.huangchengtuo.com" class="download-btn">工具箱</a>
     <a href="http://blog.huangchengtuo.com" class="download-btn">去博客</a>
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
+<script>
+import { formatTime } from "@/utils";
 
-export default Vue.extend({
+export default {
   data () {
     return {
-      now: this.$formatTime(),
+      now: formatTime(),
       timer: null
     }
   },
   mounted () {
     this.timer = setInterval(() => {
-      this.now = this.$formatTime()
+      this.now = formatTime()
     }, 1000)
   },
   beforeDestroy () {
     clearInterval(this.timer)
   }
-})
+}
 </script>
 
 <style lang="scss" scoped>

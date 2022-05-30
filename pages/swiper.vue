@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { defineComponent } from 'vue'
 import Sample3 from '@/modules/swiper/Sample3.vue'
 
 class Node {
@@ -55,7 +55,7 @@ temp = temp.next
 temp.next = head2
 
 
-export default Vue.extend({
+export default defineComponent({
   components: { Sample3 },
   data() {
     return {

@@ -16,5 +16,6 @@ interface Bangumi {
   titleTranslate: { 'zh-Hans': string[] },
   sites: Site[],
   hasCopyright: boolean,
-  chineseBegin: string
+  chineseBegin: string,
+  now?: boolean
 }

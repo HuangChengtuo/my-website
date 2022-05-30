@@ -4,15 +4,15 @@
     <div class="main">
       <h2 class="weui-form__title">黄秤砣的个人网站</h2>
       <a href="http://blog.huangchengtuo.com/resume.html" class="weui-btn weui-btn_primary">我的简历</a>
-      <nuxt-link to="/mobile/bangumi" class="weui-btn weui-btn_primary">今日新番</nuxt-link>
+      <NuxtLink to="/mobile/bangumi" class="weui-btn weui-btn_primary">今日新番</NuxtLink>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { defineComponent } from 'vue'
 
-export default Vue.extend({
+export default defineComponent({
   layout: 'mobile'
 })
 </script>

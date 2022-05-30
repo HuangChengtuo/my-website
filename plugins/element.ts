@@ -1,4 +1,5 @@
-import Vue from 'vue'
-import ElementUI from 'element-ui'
+import ElementPlus from 'element-plus'
 
-Vue.use(ElementUI)
+export default defineNuxtPlugin(nuxtApp => {
+  nuxtApp.vueApp.use(ElementPlus)
+})

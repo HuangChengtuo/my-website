@@ -1,9 +1,13 @@
-<template functional>
+<template>
   <a class="card" :href="props.href">
-    <div class="card-title">{{props.title}}</div>
+    <div class="card-title">{{ props.title }}</div>
     <img :src="props.src" alt="DD" class="dd" />
   </a>
 </template>
+
+<script setup>
+const props = defineProps()
+</script>
 
 <style lang="scss" scoped>
 .card {

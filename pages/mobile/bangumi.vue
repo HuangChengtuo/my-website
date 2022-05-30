@@ -1,8 +1,8 @@
 <template>
   <div id="mobile-bangumi">
-    <nuxt-link to="/mobile">
+    <NuxtLink to="/mobile">
       <img src="https://s1.huangchengtuo.com/img/AF.png" alt="af" class="header" />
-    </nuxt-link>
+    </NuxtLink>
     <div class="main">
       <div class="title">今日新番表</div>
       <div v-for="item of bangumi" :key="item.title" class="bangumi aic" :class="{now:item.now}">
@@ -14,10 +14,10 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { defineComponent } from 'vue'
 import dayjs from "dayjs"
 
-export default Vue.extend({
+export default defineComponent({
   layout: 'mobile',
   data () {
     return {
