@@ -5,19 +5,18 @@ module.exports = {
     node: true
   },
   extends: [
-    'plugin:vue/essential',
+    'plugin:vue/vue3-essential',
     'eslint:recommended',
     '@vue/typescript/recommended',
   ],
   parserOptions: { ecmaVersion: 2020 },
   rules: {
-    semi: [1, 'never'],
     'no-var': 2,
     'prefer-const': 2,
     eqeqeq: [2, 'smart'],
     'eol-last': 1,
-    'vue/max-attributes-per-line': [1, { singleline: 100, multiline: { max: 1, allowFirstLine: false } }],
-    '@typescript-eslint/no-explicit-any': 0,
+    'vue/max-attributes-per-line': [1, { singleline: 100, multiline: 1 }],
+    '@typescript-eslint/no-explicit-any': 2,
     '@typescript-eslint/member-delimiter-style': [1, {
       multiline: {
         delimiter: 'comma',

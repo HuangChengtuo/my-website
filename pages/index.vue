@@ -41,7 +41,7 @@ export default defineComponent({
     this.position = this.position.map(ele => Math.ceil(windowHeight * ele))
     window.addEventListener('mousewheel', this.wheelFn, { passive: false })
   },
-  beforeDestroy () {
+  beforeUnmount () {
     window.removeEventListener('mousewheel', this.wheelFn)
   },
   methods: {

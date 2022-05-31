@@ -5,8 +5,10 @@
   </a>
 </template>
 
-<script setup>
-const props = defineProps()
+<script setup lang="ts">
+import { defineProps } from 'vue'
+
+const props = defineProps<{ title: string, src: string, href: string }>()
 </script>
 
 <style lang="scss" scoped>

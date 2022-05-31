@@ -25,7 +25,7 @@ export default {
       this.now = formatTime()
     }, 1000)
   },
-  beforeDestroy () {
+  beforeUnmount () {
     clearInterval(this.timer)
   }
 }
