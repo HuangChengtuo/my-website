@@ -14,7 +14,9 @@
         <template v-slot="scope">{{ showTitle(scope.row) }}</template>
       </el-table-column>
       <el-table-column label="放送时间" width="200px" align="center">
-        <div slot-scope="scope" class="roboto-font">{{ $formatTime(scope.row.chineseBegin || scope.row.begin, 'HH:mm') }}</div>
+        <template v-slot="scope">
+          <div class="roboto-font">{{ $formatTime(scope.row.chineseBegin || scope.row.begin, 'HH:mm') }}</div>
+        </template>
       </el-table-column>
       <el-table-column label="国内放送" width="350px" align="center">
         <template v-slot="scope">
@@ -29,6 +31,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import dayjs from 'dayjs'
+import type { Bangumi, Site } from '@/interface'
 
 interface Data {
   day: string,

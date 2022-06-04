@@ -16,6 +16,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import dayjs from "dayjs"
+import type { Bangumi } from '@/interface'
 
 export default defineComponent({
   layout: 'mobile',

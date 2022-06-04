@@ -1,9 +1,9 @@
 <template>
   <div class="sample3 jcsb">
-    <StretchCard :active="index === 1" @mouseenter.native="index = 1" title="悬浮鼠标" />
-    <StretchCard :active="index === 2" @mouseenter.native="index = 2" title="悬浮鼠标" />
-    <StretchCard :active="index === 3" @mouseenter.native="index = 3" title="悬浮鼠标" />
-    <StretchCard :active="index === 4" @mouseenter.native="index = 4" title="悬浮鼠标" />
+    <StretchCard :active="index === 1" @mouseenter="index = 1" title="悬浮鼠标" />
+    <StretchCard :active="index === 2" @mouseenter="index = 2" title="悬浮鼠标" />
+    <StretchCard :active="index === 3" @mouseenter="index = 3" title="悬浮鼠标" />
+    <StretchCard :active="index === 4" @mouseenter="index = 4" title="悬浮鼠标" />
   </div>
 </template>
 

@@ -1,15 +1,10 @@
-declare module '@/static/json/app.json' {
-  const arr: string[]
-  export default arr
-}
-
-interface Site {
+export interface Site {
   begin: string,
   site: string,
   id: string
 }
 
-interface Bangumi {
+export interface Bangumi {
   begin: string,
   end: string,
   title: string,

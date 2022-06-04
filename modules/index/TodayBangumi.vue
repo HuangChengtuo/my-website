@@ -1,7 +1,7 @@
 <template>
   <NuxtLink to="/bangumi" class="today-bangumi">
     <div class="card-title">今日新番表</div>
-    <div v-for="item of bangumi" :key="item.title" class="bangumi aic" :class="{now:item.now}">
+    <div v-for="item of bangumi" :key="item.title" class="bangumi aic" :class="{ now: item.now }">
       <span class="name one-line">{{ showTitle(item) }}</span>
       <span class="roboto-font">{{ $formatTime(item.chineseBegin || item.begin, 'HH:mm') }}</span>
     </div>
@@ -11,6 +11,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import dayjs from 'dayjs'
+import type { Bangumi } from '@/interface'
 
 export default defineComponent({
   data () {
