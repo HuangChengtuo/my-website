@@ -1,8 +1,14 @@
 import { defineNuxtConfig } from 'nuxt'
 
+const lifecycle = process.env.npm_lifecycle_event
+
 export default defineNuxtConfig({
-  build: { analyze: true },
-  css: ['@/static/css/index.scss'],
+  build: {
+    analyze: true,
+    // https://github.com/element-plus/element-plus-nuxt-starter/blob/main/nuxt.config.ts
+    transpile: lifecycle === 'build' || lifecycle === 'generate' ? ['element-plus'] : []
+  },
+  css: ['@/assets/css/index.scss'],
   app: {
     head: {
       link: [
@@ -21,9 +27,5 @@ export default defineNuxtConfig({
       target: 'https://kankanapi.bihukankan.com',
       pathRewrite: { '^/proxy': '/' }
     }
-  },
-  server: {
-    port: 1111,
-    host: '0.0.0.0'
   }
 })

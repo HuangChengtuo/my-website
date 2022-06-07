@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import arr from '@/static/json/app.json'
+import arr from '@/public/json/app.json'
 
 export default defineComponent({
   data() {

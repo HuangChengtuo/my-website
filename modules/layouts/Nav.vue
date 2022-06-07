@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { formatTime } from "@/utils";
+import { formatTime } from '@/plugins/utils'
 
 export default {
   data () {

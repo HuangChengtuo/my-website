@@ -53,9 +53,9 @@ export default defineComponent({
     }
   },
   mounted () {
-    this.$api.get('https://s1.huangchengtuo.com/json/bangumi.json').then(res => {
-      this.rawBangumi = res
-    })
+    // this.$api.get('https://s1.huangchengtuo.com/json/bangumi.json').then(res => {
+    //   this.rawBangumi = res
+    // })
     this.width = document.body.clientWidth
     this.height = document.body.clientHeight
   },
