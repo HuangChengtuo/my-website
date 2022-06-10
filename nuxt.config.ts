@@ -3,12 +3,6 @@ import { defineNuxtConfig } from 'nuxt'
 const lifecycle = process.env.npm_lifecycle_event
 
 export default defineNuxtConfig({
-  build: {
-    analyze: true,
-    // https://github.com/element-plus/element-plus-nuxt-starter/blob/main/nuxt.config.ts
-    transpile: lifecycle === 'build' || lifecycle === 'generate' ? ['element-plus'] : []
-  },
-  css: ['@/assets/css/index.scss'],
   app: {
     head: {
       link: [
@@ -22,6 +16,12 @@ export default defineNuxtConfig({
       title: '黄秤砣的网站'
     },
   },
+  build: {
+    analyze: true,
+    // https://github.com/element-plus/element-plus-nuxt-starter/blob/main/nuxt.config.ts
+    transpile: lifecycle === 'build' || lifecycle === 'generate' ? ['element-plus'] : []
+  },
+  css: ['@/assets/css/default.scss', '@/assets/css/layout.scss'],
   proxy: {
     '/proxy': {
       target: 'https://kankanapi.bihukankan.com',

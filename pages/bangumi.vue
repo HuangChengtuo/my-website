@@ -1,5 +1,5 @@
 <template>
-  <div id="bangumi">
+  <div id="bangumi" class="layout-default-body">
     <el-tabs v-model="day">
       <el-tab-pane name="1" label="周一" />
       <el-tab-pane name="2" label="周二" />
@@ -34,18 +34,14 @@ import dayjs from 'dayjs'
 import api from '@/api'
 import type { Bangumi, Site } from '@/interface'
 
-interface Data {
-  day: string,
-  bangumi: Bangumi[],
-  siteMeta: Record<string, { title: string, type: string, urlTemplate: string }>
-}
+definePageMeta({ layoutTransition: false })
 
 export default defineComponent({
   props: { text: String },
-  data (): Data {
+  data () {
     return {
       day: dayjs().day().toString(),
-      bangumi: [],
+      bangumi: [] as Bangumi[],
       siteMeta: {
         "acfun": { "title": "AcFun", "urlTemplate": "https://www.acfun.cn/bangumi/aa{{id}}", "type": "onair" },
         "bilibili": { "title": "哔哩哔哩", "urlTemplate": "https://www.bilibili.com/bangumi/media/md{{id}}/", "type": "onair" },
@@ -57,7 +53,7 @@ export default defineComponent({
         "pptv": { "title": "PPTV", "urlTemplate": "http://v.pptv.com/page/{{id}}.html", "type": "onair" },
         "mgtv": { "title": "芒果tv", "urlTemplate": "https://www.mgtv.com/h/{{id}}.html", "type": "onair" },
         "dmhy": { "title": "动漫花园", "urlTemplate": "https://share.dmhy.org/topics/list?keyword={{id}}", "type": "resource" }
-      }
+      } as Record<string, { title: string, type: string, urlTemplate: string }>
     }
   },
   computed: {

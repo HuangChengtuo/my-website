@@ -1,8 +1,6 @@
 <template>
-  <div id="layout-default">
     <LayoutsNav />
-    <slot class="nuxt-body" />
-  </div>
+    <slot />
 </template>
 
 <script lang="ts">
@@ -13,12 +11,3 @@ export default defineComponent({
   components: { LayoutsNav }
 })
 </script>
-
-<style lang="scss">
-#layout-default {
-  .nuxt-body {
-    width: 1200px;
-    margin: 16px auto;
-  }
-}
-</style>

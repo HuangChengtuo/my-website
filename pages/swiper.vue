@@ -1,5 +1,5 @@
 <template>
-  <div id="swiper" style="height: 2000px">
+  <div id="swiper" class="layout-default-body" style="height: 2000px">
     <el-button @click="start">start</el-button>
     <el-button @click="next">next</el-button>
     <el-button @click="stop">stop</el-button>

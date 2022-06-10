@@ -17,18 +17,11 @@ import { defineComponent } from 'vue'
 import TodayBangumi from '@/modules/index/TodayBangumi.vue'
 import Card from '@/modules/index/Card.vue'
 
-interface Data {
-  position: number[],
-  debounce: boolean
-}
-
-definePageMeta({
-  layout: "null",
-});
+definePageMeta({ layout: false })
 
 export default defineComponent({
   components: { TodayBangumi, Card },
-  data (): Data {
+  data () {
     return {
       // 各模块边界位置，单位为vh，mounted时根据视窗转化为对应px
       position: [0, 0.8, 1.8],
