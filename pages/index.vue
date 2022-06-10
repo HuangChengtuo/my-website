@@ -14,8 +14,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import TodayBangumi from '@/modules/index/TodayBangumi.vue'
-import Card from '@/modules/index/Card.vue'
+import TodayBangumi from '@/views/index/TodayBangumi.vue'
+import Card from '@/views/index/Card.vue'
 
 definePageMeta({ layout: false })
 

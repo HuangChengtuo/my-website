@@ -23,7 +23,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Sample3 from '@/modules/swiper/Sample3.vue'
+import Sample3 from '@/views/swiper/Sample3.vue'
 
 class Node {
   val: number

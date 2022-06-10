@@ -5,7 +5,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import LayoutsNav from '@/modules/layouts/Nav.vue'
+import LayoutsNav from '@/views/layouts/Nav.vue'
 
 export default defineComponent({
   components: { LayoutsNav }
