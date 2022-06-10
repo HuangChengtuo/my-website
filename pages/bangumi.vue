@@ -31,6 +31,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import dayjs from 'dayjs'
+import api from '@/api'
 import type { Bangumi, Site } from '@/interface'
 
 interface Data {
@@ -40,6 +41,7 @@ interface Data {
 }
 
 export default defineComponent({
+  props: { text: String },
   data (): Data {
     return {
       day: dayjs().day().toString(),
@@ -76,7 +78,7 @@ export default defineComponent({
   },
   async mounted () {
     const chinesePlatform = ["acfun", "bilibili", "sohu", "youku", "qq", "iqiyi", "letv", "pptv", "mgtv", "dmhy"]
-    const res: Bangumi[] = await this.$api.get('https://s1.huangchengtuo.com/json/bangumi.json')
+    const res: Bangumi[] = await api.get('https://s1.huangchengtuo.com/json/bangumi.json')
     for (const item of res) {
       // 国内版权
       const hasCopyright = item.sites.some(e => chinesePlatform.includes(e.site))

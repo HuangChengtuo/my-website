@@ -11,6 +11,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import dayjs from 'dayjs'
+import api from '@/api'
 import type { Bangumi } from '@/interface'
 
 export default defineComponent({
@@ -45,10 +46,9 @@ export default defineComponent({
     }
   },
   mounted () {
-    // TODO api
-    // this.$api.get('https://s1.huangchengtuo.com/json/bangumi.json').then(res => {
-    //   this.rawBangumi = res
-    // })
+    api.get('https://s1.huangchengtuo.com/json/bangumi.json').then(res => {
+      this.rawBangumi = res
+    })
   },
   methods: {
     showTitle (item: Bangumi) {

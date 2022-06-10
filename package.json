@@ -12,9 +12,11 @@
   "dependencies": {
     "dayjs": "^1.10.3",
     "element-plus": "^2.2.2",
-    "nuxt": "3.0.0-rc.3"
+    "nuxt": "3.0.0-rc.3",
+    "qs": "^6.10.5"
   },
   "devDependencies": {
+    "@types/qs": "^6.9.7",
     "@typescript-eslint/eslint-plugin": "^5.26.0",
     "@typescript-eslint/parser": "^5.26.0",
     "@vue/eslint-config-typescript": "^10.0.0",

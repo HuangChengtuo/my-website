@@ -14,7 +14,7 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 #layout-default {
   .nuxt-body {
     width: 1200px;

@@ -11,6 +11,7 @@
     </main>
   </div>
 </template>
+
 <script lang="ts">
 import { defineComponent } from 'vue'
 import TodayBangumi from '@/modules/index/TodayBangumi.vue'
@@ -21,8 +22,11 @@ interface Data {
   debounce: boolean
 }
 
+definePageMeta({
+  layout: "null",
+});
+
 export default defineComponent({
-  layout: 'null',
   components: { TodayBangumi, Card },
   data (): Data {
     return {
