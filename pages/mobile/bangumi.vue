@@ -1,7 +1,7 @@
 <template>
   <div id="mobile-bangumi">
     <NuxtLink to="/mobile">
-      <img src="https://s1.huangchengtuo.com/img/AF.png" alt="af" class="header" />
+      <img src="https://s1.huangchengtuo.com/img/AF.png" alt="af" class="header">
     </NuxtLink>
     <div class="main">
       <div class="title">今日新番表</div>

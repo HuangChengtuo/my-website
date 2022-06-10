@@ -3,7 +3,7 @@
     <el-button @click="start">start</el-button>
     <el-button @click="next">next</el-button>
     <el-button @click="stop">stop</el-button>
-    <br />
+    <br>
     <div class="sample2">
       <div :class="getClass(1)">1</div>
       <div :class="getClass(2)">2</div>
@@ -11,13 +11,13 @@
       <div :class="getClass(4)">4</div>
       <div :class="getClass(5)">5</div>
     </div>
-    <br />
+    <br>
     <Sample3 />
-    <br />
-    <div class="sample1" :style="`background-image:url(${bg[head1.val]})`"></div>
+    <br>
+    <div class="sample1" :style="`background-image:url(${bg[head1.val]})`" />
     <!-- 轮播图提前加载 -->
-    <div style="background:url(https://s1.huangchengtuo.com/img/altina.jpg)"></div>
-    <div style="background:url(https://s1.huangchengtuo.com/img/juna.jpg)"></div>
+    <div style="background:url(https://s1.huangchengtuo.com/img/altina.jpg)" />
+    <div style="background:url(https://s1.huangchengtuo.com/img/juna.jpg)" />
   </div>
 </template>
 

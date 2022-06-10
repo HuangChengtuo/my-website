@@ -1,7 +1,7 @@
 <template>
   <a class="card" :href="props.href">
     <div class="card-title">{{ props.title }}</div>
-    <img :src="props.src" alt="DD" class="dd" />
+    <img :src="props.src" alt="DD" class="dd">
   </a>
 </template>
 

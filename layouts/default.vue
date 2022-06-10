@@ -1,6 +1,6 @@
 <template>
-    <LayoutsNav />
-    <slot />
+  <LayoutsNav />
+  <slot />
 </template>
 
 <script lang="ts">

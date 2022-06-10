@@ -1,6 +1,6 @@
 <template>
   <div id="mobile">
-    <img src="https://s1.huangchengtuo.com/img/AF.png" alt="af" class="header" />
+    <img src="https://s1.huangchengtuo.com/img/AF.png" alt="af" class="header">
     <div class="main">
       <h2 class="weui-form__title">黄秤砣的个人网站</h2>
       <a href="http://blog.huangchengtuo.com/resume.html" class="weui-btn weui-btn_primary">我的简历</a>

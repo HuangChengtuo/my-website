@@ -11,15 +11,15 @@
     </el-tabs>
     <el-table :data="showBangumi">
       <el-table-column label="番剧">
-        <template v-slot="scope">{{ showTitle(scope.row) }}</template>
+        <template #default="scope">{{ showTitle(scope.row) }}</template>
       </el-table-column>
       <el-table-column label="放送时间" width="200px" align="center">
-        <template v-slot="scope">
+        <template #default="scope">
           <div class="roboto-font">{{ $formatTime(scope.row.chineseBegin || scope.row.begin, 'HH:mm') }}</div>
         </template>
       </el-table-column>
       <el-table-column label="国内放送" width="350px" align="center">
-        <template v-slot="scope">
+        <template #default="scope">
           <a v-for="item of showSites(scope.row.sites)" :key="item.title" :href="item.url" target="_blank" class="link">{{ item.title }}</a>
           <span v-if="!showSites(scope.row.sites).length" style="color:gainsboro">暂无</span>
         </template>

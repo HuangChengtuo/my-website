@@ -1,6 +1,6 @@
 <template>
   <div id="home-page">
-    <div class="banner"></div>
+    <div class="banner" />
     <main class="main">
       <h1 class="title">黄秤砣</h1>
       <div class="jcsb">
