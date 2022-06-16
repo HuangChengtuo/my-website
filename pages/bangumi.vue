@@ -43,16 +43,16 @@ export default defineComponent({
       day: dayjs().day().toString(),
       bangumi: [] as Bangumi[],
       siteMeta: {
-        "acfun": { "title": "AcFun", "urlTemplate": "https://www.acfun.cn/bangumi/aa{{id}}", "type": "onair" },
-        "bilibili": { "title": "哔哩哔哩", "urlTemplate": "https://www.bilibili.com/bangumi/media/md{{id}}/", "type": "onair" },
-        "sohu": { "title": "搜狐视频", "urlTemplate": "https://tv.sohu.com/{{id}}", "type": "onair" },
-        "youku": { "title": "优酷", "urlTemplate": "https://list.youku.com/show/id_z{{id}}.html", "type": "onair" },
-        "qq": { "title": "腾讯视频", "urlTemplate": "https://v.qq.com/detail/{{id}}.html", "type": "onair" },
-        "iqiyi": { "title": "爱奇艺", "urlTemplate": "https://www.iqiyi.com/{{id}}.html", "type": "onair" },
-        "letv": { "title": "乐视", "urlTemplate": "https://www.le.com/comic/{{id}}.html", "type": "onair" },
-        "pptv": { "title": "PPTV", "urlTemplate": "http://v.pptv.com/page/{{id}}.html", "type": "onair" },
-        "mgtv": { "title": "芒果tv", "urlTemplate": "https://www.mgtv.com/h/{{id}}.html", "type": "onair" },
-        "dmhy": { "title": "动漫花园", "urlTemplate": "https://share.dmhy.org/topics/list?keyword={{id}}", "type": "resource" }
+        'acfun': { 'title': 'AcFun', 'urlTemplate': 'https://www.acfun.cn/bangumi/aa{{id}}', 'type': 'onair' },
+        'bilibili': { 'title': '哔哩哔哩', 'urlTemplate': 'https://www.bilibili.com/bangumi/media/md{{id}}/', 'type': 'onair' },
+        'sohu': { 'title': '搜狐视频', 'urlTemplate': 'https://tv.sohu.com/{{id}}', 'type': 'onair' },
+        'youku': { 'title': '优酷', 'urlTemplate': 'https://list.youku.com/show/id_z{{id}}.html', 'type': 'onair' },
+        'qq': { 'title': '腾讯视频', 'urlTemplate': 'https://v.qq.com/detail/{{id}}.html', 'type': 'onair' },
+        'iqiyi': { 'title': '爱奇艺', 'urlTemplate': 'https://www.iqiyi.com/{{id}}.html', 'type': 'onair' },
+        'letv': { 'title': '乐视', 'urlTemplate': 'https://www.le.com/comic/{{id}}.html', 'type': 'onair' },
+        'pptv': { 'title': 'PPTV', 'urlTemplate': 'http://v.pptv.com/page/{{id}}.html', 'type': 'onair' },
+        'mgtv': { 'title': '芒果tv', 'urlTemplate': 'https://www.mgtv.com/h/{{id}}.html', 'type': 'onair' },
+        'dmhy': { 'title': '动漫花园', 'urlTemplate': 'https://share.dmhy.org/topics/list?keyword={{id}}', 'type': 'resource' }
       } as Record<string, { title: string, type: string, urlTemplate: string }>
     }
   },
@@ -73,7 +73,7 @@ export default defineComponent({
     },
   },
   async mounted () {
-    const chinesePlatform = ["acfun", "bilibili", "sohu", "youku", "qq", "iqiyi", "letv", "pptv", "mgtv", "dmhy"]
+    const chinesePlatform = ['acfun', 'bilibili', 'sohu', 'youku', 'qq', 'iqiyi', 'letv', 'pptv', 'mgtv', 'dmhy']
     const res: Bangumi[] = await api.get('https://s1.huangchengtuo.com/json/bangumi.json')
     for (const item of res) {
       // 国内版权

@@ -22,7 +22,7 @@ export default defineComponent({
   },
   computed: {
     bangumi (): Bangumi[] {
-      const chinesePlatform = ["acfun", "bilibili", "sohu", "youku", "qq", "iqiyi", "letv", "pptv", "mgtv", "dmhy"]
+      const chinesePlatform = ['acfun', 'bilibili', 'sohu', 'youku', 'qq', 'iqiyi', 'letv', 'pptv', 'mgtv', 'dmhy']
       const result = []
       for (const item of this.rawBangumi) {
         // 国内版权

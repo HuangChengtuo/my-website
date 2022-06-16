@@ -15,7 +15,7 @@
 
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
-import dayjs from "dayjs"
+import dayjs from 'dayjs'
 import api from '@/api'
 import type { Bangumi } from '@/interface'
 
@@ -30,7 +30,7 @@ onMounted(() => {
 })
 
 const bangumi = computed<Bangumi[]>(() => {
-  const chinesePlatform = ["acfun", "bilibili", "sohu", "youku", "qq", "iqiyi", "letv", "pptv", "mgtv", "dmhy"]
+  const chinesePlatform = ['acfun', 'bilibili', 'sohu', 'youku', 'qq', 'iqiyi', 'letv', 'pptv', 'mgtv', 'dmhy']
   const result: Bangumi[] = []
   for (const item of rawBangumi.value) {
     // 国内版权

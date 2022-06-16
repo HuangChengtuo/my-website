@@ -1,6 +1,6 @@
 import { formatTime } from '@/plugins/utils'
 
-declare module "*.vue" {
+declare module '*.vue' {
   export default Vue
 }
 
