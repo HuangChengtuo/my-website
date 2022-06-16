@@ -1,11 +1,16 @@
 import qs from 'qs'
+import { Bangumi } from '@/interface'
+
+function get<T = any> (url: string, params?: unknown): Promise<T> {
+  let query = ''
+  if (params) {
+    query = '?' + qs.stringify(params)
+  }
+  return fetch(url + query).then(res => res.json())
+}
 
 export default {
-    get (url: string, params?: unknown) {
-        let query = ''
-        if (params) {
-            query = '?' + qs.stringify(params)
-        }
-        return fetch(url + query).then(res => res.json())
-    }
+  getBangumi () {
+    return get<Bangumi[]>('https://s1.huangchengtuo.com/json/bangumi.json')
+  }
 }

@@ -22,6 +22,7 @@ module.exports = {
       multiline: { delimiter: 'comma', requireLast: false },
       singleline: { delimiter: 'comma', requireLast: false }
     }],
-    '@typescript-eslint/no-empty-interface': 0
+    '@typescript-eslint/no-empty-interface': 0,
+    '@typescript-eslint/no-explicit-any': 0
   }
 }

@@ -41,7 +41,7 @@ const rawBangumi = ref<Bangumi[]>([])
 
 onMounted(async () => {
   const chinesePlatform = ['acfun', 'bilibili', 'sohu', 'youku', 'qq', 'iqiyi', 'letv', 'pptv', 'mgtv', 'dmhy']
-  const res: Bangumi[] = await api.get('https://s1.huangchengtuo.com/json/bangumi.json')
+  const res = await api.getBangumi()
   for (const item of res) {
     // 新增国内开播时间字段
     item.chineseBegin = item.sites.find(e => chinesePlatform.includes(e.site))?.begin || ''

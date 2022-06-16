@@ -24,7 +24,7 @@ definePageMeta({ layout: 'mobile', layoutTransition: false })
 const rawBangumi = ref<Bangumi[]>([])
 
 onMounted(() => {
-  api.get('https://s1.huangchengtuo.com/json/bangumi.json').then(res => {
+  api.getBangumi().then(res => {
     rawBangumi.value = res
   })
 })
