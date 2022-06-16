@@ -6,11 +6,11 @@ export interface Site {
 
 export interface Bangumi {
   begin: string,
-  end: string,
+  end?: string,
   title: string,
-  titleTranslate: { 'zh-Hans': string[] },
-  sites: Site[],
-  hasCopyright: boolean,
-  chineseBegin: string,
+  titleTranslate?: { 'zh-Hans': string[] },
+  sites?: Site[],
+  hasCopyright?: boolean,
+  chineseBegin?: string,
   now?: boolean
 }

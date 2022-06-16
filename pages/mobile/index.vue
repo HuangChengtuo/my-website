@@ -9,12 +9,8 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  layout: 'mobile'
-})
+<script setup lang="ts">
+definePageMeta({ layout: 'mobile', layoutTransition: false })
 </script>
 
 <style lang="scss">
