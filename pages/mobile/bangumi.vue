@@ -6,7 +6,7 @@
     <div class="main">
       <div class="title">今日新番表</div>
       <div v-for="item of bangumi" :key="item.title" class="bangumi aic" :class="{now:item.now}">
-        <span class="name one-line">{{ showTitle(item) }}</span>
+        <span class="name one-line">{{ item.titleTranslate?.['zh-Hans']?.[0] || item.title }}</span>
         <span class="roboto-font">{{ $formatTime(item.chineseBegin || item.begin, 'HH:mm') }}</span>
       </div>
     </div>
@@ -33,13 +33,7 @@ const bangumi = computed<Bangumi[]>(() => {
   const chinesePlatform = ['acfun', 'bilibili', 'sohu', 'youku', 'qq', 'iqiyi', 'letv', 'pptv', 'mgtv', 'dmhy']
   const result: Bangumi[] = []
   for (const item of rawBangumi.value) {
-    // 国内版权
-    const hasCopyright = item.sites.some(e => chinesePlatform.includes(e.site))
-    if (hasCopyright) {
-      // 新增国内开播时间字段
-      item.hasCopyright = hasCopyright
-      item.chineseBegin = item.sites.find(e => chinesePlatform.includes(e.site)).begin
-    }
+    item.chineseBegin = item?.sites?.find?.(e => chinesePlatform.includes(e.site))?.begin || ''
     if (dayjs(item.chineseBegin || item.begin).day() === dayjs().day()) {
       result.push(item)
     }
@@ -52,10 +46,6 @@ const bangumi = computed<Bangumi[]>(() => {
   })
   return result
 })
-
-function showTitle (item: Bangumi) {
-  return item.titleTranslate?.['zh-Hans']?.[0] || item.title
-}
 </script>
 
 <style lang="scss">
