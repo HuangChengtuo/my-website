@@ -5,8 +5,8 @@
       <h1 class="title">黄秤砣</h1>
       <div class="jcsb">
         <TodayBangumi class="card" />
-        <Card class="card" href="http://blog.huangchengtuo.com" title="我的博客" src="https://s1.huangchengtuo.com/img/DD.png" />
-        <Card class="card" href="http://react.huangchengtuo.com" title="我的工具箱" src="https://s1.huangchengtuo.com/img/0425react.png" />
+        <Card class="card" href="https://blog.huangchengtuo.com" title="我的博客" src="https://s1.huangchengtuo.com/img/DD.png" />
+        <Card class="card" href="https://react.huangchengtuo.com" title="我的工具箱" src="https://s1.huangchengtuo.com/img/0425react.png" />
       </div>
     </main>
   </div>
@@ -94,7 +94,6 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   window.removeEventListener('mousewheel', wheelFn)
-
 })
 </script>
 

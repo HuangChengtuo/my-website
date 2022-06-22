@@ -5,8 +5,8 @@
       黄秤砣
     </NuxtLink>
     <span class="time roboto-font">{{ now }}</span>
-    <a href="http://react.huangchengtuo.com" class="download-btn">工具箱</a>
-    <a href="http://blog.huangchengtuo.com" class="download-btn">去博客</a>
+    <a href="https://react.huangchengtuo.com" class="download-btn">工具箱</a>
+    <a href="https://blog.huangchengtuo.com" class="download-btn">去博客</a>
   </div>
 </template>
 
