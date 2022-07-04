@@ -24,12 +24,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Sample3 from '@/views/swiper/Sample3.vue'
+import { ElButton } from 'element-plus'
 
 class Node {
   val: number
   next: Node
 
-  constructor(val: number) {
+  constructor (val: number) {
     this.val = val
   }
 }
@@ -56,8 +57,8 @@ temp.next = head2
 
 
 export default defineComponent({
-  components: { Sample3 },
-  data() {
+  components: { Sample3, ElButton },
+  data () {
     return {
       head1,
       head2,
@@ -69,20 +70,20 @@ export default defineComponent({
       }
     }
   },
-  mounted() {
+  mounted () {
     this.start()
   },
   methods: {
-    start() {
+    start () {
       this.stop()
       this.timer = setInterval(() => {
         this.next()
       }, 4000)
     },
-    stop() {
+    stop () {
       clearInterval(this.timer)
     },
-    next() {
+    next () {
       if (this.loading) {
         return
       }
@@ -93,7 +94,7 @@ export default defineComponent({
         this.loading = false
       }, 1000)
     },
-    getClass(index: number) {
+    getClass (index: number) {
       const ll = this.head2.val === index
       const l = index === this.head2.next.val
       const c = index === this.head2.next.next.val

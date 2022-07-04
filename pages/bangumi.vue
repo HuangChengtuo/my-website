@@ -33,6 +33,7 @@ import { ref, onMounted, computed } from 'vue'
 import dayjs from 'dayjs'
 import api from '@/api'
 import type { Bangumi, Site } from '@/interface'
+import { ElTabs, ElTabPane, ElTable, ElTableColumn } from 'element-plus'
 
 definePageMeta({ layoutTransition: false })
 

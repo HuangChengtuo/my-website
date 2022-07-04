@@ -7,18 +7,11 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 import StretchCard from './StretchCard.vue'
 
-export default defineComponent({
-  components: { StretchCard },
-  data() {
-    return {
-      index: 1
-    }
-  }
-})
+const index = ref(1)
 </script>
 
 <style scoped>

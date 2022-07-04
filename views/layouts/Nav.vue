@@ -10,25 +10,24 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { formatTime } from '@/plugins/utils'
 
-export default {
-  data () {
-    return {
-      now: formatTime(),
-      timer: null
-    }
-  },
-  mounted () {
-    this.timer = setInterval(() => {
-      this.now = formatTime()
-    }, 1000)
-  },
-  beforeUnmount () {
-    clearInterval(this.timer)
-  }
-}
+const now = ref(formatTime())
+
+let timer: NodeJS.Timer = null
+
+onMounted(() => {
+  timer = setInterval(() => {
+    now.value = formatTime()
+  }, 1000)
+})
+
+onBeforeUnmount(() => {
+  clearInterval(timer)
+})
+
 </script>
 
 <style lang="scss" scoped>
