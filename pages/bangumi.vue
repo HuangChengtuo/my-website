@@ -1,13 +1,13 @@
 <template>
   <div id="bangumi" class="layout-default-body">
-    <el-tabs v-model="day">
-      <el-tab-pane name="1" label="周一" />
-      <el-tab-pane name="2" label="周二" />
-      <el-tab-pane name="3" label="周三" />
-      <el-tab-pane name="4" label="周四" />
-      <el-tab-pane name="5" label="周五" />
-      <el-tab-pane name="6" label="周六" />
-      <el-tab-pane name="0" label="周日" />
+    <el-tabs v-model="state.day">
+      <el-tab-pane :name="1" label="周一" />
+      <el-tab-pane :name="2" label="周二" />
+      <el-tab-pane :name="3" label="周三" />
+      <el-tab-pane :name="4" label="周四" />
+      <el-tab-pane :name="5" label="周五" />
+      <el-tab-pane :name="6" label="周六" />
+      <el-tab-pane :name="0" label="周日" />
     </el-tabs>
     <el-table :data="bangumi">
       <el-table-column label="番剧">
@@ -29,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
+import { reactive, onMounted, computed } from 'vue'
 import dayjs from 'dayjs'
 import api from '@/api'
 import type { Bangumi, Site } from '@/interface'
@@ -37,8 +37,10 @@ import { ElTabs, ElTabPane, ElTable, ElTableColumn } from 'element-plus'
 
 definePageMeta({ layoutTransition: false })
 
-const day = ref(dayjs().day().toString())
-const rawBangumi = ref<Bangumi[]>([])
+const state = reactive({
+  day: dayjs().day(),
+  rawBangumi: [] as Bangumi[]
+})
 
 onMounted(async () => {
   const chinesePlatform = ['acfun', 'bilibili', 'sohu', 'youku', 'qq', 'iqiyi', 'letv', 'pptv', 'mgtv', 'dmhy']
@@ -47,13 +49,13 @@ onMounted(async () => {
     // 新增国内开播时间字段
     item.chineseBegin = item.sites.find(e => chinesePlatform.includes(e.site))?.begin || ''
   }
-  rawBangumi.value = res
+  state.rawBangumi = res
 })
 
 const bangumi = computed(() => {
   const result: Bangumi[] = []
-  for (const item of rawBangumi.value) {
-    if (dayjs(item.chineseBegin || item.begin).day() === +day.value) {
+  for (const item of state.rawBangumi) {
+    if (dayjs(item.chineseBegin || item.begin).day() === state.day) {
       result.push(item)
     }
   }
