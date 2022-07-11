@@ -81,7 +81,7 @@ function wheelFn (e: WheelEvent) {
 }
 
 onMounted(() => {
-  if (window.navigator.userAgent.match(/iPhone|Android|iPad/)) {
+  if (window.navigator.userAgent.match(/iPhone|Android/)) {
     router.push('/mobile')
     return
   }
