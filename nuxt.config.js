@@ -18,7 +18,7 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' }
     ],
-    title: '黄秤砣的网站'
+    title: '个人文章简历记录'
   },
   modules: ['@nuxtjs/axios'],
   plugins: ['@/plugins/api.ts', '@/plugins/element.ts', '@/plugins/utils.ts'],
