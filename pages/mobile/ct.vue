@@ -11,20 +11,20 @@
     <img v-show="false" src="https://s1.huangchengtuo.com/img/ct/2.jpg" />
     <img v-show="false" src="https://s1.huangchengtuo.com/img/ct/3.jpg" />
     <img v-show="false" src="https://s1.huangchengtuo.com/img/ct/4.jpg" />
-    <el-slider style="margin:256rem 64rem" v-model="id" :show-tooltip="false" :min="0" :max="398" />
+    <el-slider v-model="id" style="margin:256rem 64rem" :show-tooltip="false" :min="0" :max="398" />
   </div>
 </template>
 
 <script>
 export default {
   layout: 'null',
-  data() {
+  data () {
     return {
       id: 0
     }
   },
   methods: {
-    getBg() {
+    getBg () {
       return Math.floor(this.id / 100) + 1
     }
   }

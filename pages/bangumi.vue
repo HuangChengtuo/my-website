@@ -1,5 +1,5 @@
 <template>
-  <div id="bangumi" class="layout-default-body">
+  <div id="bangumi">
     <el-tabs v-model="state.day">
       <el-tab-pane :name="1" label="周一" />
       <el-tab-pane :name="2" label="周二" />
@@ -34,8 +34,6 @@ import dayjs from 'dayjs'
 import api from '@/api'
 import type { Bangumi, Site } from '@/interface'
 import { ElTabs, ElTabPane, ElTable, ElTableColumn } from 'element-plus'
-
-definePageMeta({ layoutTransition: false })
 
 const state = reactive({
   day: dayjs().day(),

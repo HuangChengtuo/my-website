@@ -19,7 +19,7 @@ import dayjs from 'dayjs'
 import api from '@/api'
 import type { Bangumi } from '@/interface'
 
-definePageMeta({ layout: 'mobile', layoutTransition: false })
+definePageMeta({ layout: 'mobile' })
 
 const rawBangumi = ref<Bangumi[]>([])
 
