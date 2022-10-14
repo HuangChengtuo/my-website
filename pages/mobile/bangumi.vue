@@ -16,6 +16,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import dayjs from "dayjs"
+import type { Bangumi } from '@/interface'
 
 export default Vue.extend({
   layout: 'mobile',

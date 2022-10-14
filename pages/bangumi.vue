@@ -29,6 +29,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import dayjs from 'dayjs'
+import type { Bangumi, Site } from '@/interface'
 
 interface Data {
   day: string,
