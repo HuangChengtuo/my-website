@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 import { reactive, onMounted, onBeforeUnmount } from 'vue'
-import { useRouter } from 'nuxt/app'
+import { useRouter } from '#imports'
 import TodayBangumi from '@/views/index/TodayBangumi.vue'
 import Card from '@/views/index/Card.vue'
 

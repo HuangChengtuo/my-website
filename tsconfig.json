@@ -19,11 +19,6 @@
     "strictNullChecks": false,
     "noEmit": true,
     "baseUrl": ".",
-    "paths": {
-      "@/*": [
-        "./*"
-      ]
-    },
     "types": [
       "@types/node"
     ]
