@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-definePageMeta({ layout: 'mobile', layoutTransition: false })
+definePageMeta({ layout: 'mobile' })
 </script>
 
 <style lang="scss">

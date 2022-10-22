@@ -1,5 +1,7 @@
 <template>
-  <slot />
+  <div id="layout-mobile">
+    <slot />
+  </div>
 </template>
 
 <script setup lang="ts">

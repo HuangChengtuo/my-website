@@ -21,7 +21,7 @@ export default defineNuxtConfig({
     // https://github.com/element-plus/element-plus-nuxt-starter/blob/main/nuxt.config.ts
     transpile: lifecycle === 'build' || lifecycle === 'generate' ? ['element-plus'] : []
   },
-  css: ['@/assets/css/default.scss', '@/assets/css/layout.scss'],
+  css: ['@/assets/css/default.scss'],
   proxy: {
     '/proxy': {
       target: 'https://kankanapi.bihukankan.com',
