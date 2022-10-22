@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "dayjs": "^1.10.3",
-    "element-plus": "^2.2.2",
+    "element-plus": "^2.2.19",
     "nuxt": "^3.0.0-rc.11",
     "qs": "^6.10.5"
   },
