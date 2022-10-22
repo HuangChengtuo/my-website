@@ -13,12 +13,17 @@
       <el-table-column label="番剧">
         <template #default="scope">{{ scope.row.titleTranslate?.['zh-Hans']?.[0] || scope.row.title }}</template>
       </el-table-column>
-      <el-table-column label="放送时间" width="200px" align="center">
+      <el-table-column label="开播日期" width="160px" align="center">
+        <template #default="scope">
+          <div class="roboto-font">{{ $formatTime(scope.row.begin||scope.row.chineseBegin,'YYYY-MM-DD') }}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="放送时间" width="120px" align="center">
         <template #default="scope">
           <div class="roboto-font">{{ $formatTime(scope.row.chineseBegin || scope.row.begin, 'HH:mm') }}</div>
         </template>
       </el-table-column>
-      <el-table-column label="国内放送" width="350px" align="center">
+      <el-table-column label="国内放送" width="140px" align="center">
         <template #default="scope">
           <a v-for="item of showSites(scope.row.sites)" :key="item.title" :href="item.url" target="_blank" class="link">{{ item.title }}</a>
           <span v-if="!showSites(scope.row.sites).length" style="color:gainsboro">暂无</span>
@@ -94,7 +99,7 @@ function showSites (arr: Site[]) {
 #bangumi {
   padding-bottom: 32px;
 
-  .link + .link {
+  .link+.link {
     margin-left: 5px;
   }
 }
