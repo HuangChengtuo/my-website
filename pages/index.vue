@@ -14,18 +14,23 @@
 
 <script setup lang="ts">
 import { reactive, onMounted, onBeforeUnmount } from 'vue'
-import { useRouter } from '#imports'
+import { definePageMeta } from '#imports'
 import TodayBangumi from '@/views/index/TodayBangumi.vue'
 import Card from '@/views/index/Card.vue'
 
 definePageMeta({ layout: false })
 
+onMounted(() => {
+  if (window.navigator.userAgent.match(/iPhone|Android/)) {
+    location.href = 'https://blog.huangchengtuo.com'
+  }
+})
+
 const state = reactive({
-  /** 各模块边界位置，单位为vh，mounted时根据视窗转化为对应px */
+  /** 各模块边界位置，单位为vh，mounted 时根据视窗转化为对应 px */
   position: [0, 0.8, 1.8],
   debounce: false
 })
-const router = useRouter()
 
 /** 计算现在在哪个位置，是正好对准边界还是夹在中间 */
 function calcNowPosition (nowY: number): { index: number, between: boolean } {
@@ -81,11 +86,6 @@ function wheelFn (e: WheelEvent) {
 }
 
 onMounted(() => {
-  if (window.navigator.userAgent.match(/iPhone|Android/)) {
-    router.push('/mobile')
-    return
-  }
-
   const windowHeight = window.innerHeight || document.body.clientHeight
   // 根据vh转化为px
   state.position = state.position.map(ele => Math.ceil(windowHeight * ele))
