@@ -15,6 +15,7 @@
 
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
+import { definePageMeta } from '#imports'
 import dayjs from 'dayjs'
 import api from '@/api'
 import type { Bangumi } from '@/interface'

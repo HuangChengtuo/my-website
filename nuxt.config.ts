@@ -1,6 +1,4 @@
-import { defineNuxtConfig } from 'nuxt'
-
-const lifecycle = process.env.npm_lifecycle_event
+import { defineNuxtConfig } from 'nuxt/config'
 
 export default defineNuxtConfig({
   app: {
@@ -16,11 +14,7 @@ export default defineNuxtConfig({
       title: '黄秤砣的网站'
     },
   },
-  build: {
-    analyze: true,
-    // https://github.com/element-plus/element-plus-nuxt-starter/blob/main/nuxt.config.ts
-    transpile: lifecycle === 'build' || lifecycle === 'generate' ? ['element-plus'] : []
-  },
+  build: { analyze: true },
   css: ['@/assets/css/default.scss'],
   proxy: {
     '/proxy': {
