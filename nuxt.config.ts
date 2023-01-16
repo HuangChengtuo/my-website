@@ -15,11 +15,5 @@ export default defineNuxtConfig({
     },
   },
   build: { analyze: true },
-  css: ['@/assets/css/default.scss'],
-  proxy: {
-    '/proxy': {
-      target: 'https://kankanapi.bihukankan.com',
-      pathRewrite: { '^/proxy': '/' }
-    }
-  }
+  css: ['@/assets/css/default.scss']
 })
