@@ -32,19 +32,14 @@ img {
   box-sizing: border-box;
 }
 
+h2 {
+  margin: 0;
+}
+
 .one-line {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-@font-face {
-  font-family: dinbold;
-  src: url('https://s1.huangchengtuo.com/fonts/dinbold.woff');
-}
-
-.din-font {
-  font-family: dinbold, sans-serif;
 }
 
 @font-face {
