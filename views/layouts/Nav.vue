@@ -1,34 +1,33 @@
 <template>
   <div id="nav">
-    <nuxt-link to="/" class="logo">
+    <NuxtLink to="/" class="logo">
       <img src="https://s1.huangchengtuo.com/img/pureDD.png" alt="logo" class="logo-img">
       黄秤砣
-    </nuxt-link>
+    </NuxtLink>
     <span class="time roboto-font">{{ now }}</span>
     <a href="https://react.huangchengtuo.com" class="download-btn">工具箱</a>
     <a href="https://blog.huangchengtuo.com" class="download-btn">去博客</a>
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
+<script setup lang="ts">
+import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { formatTime } from '@/plugins/utils'
 
-export default Vue.extend({
-  data () {
-    return {
-      now: this.$formatTime(),
-      timer: null
-    }
-  },
-  mounted () {
-    this.timer = setInterval(() => {
-      this.now = this.$formatTime()
-    }, 1000)
-  },
-  beforeDestroy () {
-    clearInterval(this.timer)
-  }
+const now = ref(formatTime())
+
+let timer: NodeJS.Timer = null
+
+onMounted(() => {
+  timer = setInterval(() => {
+    now.value = formatTime()
+  }, 1000)
 })
+
+onBeforeUnmount(() => {
+  clearInterval(timer)
+})
+
 </script>
 
 <style lang="scss" scoped>

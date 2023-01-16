@@ -1,69 +1,51 @@
 <template>
   <div id="mobile-bangumi">
-    <nuxt-link to="/mobile">
-      <img src="https://s1.huangchengtuo.com/img/AF.png" alt="af" class="header" />
-    </nuxt-link>
+    <NuxtLink to="/mobile">
+      <img src="https://s1.huangchengtuo.com/img/AF.png" alt="af" class="header">
+    </NuxtLink>
     <div class="main">
       <div class="title">今日新番表</div>
       <div v-for="item of bangumi" :key="item.title" class="bangumi aic" :class="{now:item.now}">
-        <span class="name one-line">{{ showTitle(item) }}</span>
+        <span class="name one-line">{{ item.titleTranslate?.['zh-Hans']?.[0] || item.title }}</span>
         <span class="roboto-font">{{ $formatTime(item.chineseBegin || item.begin, 'HH:mm') }}</span>
       </div>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import dayjs from "dayjs"
+<script setup lang="ts">
+import { computed, onMounted, ref } from 'vue'
+import { definePageMeta } from '#imports'
+import dayjs from 'dayjs'
+import api from '@/api'
 import type { Bangumi } from '@/interface'
 
-export default Vue.extend({
-  layout: 'mobile',
-  data () {
-    return {
-      width: 0,
-      height: 0,
-      rawBangumi: []
-    }
-  },
-  computed: {
-    bangumi (): Bangumi[] {
-      const chinesePlatform = ["acfun", "bilibili", "sohu", "youku", "qq", "iqiyi", "letv", "pptv", "mgtv", "dmhy"]
-      const result = []
-      for (const item of this.rawBangumi) {
-        // 国内版权
-        const hasCopyright = item.sites.some(e => chinesePlatform.includes(e.site))
-        if (hasCopyright) {
-          // 新增国内开播时间字段
-          item.hasCopyright = hasCopyright
-          item.chineseBegin = item.sites.find(e => chinesePlatform.includes(e.site)).begin
-        }
-        if (dayjs(item.chineseBegin || item.begin).day() === dayjs().day()) {
-          result.push(item)
-        }
-      }
-      result.push({ title: '---- 现在 ----', now: true, begin: dayjs().toISOString() })
-      result.sort((a, b) => {
-        const timeA = dayjs(a.chineseBegin || a.begin).format('HHmmss')
-        const timeB = dayjs(b.chineseBegin || b.begin).format('HHmmss')
-        return Number(timeA) - Number(timeB)
-      })
-      return result
-    }
-  },
-  mounted () {
-    this.$api.get('https://s1.huangchengtuo.com/json/bangumi.json').then(res => {
-      this.rawBangumi = res
-    })
-    this.width = document.body.clientWidth
-    this.height = document.body.clientHeight
-  },
-  methods: {
-    showTitle (item: Bangumi) {
-      return item.titleTranslate?.['zh-Hans']?.[0] || item.title
+definePageMeta({ layout: 'mobile' })
+
+const rawBangumi = ref<Bangumi[]>([])
+
+onMounted(() => {
+  api.getBangumi().then(res => {
+    rawBangumi.value = res
+  })
+})
+
+const bangumi = computed<Bangumi[]>(() => {
+  const chinesePlatform = ['acfun', 'bilibili', 'sohu', 'youku', 'qq', 'iqiyi', 'letv', 'pptv', 'mgtv', 'dmhy']
+  const result: Bangumi[] = []
+  for (const item of rawBangumi.value) {
+    item.chineseBegin = item?.sites?.find?.(e => chinesePlatform.includes(e.site))?.begin || ''
+    if (dayjs(item.chineseBegin || item.begin).day() === dayjs().day()) {
+      result.push(item)
     }
   }
+  result.push({ title: '---- 现在 ----', now: true, begin: dayjs().toISOString() })
+  result.sort((a, b) => {
+    const timeA = dayjs(a.chineseBegin || a.begin).format('HHmmss')
+    const timeB = dayjs(b.chineseBegin || b.begin).format('HHmmss')
+    return Number(timeA) - Number(timeB)
+  })
+  return result
 })
 </script>
 

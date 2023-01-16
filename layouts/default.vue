@@ -1,22 +1,19 @@
 <template>
   <div id="layout-default">
     <LayoutsNav />
-    <nuxt class="nuxt-body" />
+    <div id="layout-default-body">
+      <slot />
+    </div>
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-import LayoutsNav from '@/modules/layouts/Nav.vue'
-
-export default Vue.extend({
-  components: { LayoutsNav }
-})
+<script setup lang="ts">
+import LayoutsNav from '@/views/layouts/Nav.vue'
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 #layout-default {
-  .nuxt-body {
+  #layout-default-body {
     width: 1200px;
     margin: 16px auto;
   }

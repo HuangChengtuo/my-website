@@ -1,19 +1,11 @@
 <template>
-  <div class="stretch-card" :class="{'stretch-card-active':active}">
-    <h1 class="title">{{ title }}</h1>
+  <div class="stretch-card" :class="{'stretch-card-active': props.active}">
+    <h1 class="title">{{ props.title }}</h1>
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-
-export default Vue.extend({
-  props: {
-    active: Boolean,
-    title: String
-  }
-})
-
+<script setup lang="ts">
+const props = defineProps<{ active: boolean, title: string }>()
 </script>
 
 <style lang="scss" scoped>

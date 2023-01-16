@@ -3,7 +3,7 @@
     <el-button @click="start">start</el-button>
     <el-button @click="next">next</el-button>
     <el-button @click="stop">stop</el-button>
-    <br />
+    <br>
     <div class="sample2">
       <div :class="getClass(1)">1</div>
       <div :class="getClass(2)">2</div>
@@ -11,25 +11,26 @@
       <div :class="getClass(4)">4</div>
       <div :class="getClass(5)">5</div>
     </div>
-    <br />
+    <br>
     <Sample3 />
-    <br />
-    <div class="sample1" :style="`background-image:url(${bg[head1.val]})`"></div>
+    <br>
+    <div class="sample1" :style="`background-image:url(${bg[head1.val]})`" />
     <!-- 轮播图提前加载 -->
-    <div style="background:url(https://s1.huangchengtuo.com/img/altina.jpg)"></div>
-    <div style="background:url(https://s1.huangchengtuo.com/img/juna.jpg)"></div>
+    <div style="background:url(https://s1.huangchengtuo.com/img/altina.jpg)" />
+    <div style="background:url(https://s1.huangchengtuo.com/img/juna.jpg)" />
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import Sample3 from '@/modules/swiper/Sample3.vue'
+import { defineComponent } from 'vue'
+import Sample3 from '@/views/swiper/Sample3.vue'
+import { ElButton } from 'element-plus'
 
 class Node {
   val: number
   next: Node
 
-  constructor(val: number) {
+  constructor (val: number) {
     this.val = val
   }
 }
@@ -55,9 +56,9 @@ temp = temp.next
 temp.next = head2
 
 
-export default Vue.extend({
-  components: { Sample3 },
-  data() {
+export default defineComponent({
+  components: { Sample3, ElButton },
+  data () {
     return {
       head1,
       head2,
@@ -69,20 +70,20 @@ export default Vue.extend({
       }
     }
   },
-  mounted() {
+  mounted () {
     this.start()
   },
   methods: {
-    start() {
+    start () {
       this.stop()
       this.timer = setInterval(() => {
         this.next()
       }, 4000)
     },
-    stop() {
+    stop () {
       clearInterval(this.timer)
     },
-    next() {
+    next () {
       if (this.loading) {
         return
       }
@@ -93,7 +94,7 @@ export default Vue.extend({
         this.loading = false
       }, 1000)
     },
-    getClass(index: number) {
+    getClass (index: number) {
       const ll = this.head2.val === index
       const l = index === this.head2.next.val
       const c = index === this.head2.next.next.val

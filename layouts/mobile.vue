@@ -1,15 +1,13 @@
 <template>
-  <nuxt />
+  <div id="layout-mobile">
+    <slot />
+  </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
+<script setup lang="ts">
+import { useHead } from '#imports'
 
-export default Vue.extend({
-  head () {
-    return {
-      link: [{ rel: 'stylesheet', href: 'https://s1.huangchengtuo.com/css/weui.min.css' }]
-    }
-  }
+useHead({
+  link: [{ rel: 'stylesheet', href: 'https://s1.huangchengtuo.com/css/weui.min.css' }]
 })
 </script>

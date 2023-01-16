@@ -20,18 +20,13 @@
     "strictNullChecks": false,
     "noEmit": true,
     "baseUrl": ".",
-    "paths": {
-      "@/*": [
-        "./*"
-      ]
-    },
     "types": [
-      "@types/node",
-      "@nuxt/types"
+      "@types/node"
     ]
   },
   "exclude": [
     "node_modules",
     "dist"
-  ]
+  ],
+  "extends": "./.nuxt/tsconfig.json"
 }

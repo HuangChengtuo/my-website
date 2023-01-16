@@ -1,107 +1,99 @@
 <template>
   <div id="home-page">
-    <div class="banner"></div>
-    <main class="main fdc">
-      <h1 class="title">个人文章简历记录</h1>
+    <div class="banner" />
+    <main class="main">
+      <h1 class="title">黄秤砣</h1>
       <div class="jcsb">
-        <client-only>
-          <TodayBangumi class="card" />
-        </client-only>
+        <TodayBangumi class="card" />
         <Card class="card" href="https://blog.huangchengtuo.com" title="我的博客" src="https://s1.huangchengtuo.com/img/DD.png" />
         <Card class="card" href="https://react.huangchengtuo.com" title="我的工具箱" src="https://s1.huangchengtuo.com/img/0425react.png" />
       </div>
-      <footer class="footer">
-        <a class="icp" href="https://beian.miit.gov.cn/" target="_blank">网站备案号：浙ICP备2021003329号-1</a>
-      </footer>
     </main>
   </div>
 </template>
-<script lang="ts">
-import Vue from 'vue'
-import TodayBangumi from '@/modules/index/TodayBangumi.vue'
-import Card from '@/modules/index/Card.vue'
 
-interface Data {
-  position: number[],
-  debounce: boolean
-}
+<script setup lang="ts">
+import { reactive, onMounted, onBeforeUnmount } from 'vue'
+import { definePageMeta } from '#imports'
+import TodayBangumi from '@/views/index/TodayBangumi.vue'
+import Card from '@/views/index/Card.vue'
 
-export default Vue.extend({
-  layout: 'null',
-  components: { TodayBangumi, Card },
-  data (): Data {
-    return {
-      // 各模块边界位置，单位为vh，mounted时根据视窗转化为对应px
-      position: [0, 0.8, 1.8],
-      debounce: false,
-    }
-  },
-  mounted () {
-    if (window.navigator.userAgent.match(/iPhone|Android/)) {
-      this.$router.push('/mobile')
-      return
-    }
-    const windowHeight = window.innerHeight || document.body.clientHeight
-    // 根据vh转化为px
-    this.position = this.position.map(ele => Math.ceil(windowHeight * ele))
-    window.addEventListener('mousewheel', this.wheelFn, { passive: false })
-  },
-  beforeDestroy () {
-    window.removeEventListener('mousewheel', this.wheelFn)
-  },
-  methods: {
-    wheelFn (e: WheelEvent) {
-      e.preventDefault()
-      const nowY = window.scrollY
-      // 正在滚动中
-      if (this.debounce) {
-        return
-      }
-      const { index, between } = this.calcNowPosition(nowY)
-      // 滚轮是向下还是向上
-      const down = e.deltaY > 0
-      this.debounce = true
-      let start = 0
+definePageMeta({ layout: false })
 
-      let scrollHeight = 0
-      if (down) {
-        // 向下滚，滚动高度等于下一个位置与现在的差值
-        scrollHeight = this.position[index + 1] - nowY
-      } else {
-        // 向上滚，夹在中间需滚动上一个边界与现在的差值，在边界就滚动一个完整距离
-        scrollHeight = between ? (nowY - this.position[index]) : (this.position[index] - this.position[index - 1])
-      }
-      console.log('move', scrollHeight)
-      // 动画函数，需要闭包访问 start 就没有分离出来
-      const step = (unix: number) => {
-        if (!start) {
-          start = unix
-        }
-        const duration = unix - start
-        const y = this.easeInOutCubic(duration / 1000) * scrollHeight
-        window.scrollTo(0, down ? nowY + y : nowY - y)
-        if (duration <= 1001) {
-          requestAnimationFrame(step)
-        } else {
-          this.debounce = false
-        }
-      }
-      requestAnimationFrame(step)
-    },
-    // 计算现在在哪个位置，是正好对准边界还是夹在中间
-    calcNowPosition (nowY: number): { index: number, between: boolean } {
-      for (let i = 0; i < this.position.length; i++) {
-        if (this.position[i] > nowY) {
-          return { index: i - 1, between: this.position[i - 1] !== nowY }
-        }
-      }
-      return { index: this.position.length - 1, between: false }
-    },
-    // 缓动函数 https://easings.net#easeInOutCubic
-    easeInOutCubic (x: number): number {
-      return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2
+onMounted(() => {
+  if (window.navigator.userAgent.match(/iPhone|Android/)) {
+    location.href = 'https://blog.huangchengtuo.com'
+  }
+})
+
+const state = reactive({
+  /** 各模块边界位置，单位为vh，mounted 时根据视窗转化为对应 px */
+  position: [0, 0.8, 1.8],
+  debounce: false
+})
+
+/** 计算现在在哪个位置，是正好对准边界还是夹在中间 */
+function calcNowPosition (nowY: number): { index: number, between: boolean } {
+  for (let i = 0; i < state.position.length; i++) {
+    if (state.position[i] > nowY) {
+      return { index: i - 1, between: state.position[i - 1] !== nowY }
     }
   }
+  return { index: state.position.length - 1, between: false }
+}
+
+/** 缓动函数 https://easings.net#easeInOutCubic */
+function easeInOutCubic (x: number): number {
+  return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2
+}
+
+function wheelFn (e: WheelEvent) {
+  e.preventDefault()
+  const nowY = window.scrollY
+  // 正在滚动中
+  if (state.debounce) {
+    return
+  }
+  const { index, between } = calcNowPosition(nowY)
+  // 滚轮是向下还是向上
+  const down = e.deltaY > 0
+  state.debounce = true
+  let start = 0
+  let scrollHeight = 0
+  if (down) {
+    // 向下滚，滚动高度等于下一个位置与现在的差值
+    scrollHeight = state.position[index + 1] - nowY
+  } else {
+    // 向上滚，夹在中间需滚动上一个边界与现在的差值，在边界就滚动一个完整距离
+    scrollHeight = between ? (nowY - state.position[index]) : (state.position[index] - state.position[index - 1])
+  }
+  console.log('move', scrollHeight)
+  // 动画函数，需要闭包访问 start 就没有分离出来
+  const step = (unix: number) => {
+    if (!start) {
+      start = unix
+    }
+    const duration = unix - start
+    const y = easeInOutCubic(duration / 1000) * scrollHeight
+    window.scrollTo(0, down ? nowY + y : nowY - y)
+    if (duration <= 1001) {
+      requestAnimationFrame(step)
+    } else {
+      state.debounce = false
+    }
+  }
+  requestAnimationFrame(step)
+}
+
+onMounted(() => {
+  const windowHeight = window.innerHeight || document.body.clientHeight
+  // 根据vh转化为px
+  state.position = state.position.map(ele => Math.ceil(windowHeight * ele))
+  window.addEventListener('mousewheel', wheelFn, { passive: false })
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('mousewheel', wheelFn)
 })
 </script>
 
@@ -155,16 +147,6 @@ export default Vue.extend({
 
       &:hover {
         box-shadow: 16px 16px 32px #cccccc, -16px -16px 32px #ffffff;
-      }
-    }
-
-    .footer {
-      text-align: center;
-      margin-top: auto;
-      height: 32px;
-
-      .icp {
-        color: #666666;
       }
     }
   }
