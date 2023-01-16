@@ -1,13 +1,16 @@
 <template>
   <div id="home-page">
     <div class="banner" />
-    <main class="main">
+    <main class="main fdc">
       <h1 class="title">黄秤砣</h1>
       <div class="jcsb">
         <TodayBangumi class="card" />
         <Card class="card" href="https://blog.huangchengtuo.com" title="我的博客" src="https://s1.huangchengtuo.com/img/DD.png" />
         <Card class="card" href="https://react.huangchengtuo.com" title="我的工具箱" src="https://s1.huangchengtuo.com/img/0425react.png" />
       </div>
+      <footer class="footer">
+        <a class="icp" href="https://beian.miit.gov.cn/" target="_blank">网站备案号：浙ICP备2021003329号-1</a>
+      </footer>
     </main>
   </div>
 </template>
@@ -148,6 +151,16 @@ onBeforeUnmount(() => {
       &:hover {
         box-shadow: 16px 16px 32px #cccccc, -16px -16px 32px #ffffff;
       }
+    }
+  }
+
+  .footer {
+    text-align: center;
+    margin-top: auto;
+    height: 32px;
+
+    .icp {
+      color: #666666;
     }
   }
 }
