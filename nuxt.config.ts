@@ -15,5 +15,5 @@ export default defineNuxtConfig({
     },
   },
   build: { analyze: true },
-  css: ['@/assets/css/default.scss']
+  css: ['@/css/default.scss']
 })
