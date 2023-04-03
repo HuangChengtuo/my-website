@@ -3,42 +3,34 @@
     <div class="card-title">今日新番表</div>
     <div v-for="item of bangumi" :key="item.title" class="bangumi aic" :class="{ now: item.now }">
       <span class="name one-line">{{ item.titleTranslate?.['zh-Hans']?.[0] || item.title }}</span>
-      <span class="roboto-font">{{ $formatTime(item.chineseBegin || item.begin, 'HH:mm') }}</span>
+      <span class="roboto-font">{{ $formatTime(item.begin, 'HH:mm') }}</span>
     </div>
   </NuxtLink>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted } from 'vue'
 import dayjs from 'dayjs'
 import api from '@/api'
 import type { Bangumi } from '@/interface'
 
-const rawBangumi = ref<Bangumi[]>([])
+const bangumi = ref<Bangumi[]>([])
 
 onMounted(() => {
   api.getBangumi().then(res => {
-    rawBangumi.value = res
-  })
-})
-
-const bangumi = computed(() => {
-  const chinesePlatform = ['acfun', 'bilibili', 'sohu', 'youku', 'qq', 'iqiyi', 'letv', 'pptv', 'mgtv', 'dmhy']
-  const result: Bangumi[] = []
-  for (const item of rawBangumi.value) {
-    // 国内版权
-    item.chineseBegin = item?.sites?.find?.(e => chinesePlatform.includes(e.site))?.begin || ''
-    if (dayjs(item.chineseBegin || item.begin).day() === dayjs().day()) {
-      result.push(item)
+    const result: Bangumi[] = [{ title: '---- 现在 ----', now: true, begin: dayjs().toISOString() }]
+    for (const item of res) {
+      if (dayjs(item.begin).day() === dayjs().day()) {
+        result.push(item)
+      }
     }
-  }
-  result.push({ title: '---- 现在 ----', now: true, begin: dayjs().toISOString() })
-  result.sort((a, b) => {
-    const timeA = dayjs(a.chineseBegin || a.begin).format('HHmmss')
-    const timeB = dayjs(b.chineseBegin || b.begin).format('HHmmss')
-    return Number(timeA) - Number(timeB)
+    result.sort((a, b) => {
+      const timeA = +dayjs(a.begin).format('HHmmss')
+      const timeB = +dayjs(b.begin).format('HHmmss')
+      return timeA - timeB
+    })
+    bangumi.value = result
   })
-  return result
 })
 </script>
 

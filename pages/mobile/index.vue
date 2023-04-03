@@ -8,7 +8,7 @@
     </div>
   </div>
 </template>
-
+<!-- 已废弃，跳转至 https://blog.huangchengtuo.com -->
 <script setup lang="ts">
 import { definePageMeta } from '#imports'
 

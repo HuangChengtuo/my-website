@@ -13,20 +13,20 @@
       <el-table-column label="番剧">
         <template #default="scope">{{ scope.row.titleTranslate?.['zh-Hans']?.[0] || scope.row.title }}</template>
       </el-table-column>
-      <el-table-column label="开播日期" width="160px" align="center">
+      <el-table-column label="开播日期" prop="begin" width="160px" align="center" sortable>
         <template #default="scope">
-          <div class="roboto-font">{{ $formatTime(scope.row.begin||scope.row.chineseBegin,'YYYY-MM-DD') }}</div>
+          <div class="roboto-font">{{ $formatTime(scope.row.begin, 'YYYY-MM-DD') }}</div>
         </template>
       </el-table-column>
       <el-table-column label="放送时间" width="120px" align="center">
         <template #default="scope">
-          <div class="roboto-font">{{ $formatTime(scope.row.chineseBegin || scope.row.begin, 'HH:mm') }}</div>
+          <div class="roboto-font">{{ $formatTime(scope.row.begin, 'HH:mm') }}</div>
         </template>
       </el-table-column>
       <el-table-column label="国内放送" width="140px" align="center">
         <template #default="scope">
           <a v-for="item of showSites(scope.row.sites)" :key="item.title" :href="item.url" target="_blank" class="link">{{ item.title }}</a>
-          <span v-if="!showSites(scope.row.sites).length" style="color:gainsboro">暂无</span>
+          <span v-if="!showSites(scope.row.sites).length">🈚️</span>
         </template>
       </el-table-column>
     </el-table>
@@ -34,11 +34,11 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, onMounted, computed } from 'vue'
+import { computed, onMounted, reactive } from 'vue'
 import dayjs from 'dayjs'
 import api from '@/api'
 import type { Bangumi, Site } from '@/interface'
-import { ElTabs, ElTabPane, ElTable, ElTableColumn } from 'element-plus'
+import { ElTable, ElTableColumn, ElTabPane, ElTabs } from 'element-plus'
 
 const state = reactive({
   day: dayjs().day(),
@@ -46,26 +46,20 @@ const state = reactive({
 })
 
 onMounted(async () => {
-  const chinesePlatform = ['acfun', 'bilibili', 'sohu', 'youku', 'qq', 'iqiyi', 'letv', 'pptv', 'mgtv', 'dmhy']
-  const res = await api.getBangumi()
-  for (const item of res) {
-    // 新增国内开播时间字段
-    item.chineseBegin = item.sites.find(e => chinesePlatform.includes(e.site))?.begin || ''
-  }
-  state.rawBangumi = res
+  state.rawBangumi = await api.getBangumi()
 })
 
 const bangumi = computed(() => {
   const result: Bangumi[] = []
   for (const item of state.rawBangumi) {
-    if (dayjs(item.chineseBegin || item.begin).day() === state.day) {
+    if (dayjs(item.begin).day() === state.day) {
       result.push(item)
     }
   }
   result.sort((a, b) => {
-    const timeA = dayjs(a.chineseBegin || a.begin).format('HHmmss')
-    const timeB = dayjs(b.chineseBegin || b.begin).format('HHmmss')
-    return Number(timeA) - Number(timeB)
+    const timeA = +dayjs(a.begin).format('HHmmss')
+    const timeB = +dayjs(b.begin).format('HHmmss')
+    return timeA - timeB
   })
   return result
 })
@@ -99,7 +93,7 @@ function showSites (arr: Site[]) {
 #bangumi {
   padding-bottom: 32px;
 
-  .link+.link {
+  .link + .link {
     margin-left: 5px;
   }
 }

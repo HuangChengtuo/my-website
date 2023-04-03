@@ -10,6 +10,6 @@ export interface Bangumi {
   title: string,
   titleTranslate?: { 'zh-Hans': string[] },
   sites?: Site[],
-  chineseBegin?: string,
+  /** 前端后加字段 */
   now?: boolean
 }
