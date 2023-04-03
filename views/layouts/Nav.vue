@@ -14,7 +14,7 @@
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { formatTime } from '@/plugins/utils'
 
-const now = ref(formatTime())
+const now = ref('')
 
 let timer: NodeJS.Timer = null
 
