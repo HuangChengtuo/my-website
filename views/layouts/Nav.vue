@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue'
-import { formatTime } from '@/plugins/utils'
+import { formatTime } from '@/utils'
 
 const now = ref('')
 

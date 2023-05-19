@@ -15,12 +15,12 @@
       </el-table-column>
       <el-table-column label="开播日期" prop="begin" width="160px" align="center" sortable>
         <template #default="scope">
-          <div class="roboto-font">{{ $formatTime(scope.row.begin, 'YYYY-MM-DD') }}</div>
+          <div class="roboto-font">{{ formatTime(scope.row.begin, 'YYYY-MM-DD') }}</div>
         </template>
       </el-table-column>
       <el-table-column label="放送时间" width="120px" align="center">
         <template #default="scope">
-          <div class="roboto-font">{{ $formatTime(scope.row.begin, 'HH:mm') }}</div>
+          <div class="roboto-font">{{ formatTime(scope.row.begin, 'HH:mm') }}</div>
         </template>
       </el-table-column>
       <el-table-column label="国内放送" width="140px" align="center">
@@ -39,6 +39,7 @@ import dayjs from 'dayjs'
 import api from '@/api'
 import type { Bangumi, Site } from '@/interface'
 import { ElTable, ElTableColumn, ElTabPane, ElTabs } from 'element-plus'
+import { formatTime } from '@/utils'
 
 const state = reactive({
   day: dayjs().day(),

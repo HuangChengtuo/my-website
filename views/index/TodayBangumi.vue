@@ -3,7 +3,7 @@
     <div class="card-title">今日新番表</div>
     <div v-for="item of bangumi" :key="item.title" class="bangumi aic" :class="{ now: item.now }">
       <span class="name one-line">{{ item.titleTranslate?.['zh-Hans']?.[0] || item.title }}</span>
-      <span class="roboto-font">{{ $formatTime(item.begin, 'HH:mm') }}</span>
+      <span class="roboto-font">{{ formatTime(item.begin, 'HH:mm') }}</span>
     </div>
   </NuxtLink>
 </template>
@@ -13,6 +13,7 @@ import { ref, onMounted } from 'vue'
 import dayjs from 'dayjs'
 import api from '@/api'
 import type { Bangumi } from '@/interface'
+import { formatTime } from '@/utils'
 
 const bangumi = ref<Bangumi[]>([])
 
