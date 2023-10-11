@@ -19,7 +19,6 @@
     "noImplicitAny": false,
     "strictNullChecks": false,
     "noEmit": true,
-    "baseUrl": ".",
     "types": [
       "@types/node"
     ]
